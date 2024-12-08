@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Portfolio</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>mementos</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- FontAwesomeが使えるようにする -->
+    <script src="https://kit.fontawesome.com/a31255e7a3.js" crossorigin="anonymous"></script>
+    <!-- CSSやjavascriptのファイルの管理方法および場所 pack_tagはCSSをWebpackerで管理する際に利用 場所はapp/javascript/packs/stylesheets-->
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+  <header>
+  <!-- ヘッダーはトップ、ユーザー一覧、ログイン、ユーザー登録、マイページ、新規投稿、ログアウト -->
+    <nav class="row">
+      <div class="logo col-4">
+        <%= link_to "mementos", top_path %>
+      </div>
+      <ul class="col-8">
+      <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
+        <% if user_signed_in? %>
+          <li>
+            "マイページ"
+          </li>
+          <li>
+            "思い出の品を投稿する"
+          </li>
+        <% end %>
+          <li>
+            "みんなの思い出の品を見る"
+          </li>
+          <li>
+            "ユーザー一覧"
+          </li>
+        <% if user_signed_in? %>
+        <!-- deviseのルートを確認する -->
+          <li>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "ログイン", new_user_session_path %>
+          </li>
+          <li>
+            <%= link_to "ユーザー登録", new_user_registration_path %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </header>
     <%= yield %>
   </body>
 </html>
