@@ -4,9 +4,8 @@ Rails.application.routes.draw do
     sessions: 'public/sessions',              #ログイン・ログアウト
     passwords: 'public/passwords'             #パスワードの変更
   }
-  #devise_for :usersは使用モデルの指定のほかに、
-  #users/コントローラーを指定してしまうため、使用するコントローラーを個別に指定しなければならない
-  #usersがない場合は元となるdeviseコントローラーそのものを使用するが、今回はこの状態
+  #devise_for :usersは標準のdeviseコントローラーを指定してしまうため、
+  #カスタマイズしている場合は使用するコントローラーを個別に指定しなければならない
 
   scope module: :public do
     get '' => 'homes#top', as: 'top'
