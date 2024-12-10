@@ -4,6 +4,6 @@ class User < ApplicationRecord
   has_one_attached :image #アイコン画像のデータ
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :name, presence: true
+  validates :name, presence: { message: "を入力してください。" }
   #自分で追加したカラムはバリデーションを設定しないといけないので、nameを追記
 end
