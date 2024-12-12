@@ -1,0 +1,31 @@
+# 使用インスタンス変数：@user=current_user、@post=current_user.posts
+
+<div class="user_profile">
+# １．ゆーざーのアイコン
+<%= image_tag @user.image %>
+# 編集ページ
+<%= link_to "プロフィールを編集する", user_edit_path(current_user.id) %>
+# ２．ユーザーの名前
+<%= @user.name %>
+# ３．ユーザーの自己紹介
+<%= @user.introduction %>
+# ５．そのユーザーがいいねをした投稿のページへの移動
+<%= link_to "いいね一覧", favorites_path %>
+# ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する
+<%= @user.is_public? ? "公開" : "非公開" %>
+<%= link_to @user.is_public? ? "非公開にする" : "公開にする", my_page_public_status_path,  method: :patch %>
+
+</div>
+# ４．ユーザーの投稿一覧⇒各投稿への移動
+<div class="user_posts">
+<% @post.each.do |post| %>
+  <div class="user_post_card">
+    <%= post.image %>
+    <%= post.title %>
+  </div>
+<% end %>
+</div>
+
+
+
+# 他のユーザーの時、このユーザーをフォローするを表示
