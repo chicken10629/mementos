@@ -8,13 +8,16 @@ Rails.application.routes.draw do
   #カスタマイズしている場合は使用するコントローラーを個別に指定しなければならない
 
   scope module: :public do #namespaceの指定をコントローラーのみにする。URLに含めない。
+    #ファイル名とアクション名は一致させる必要アリ。アクション名を#mypageにしたらエラーがでてしまった。
     get '' => 'homes#top', as: 'top'
-    get 'users/my_page' => 'users#mypage', as: 'my_page'#URL、コントローラー#アクション名、パス名
-    get 'users/my_page/edit' => 'users#edit', as: 'my_page_edit'
-    patch 'users/my_page' => 'users#update', as: 'my_page_update'
+    get 'users/my_page' => 'users#my_page', as: 'my_page'#URL、コントローラー#アクション名、パス名
+    get 'users/my_page/edit/:id' => 'users#my_page_edit', as: 'my_page_edit'
+    patch 'users/my_page/edit/:id' => 'users#my_page_update', as: 'my_page_update'
+    put 'users/my_page' => 'users#my_page_withdraw', as: 'my_page_withdraw'
     patch 'users/my_page/public_status' => 'users#public_status', as: 'my_page_public_status'
     resources :users, only: [:index, :show] do
       resources :follows, only: [:index, :create, :destroy] #usersにネスト
+      resources :favorites, only: [:index]
     end
 
     resources :posts do
@@ -24,4 +27,5 @@ Rails.application.routes.draw do
       resources :favorites, only: [:index, :create, :destroy]
     end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  end
 end
