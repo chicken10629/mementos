@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  
   def my_page
     @user = User.find(current_user.id)
     @posts = @user.posts.order(created_at: :desc) #current_userに紐づく投稿データを最新順に表示
@@ -15,11 +16,15 @@ class Public::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @users = User.where(is_active: true)
   end
 
   def show
+    #current_userである場合my_pageへ飛ばす
     @user = User.find(params[:id])
+    if @user == current_user
+      redirect_to my_page_path and return # and returnで@postsが実行されなくなる
+    end
     @posts = @user.posts.order(created_at: :desc)
   end
 

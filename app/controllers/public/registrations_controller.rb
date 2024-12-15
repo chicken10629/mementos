@@ -4,7 +4,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  
+  def after_sign_up_path_for(resource)
+    my_page_path
+  end
 
   # GET /resource/sign_up
    def new

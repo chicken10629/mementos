@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get 'users/my_page' => 'users#my_page', as: 'my_page'#URL、コントローラー#アクション名、パス名
     get 'users/my_page/edit/:id' => 'users#my_page_edit', as: 'my_page_edit'
     patch 'users/my_page/edit/:id' => 'users#my_page_update', as: 'my_page_update'
-    put 'users/my_page' => 'users#my_page_withdraw', as: 'my_page_withdraw'
+    put 'users/my_page' => 'users#withdraw', as: 'withdraw'
     patch 'users/my_page/public_status' => 'users#public_status', as: 'my_page_public_status'
     resources :users, only: [:index, :show] do
       resources :follows, only: [:index, :create, :destroy] #usersにネスト

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
+  before_action :authenticate_user!, except: [:top, :index], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
 
 
   private
@@ -18,6 +18,14 @@ class ApplicationController < ActionController::Base
 
   def action_is_public?
     controller_name == 'homes' && action_name == 'top'
+  end
+
+  #サインインしている、なおかつis_activeがfalseである時、強制的にログアウトさせる
+  def check_active_user
+    if user_signed_in? && !curent_user.is_active?
+      sign_out current_user
+      redirect_to new_user_session_path, alert: "あなたのアカウントは既に削除されています。"
+    end
   end
 
 end
