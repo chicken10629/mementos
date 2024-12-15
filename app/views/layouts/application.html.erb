@@ -23,17 +23,17 @@
       <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
         <% if user_signed_in? %>
           <li>
-            "マイページ"
+            <%= link_to "マイページ", my_page_path %>
           </li>
           <li>
-            "思い出の品を投稿する"
+            <%= link_to "思い出の品を投稿する", new_post_path %>
           </li>
         <% end %>
           <li>
-            "みんなの思い出の品を見る"
+            <%= link_to "みんなの思い出の品を見る", posts_path %>
           </li>
           <li>
-            "ユーザー一覧"
+            <%= link_to "ユーザー一覧", users_path %>
           </li>
         <% if user_signed_in? %>
         <!-- deviseのルートを確認する -->

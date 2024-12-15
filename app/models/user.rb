@@ -6,12 +6,33 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :follows, dependent: :destroy
+  
+  # フォローした、されたユーザーのデータを取得するメソッド
+  # 指定したモデルとの関連付けと外部キーを指定。
+  # followersはメソッド名らしいため、自由に名を付けられる。
+  has_many :following_users, class_name: "Follow", foreign_key: "follow_id", dependent: :destroy
+  has_many :followers, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :name, presence: { message: "を入力してください。" }
   #自分で追加したカラムはバリデーションを設定しないといけないので、nameを追記
+
+  def followed_by?(user)
+    follows.exists?(follow_id: user.id)
+  end
+
+  def follow(other_user)
+    #following_usersは↑で定義した、followしたユーザーデータを取得するメソッド
+    #other_userをフォローするために、followモデルに新しいデータを作成する
+    #フォローされたユーザーidに選んだユーザーのidをセットしている。
+    following_users.create(followed_id: other_user.id)
+  end
+
+  def unfollow(other_user)
+    #other_user、選んだユーザーのidとfollowed_idが一致するデータを削除
+    following_users.find_by(followed_id: other_user.id).destroy
+
 
   def get_profile_image
     unless profile_image.attached?
