@@ -10,45 +10,56 @@
     <!-- CSSやjavascriptのファイルの管理方法および場所 pack_tagはCSSをWebpackerで管理する際に利用 場所はapp/javascript/packs/stylesheets-->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   </head>
 
   <body>
-  <header>
+  <header style="height: 100px;">
   <!-- ヘッダーはトップ、ユーザー一覧、ログイン、ユーザー登録、マイページ、新規投稿、ログアウト -->
-    <nav class="row">
-      <div class="logo col-4">
-        <%= link_to "mementos", top_path %>
-      </div>
-      <ul class="col-8">
-      <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
-        <% if user_signed_in? %>
-          <li>
-            <%= link_to "マイページ", my_page_path %>
-          </li>
-          <li>
-            <%= link_to "思い出の品を投稿する", new_post_path %>
-          </li>
-        <% end %>
-          <li>
-            <%= link_to "みんなの思い出の品を見る", posts_path %>
-          </li>
-          <li>
-            <%= link_to "ユーザー一覧", users_path %>
-          </li>
-        <% if user_signed_in? %>
-        <!-- deviseのルートを確認する -->
-          <li>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "ログイン", new_user_session_path %>
-          </li>
-          <li>
-            <%= link_to "ユーザー登録", new_user_registration_path %>
-          </li>
-        <% end %>
-      </ul>
+    <nav class="row p-3">
+        <h3 class="logo col-md-2 col-lg-4 ml-auto vertical-line-middle">
+          <%= link_to "mementos", top_path %>
+        </h3>
+        <div class="col-md-10 col-lg-8">
+          <ul class="d-flex list-unstyled justify-content-around mr-auto hina-mincho-regular pt-2">
+          <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
+            <% if user_signed_in? %>             
+              <li class="nav-item">
+                <i class="fa-solid fa-circle-user"></i>
+                <%= link_to "マイページ", my_page_path %>
+              </li>
+              <li class="nav-item">
+                <i class="fa-regular fa-file-pen"></i>
+                <%= link_to "新規投稿", new_post_path %>
+              </li>
+            <% end %>
+              <li class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                <%= link_to "投稿一覧", posts_path %>
+              </li>
+              <li class="nav-item">
+                <i class="fa-solid fa-users"></i>
+                <%= link_to "ユーザー一覧", users_path %>
+              </li>
+            <% if user_signed_in? %>
+            <!-- deviseのルートを確認する -->
+              <li class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <%= link_to "ログイン", new_user_session_path %>
+              </li>
+              <li class="nav-item">
+                <i class="fa-solid fa-user-plus"></i>
+                <%= link_to "ユーザー登録", new_user_registration_path %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
     </nav>
   </header>
   <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->

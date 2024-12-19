@@ -1,36 +1,38 @@
-<h2>Sign up</h2>
-<!-- 後でform_withに変換し、コントローラー側にインスタンス変数を定義 -->
-<%= form_with model:@user , url: user_registration_path do |f| %>
-  <!-- パス名を指定することで、送信後のアクション（create)を実行してくれる -->
-  <%= render "public/shared/error_messages", resource: resource %>
+<div class="pl-5 pt-3">
+  <h3>ユーザー登録</h3>
+  <!-- 後でform_withに変換し、コントローラー側にインスタンス変数を定義 -->
+  <%= form_with model:@user , url: user_registration_path do |f| %>
+    <!-- パス名を指定することで、送信後のアクション（create)を実行してくれる -->
+    <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name %> <br>
-    <%= f.text_field :name, autofocus: true %>
-  </div>
-<!-- f.labelは何を入力すればいいか、ユーザーに伝える f.name_fieldは送るデータのカラム名を指定 autocompleteは前回入力したデータを自動入力 ユーザー登録で必要なの？-->
+    <div class="field">
+      <%= f.label :name %> <br>
+      <%= f.text_field :name, autofocus: true %>
+    </div>
+  <!-- f.labelは何を入力すればいいか、ユーザーに伝える f.name_fieldは送るデータのカラム名を指定 autocompleteは前回入力したデータを自動入力 ユーザー登録で必要なの？-->
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "ユーザー登録" %>
-  </div>
-<% end %>
+    <div class="actions mt-3">
+      <%= f.submit "ユーザー登録", class:"btn btn-primary" %>
+    </div>
+  <% end %>
 
-<%= render "public/shared/links" %>
+  <%= render "public/shared/links" %>
+</div>

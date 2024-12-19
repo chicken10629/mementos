@@ -2,8 +2,11 @@
 カレントユーザーではない場合、フォローボタンを表示
 -->
 <% @users.each do |user| %>
-
-  <%= image_tag user.profile_image %>
+  <% if user.profile_image.attached? %>
+    <%= image_tag user.profile_image, size: "100x100" %>
+  <% else %>
+    <%= image_tag 'no_image.jpeg' %>
+  <% end %>
   <%= link_to user.name, user_path(user.id) %>
   <%= user.introduction %>
 <% end %>
