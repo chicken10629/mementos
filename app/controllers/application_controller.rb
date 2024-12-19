@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top, :index], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
+  before_action :authenticate_user!, except: [:top, :index, :show], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
 
 
   private

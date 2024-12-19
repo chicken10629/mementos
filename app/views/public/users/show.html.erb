@@ -1,28 +1,42 @@
-<div class="user_profile">
+<div class="container mt-5">
   <!-- １．ゆーざーのアイコン -->
-  <% if @user.profile_image.attached? %>
-    <%= image_tag @user.profile_image %>
-  <% else %>
-    <%= image_tag 'no_image.jpg' %>
-  <% end %>
+  <div class="row">
+    <% if @user.profile_image.attached? %>
+      <%= image_tag @user.profile_image %>
+    <% else %>
+      <%= image_tag 'no_image.jpg' %>
+    <% end %>
+    <% if @user.is_public == true %>
+      <div class="user-follow">
+        <% if current_user %>
+          <% if @user.followed_by?(current_user) %>
+            <%= link_to "フォロー解除", unfollow_user_path, method: :create %>
+          <% else %>
+            <%= link_to "フォローする", follow_user_path, method: :destroy %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
   <!-- ２．ユーザーの名前 -->
-  <%= @user.name %>
+    <%= @user.name %>
   <% if @user.is_public == true %>
       <!-- ３．ユーザーの自己紹介 -->
       <%= @user.introduction %>
       <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
       <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
       <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
-</div>
-    <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
-    <div class="user_posts">
-      <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-        <div class="user_post_card">
-          <%= post.image %>
-          <%= post.title %>
-        </div>
-      <% end %>
-    </div>
+  </div>
+  <div class="user_posts row">
+      <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
+        <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
+          <div class="user_post_card">
+            <%= post.image %>
+            <%= post.title %>
+          </div>
+        <% end %>
   <% else %>
-      このユーザーは非公開に設定しています。
+    このユーザーは非公開に設定しています。
   <% end %>
+  </div>
+</div>

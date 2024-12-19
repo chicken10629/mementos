@@ -1,12 +1,25 @@
 <!-- ユーザー一覧の表示
 カレントユーザーではない場合、フォローボタンを表示
 -->
-<% @users.each do |user| %>
-  <% if user.profile_image.attached? %>
-    <%= image_tag user.profile_image, size: "100x100" %>
-  <% else %>
-    <%= image_tag 'no_image.jpeg' %>
+<div class="container mt-5">
+  <% @users.each do |user| %>
+    <table class="mt-2" style="table-layout: fixed;">
+      <tr>
+        <td class="w-25">
+          <% if user.profile_image.attached? %>
+            <%= image_tag user.profile_image, size: "100x100" %>
+          <% else %>
+            <%= image_tag 'no_image.jpeg' %>
+          <% end %>
+          <p>
+            <%= link_to user.name, user_path(user.id) %>
+          </p>
+        </td>
+        <td class="w-75 pl-3 align-top">
+          <i class="fa-solid fa-comment"></i>
+          <%= user.introduction %>
+        </td>
+      </tr>
+    </table>
   <% end %>
-  <%= link_to user.name, user_path(user.id) %>
-  <%= user.introduction %>
-<% end %>
+</div>

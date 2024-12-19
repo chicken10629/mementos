@@ -10,7 +10,7 @@ class User < ApplicationRecord
   # フォローした、されたユーザーのデータを取得するメソッド
   # 指定したモデルとの関連付けと外部キーを指定。
   # followersはメソッド名らしいため、自由に名を付けられる。
-  has_many :following_users, class_name: "Follow", foreign_key: "follow_id", dependent: :destroy
+  has_many :following_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :followers, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
 
   devise :database_authenticatable, :registerable,
@@ -23,8 +23,9 @@ class User < ApplicationRecord
     super && is_active?
   end
 
+  #userによってフォローされているかどうかのチェック
   def followed_by?(user)
-    follows.exists?(follow_id: user.id)
+    following_users.exists?(follower_id: user.id)
   end
 
   def follow(other_user)

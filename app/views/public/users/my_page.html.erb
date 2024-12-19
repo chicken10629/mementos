@@ -4,7 +4,10 @@
 <!-- １．ゆーざーのアイコン -->
   <div class="row">
     <%= image_tag @user.get_profile_image %>
-    <%= link_to "プロフィールを編集する", my_page_edit_path(current_user.id.to_s), class: 'pl-4' %>
+    <div class="profile_edit">
+      <i class="fa-solid fa-user-pen pl-4"></i>
+      <%= link_to "プロフィールを編集する", my_page_edit_path(current_user.id.to_s) %>
+    </div>
   </div>
   <div class="row d-flex flex-column">
         <!-- ２．ユーザーの名前 -->
@@ -12,17 +15,29 @@
         <%= @user.name %>
       </h3>
       <!-- ３．ユーザーの自己紹介 -->
-      <p class="mt-3">
+      <h5 class="mt-3">
+        <i class="fa-solid fa-comment"></i>
+        ユーザーコメント
+      </h5>
+      <p>
         <%= @user.introduction %>
       </p>
       <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
-      <p>
+      <p class="mt-3">
+        <i class="fa-solid fa-heart"></i>
         <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
       </p>
       <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
-      <p class="mt-4">プロフィール・投稿の公開</p>
-      <%= @user.is_public? ? "公開" : "非公開" %>
-      <%= link_to @user.is_public? ? "非公開にする" : "公開にする", my_page_public_status_path,  method: :patch %>
+      <p class="mt-4">
+        <i class="fa-solid fa-user-lock"></i>
+        プロフィール・投稿の公開設定
+      </p>
+      <%= @user.is_public? ?
+        "公開":
+        "非公開"
+      %>
+      <%= link_to @user.is_public? ? "非公開にする" :
+       "公開にする", my_page_public_status_path,  method: :patch %>
   </div>
 </div>
 <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
