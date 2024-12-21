@@ -9,34 +9,40 @@
     <% if @user.is_public == true %>
       <div class="user-follow">
         <% if current_user %>
-          <% if @user.followed_by?(current_user) %>
-            <%= link_to "フォロー解除", unfollow_user_path, method: :create %>
+          <% if current_user.following?(@user) %>
+            <%= link_to "フォロー解除する", user_follow_path(@user, @user.following_users.find_by(follower_id: current_user.id)), method: :delete %>
           <% else %>
-            <%= link_to "フォローする", follow_user_path, method: :destroy %>
+            <%= link_to "フォローする", user_follows_path(@user), method: :post %>
           <% end %>
         <% end %>
       </div>
     <% end %>
   </div>
   <!-- ２．ユーザーの名前 -->
-    <%= @user.name %>
-  <% if @user.is_public == true %>
-      <!-- ３．ユーザーの自己紹介 -->
-      <%= @user.introduction %>
-      <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
-      <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
-      <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
-  </div>
-  <div class="user_posts row">
-      <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
-        <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-          <div class="user_post_card">
-            <%= post.image %>
-            <%= post.title %>
-          </div>
-        <% end %>
-  <% else %>
-    このユーザーは非公開に設定しています。
-  <% end %>
+  <div class="row d-flex flex-column">
+    <h3>
+      <%= @user.name %>
+    </h3>
+    <% if @user.is_public == true %>
+        <!-- ３．ユーザーの自己紹介 -->
+        <%= @user.introduction %>
+        <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
+        <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
+        <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
+    </div>
+    <div class="user_posts row">
+        <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
+          <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
+            <div class="user_post_card">
+              <%= post.image %>
+              <%= post.title %>
+            </div>
+          <% end %>
+    <% else %>
+      <p class="mt-3">
+        このユーザーは非公開に設定しています。
+      </p>
+    <% end %>
+    </div>
   </div>
 </div>

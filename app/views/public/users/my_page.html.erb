@@ -3,7 +3,11 @@
 <div class="user_profile container m-5">
 <!-- １．ゆーざーのアイコン -->
   <div class="row">
-    <%= image_tag @user.get_profile_image %>
+  <% if @user.profile_image.attached? %>
+    <%= image_tag @user.profile_image %>
+  <% else %>
+    <%= image_tag 'no_image.jpg' %>
+  <% end %>
     <div class="profile_edit">
       <i class="fa-solid fa-user-pen pl-4"></i>
       <%= link_to "プロフィールを編集する", my_page_edit_path(current_user.id.to_s) %>
@@ -26,6 +30,10 @@
       <p class="mt-3">
         <i class="fa-solid fa-heart"></i>
         <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
+      </p>
+      <p class="mt-3">
+        <i class="fa-solid fa-users-rectangle"></i>
+        <%= link_to "フォローユーザー一覧を表示", user_follows_path(@user.id) %>
       </p>
       <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
       <p class="mt-4">

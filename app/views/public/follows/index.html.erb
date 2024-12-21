@@ -1,6 +1,10 @@
-<!-- ユーザー一覧の表示-->
 <div class="container mt-5">
-  <% @users.each do |user| %>
+  <% if @followed_users.exists? %>
+    <h3>フォローしたユーザー一覧</h3>
+  <% else %>
+    <h3>まだだれもフォローしてません。</h3>
+  <% end %>
+  <% @followed_users.each do |user| %>
     <table class="mt-2">
       <tr>
         <td class="w-25">
