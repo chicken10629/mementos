@@ -1,23 +1,21 @@
 <!-- ユーザー一覧の表示-->
 <div class="container mt-5">
   <% @users.each do |user| %>
-    <table class="mt-2">
-      <tr>
-        <td class="w-25">
+    <div class="row mt-2">
+      <div class="col-sm-4 col-lg-2">
           <% if user.profile_image.attached? %>
             <%= image_tag user.profile_image, size: "100x100" %>
           <% else %>
             <%= image_tag 'no_image.jpeg' %>
           <% end %>
-          <p>
+          <h5>
             <%= link_to user.name, user_path(user.id) %>
-          </p>
-        </td>
-        <td class="w-75 align-top pl-4">
+          </h5>
+      </div>
+      <div class="col-sm-8 col-lg-10 align-top">
           <i class="fa-solid fa-comment"></i>
           <%= user.introduction %>
-        </td>
-      </tr>
-    </table>
+      </div>
+    </div>
   <% end %>
 </div>

@@ -1,36 +1,42 @@
 <div class="container mt-5">
   <!-- １．ゆーざーのアイコン -->
   <div class="row">
-    <% if @user.profile_image.attached? %>
-      <%= image_tag @user.profile_image %>
-    <% else %>
-      <%= image_tag 'no_image.jpg' %>
-    <% end %>
-    <% if @user.is_public == true %>
-      <div class="user-follow">
-        <% if current_user %>
-          <% if current_user.following?(@user) %>
-            <%= link_to "フォロー解除する", user_follow_path(@user, @user.following_users.find_by(follower_id: current_user.id)), method: :delete %>
-          <% else %>
-            <%= link_to "フォローする", user_follows_path(@user), method: :post %>
+    <div class="col-md-4 col-lg-2">
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image %>
+      <% else %>
+        <%= image_tag 'no_image.jpg' %>
+      <% end %>
+      <h5>
+        <%= @user.name %>
+      </h5>
+    </div>
+      <% if @user.is_public == true %>
+        <div class="user-follow col-md-8 col-lg-10 ">
+          <% if current_user %>
+            <% if current_user.following?(@user) %>
+              <i class="fa-solid fa-user-minus"></i>
+              <%= link_to "フォロー解除する", user_follow_path(user_id: current_user.id, id: @user.id), method: :delete %>
+            <% else %>
+              <i class="fa-solid fa-user-plus"></i>
+              <%= link_to "フォローする", user_follows_path(@user), method: :post %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
   </div>
-  <!-- ２．ユーザーの名前 -->
-  <div class="row d-flex flex-column">
-    <h3>
-      <%= @user.name %>
-    </h3>
+  <div class="row d-flex flex-column pl-3">
     <% if @user.is_public == true %>
-        <!-- ３．ユーザーの自己紹介 -->
+      <!-- ３．ユーザーの自己紹介 -->
+      <div>
+        <i class="fa-solid fa-comment"></i>
         <%= @user.introduction %>
+      </div>
         <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
         <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
         <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
     </div>
-    <div class="user_posts row">
+    <div class="user_posts row pl-3">
         <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
           <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
             <div class="user_post_card">

@@ -5,9 +5,8 @@
     <h3>まだだれもフォローしてません。</h3>
   <% end %>
   <% @followed_users.each do |user| %>
-    <table class="mt-2">
-      <tr>
-        <td class="w-25">
+    <div class="row">
+      <div class="col-md-4 col-lg-2">
           <% if user.profile_image.attached? %>
             <%= image_tag user.profile_image, size: "100x100" %>
           <% else %>
@@ -16,12 +15,11 @@
           <p>
             <%= link_to user.name, user_path(user.id) %>
           </p>
-        </td>
-        <td class="w-75 align-top pl-4">
-          <i class="fa-solid fa-comment"></i>
-          <%= user.introduction %>
-        </td>
-      </tr>
-    </table>
+      </div>
+      <div class="col-md-8 col-lg-10 align-top">
+        <i class="fa-solid fa-comment"></i>
+        <%= user.introduction %>
+      </div>
+    </div>
   <% end %>
 </div>

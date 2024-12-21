@@ -25,18 +25,18 @@ class User < ApplicationRecord
 
   #userによってフォローされているかどうかのチェック
   def followed_by?(current_user)
-    followers.exists?(follower_id: current_user.id)#フォローされたユーザー
+    followers.exists?(follower_id: current_user.id)#カレントユーザーにフォローされているfollowerがいるか？
   end
 
   def following?(other_user)
-    following_users.include?(other_user)#フォローしているか判定
+    following_users.map(&:followed_id).include?(other_user.id)#フォローしているか判定
   end
 
   def follow(other_user)
     #following_usersは↑で定義した、followしたユーザーデータを取得するメソッド
     #other_userをフォローするために、followモデルに新しいデータを作成する
     #フォローされたユーザーidに選んだユーザーのidをセットしている。
-    following_users.create(followed_id: other_user.id)
+    following_users.create!(followed_id: other_user.id)
   end
 
   def unfollow(other_user)
