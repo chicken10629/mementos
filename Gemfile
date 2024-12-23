@@ -7,8 +7,8 @@ ruby '3.1.2'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
-# Use Puma as the app server
-gem 'puma', '~> 5.0'
+# Use Puma as the app server 5.0~>3.11へダウングレード
+gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -56,3 +56,18 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'kaminari', "~> 1.2"
+#MySQLの利用のための設定
+#データベース接続設定で利用する環境変数を管理するGEM
+#MySQLを操作するためのGEM
+#productionなので本番環境
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
+
+gem "net-smtp"
+gem "net-pop"
+gem "net-imap"
+#SMTPサーバーを通じてメールを送信
+#POP3を利用してメールサーバーからメールを受信
+#IMAPを利用してメールサーバーとやりとり
