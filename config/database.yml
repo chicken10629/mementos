@@ -22,4 +22,14 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: <%= ENV['DB_DATABASE'] %>
+  adapter: mysql2
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_general_ci
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+#.envファイルで記述した環境変数とリンク
+#環境変数はDBエンドポイント名、DB名、DBマスターユーザー名、パスワード
+#欲しいけど見せたくないデータをenvで定義するっぽい？
