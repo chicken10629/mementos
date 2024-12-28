@@ -9,6 +9,7 @@ en:
     failure:
       already_authenticated: "既にログインしています。"
       inactive: "あなたのアカウントは既に削除されています。新しいメールアドレスで新規登録してください。"
+      unauthenticated: "メールアドレスまたはパスワードが未入力です"
       invalid: " メールアドレスかパスワードが未入力、または間違っています。"
       #ログインエラーメッセージの変更
       locked: "Your account is locked."

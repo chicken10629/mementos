@@ -1,6 +1,10 @@
 <div class="pl-5 pt-3">
 <h3>ログイン画面</h3>
-  <%= flash[:alert]%>
+  <% if flash[:alert] %>
+    <div class="row w-50 alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <!-- エラーメッセージを表示 -->
   <%= form_with model:@user , url: user_session_path do |f| %>
 
