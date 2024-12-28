@@ -62,7 +62,9 @@
         </div>
     </nav>
   </header>
-  <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
+  <div class="pl-3">
+    <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
+  </div>
     <%= yield %>
   </body>
 </html>

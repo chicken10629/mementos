@@ -7,9 +7,9 @@ en:
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
     failure:
-      already_authenticated: "You are already signed in."
-      inactive: "Your account is not activated yet."
-      invalid: " %{authentication_keys}かパスワードが未入力、または間違っています。"
+      already_authenticated: "既にログインしています。"
+      inactive: "あなたのアカウントは既に削除されています。新しいメールアドレスで新規登録してください。"
+      invalid: " メールアドレスかパスワードが未入力、または間違っています。"
       #ログインエラーメッセージの変更
       locked: "Your account is locked."
       last_attempt: "You have one more attempt before your account is locked."
