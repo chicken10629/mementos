@@ -7,7 +7,7 @@ class Public::UsersController < ApplicationController
 
   def public_status
     @user = current_user #これ設定しないとis_publicがnilになってしまう
-    @user.update(is_public: !@user.is_public)
+    @user.update(is_public: !@user.is_public) #現在のis_publicの反対の状態にする
     redirect_to my_page_path, notice: '公開状態を変更しました。'
   end
 
@@ -17,6 +17,7 @@ class Public::UsersController < ApplicationController
 
   def index
     @users = User.where(is_active: true)
+    #倫理削除された物を除く
   end
 
   def show
@@ -26,14 +27,15 @@ class Public::UsersController < ApplicationController
       redirect_to my_page_path and return # and returnで@postsが実行されなくなる
     end
     @posts = @user.posts.order(created_at: :desc)
+    #投稿を最新順に表示
   end
 
   def my_page_update
     @user = User.find(params[:id]) #バリデーションエラー表示のため、ローカルではなくインスタンス変数で
     if @user.update(user_params)
-      redirect_to my_page_path, notice: 'プロフィールを更新しました。'
+      redirect_to my_page_path, notice: 'プロフィールを更新しました。' #パス名を指定
     else
-      render :my_page_edit, alert: 'ユーザー情報の編集に失敗しました。'
+      render :my_page_edit, alert: 'ユーザー情報の編集に失敗しました。' #こっちはアクション名
     end
   end
 

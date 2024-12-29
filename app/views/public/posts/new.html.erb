@@ -1,3 +1,27 @@
-新しい投稿の作成ページ
-タイトル、画像、エピソードの投稿
-投稿ボタン(createアクション)
+
+<div class="container">
+  <div class="row p-3">
+    <%= flash[:alert] %>
+    <%= form_with model: @post, url: posts_path  do |f| %>
+
+      <div class="field mt-3">
+        <%= f.label :title, "タイトル" %><br>
+        <%= f.text_field :title, autofocus: true %>
+      </div>
+
+      <div class="field mt-3">
+        <%= f.label :body, "エピソード" %><br>
+        <%= f.text_area :body %>
+      </div>
+
+      <div class="field mt-3">
+        <%= f.label :images, "画像を選択してください" %><br>
+        <%= f.file_field :images, multiple: true %>
+        <!-- 後で複数投稿可能にする -->
+      </div>
+
+      <%= f.submit "投稿する" %>
+    <% end %>
+
+  </div>
+</div>

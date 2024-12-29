@@ -39,9 +39,9 @@
     <div class="user_posts row pl-3">
         <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
           <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-            <div class="user_post_card">
-              <%= post.image %>
-              <%= post.title %>
+            <div class="user_post_card mt-3">
+              <%= image_tag post.image.variant(resize: "150x150") %>
+              <%= link_to post.title, post_path(post.id) %>
             </div>
           <% end %>
     <% else %>
