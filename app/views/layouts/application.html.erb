@@ -18,10 +18,25 @@
   <header style="height: 100px;">
   <!-- ヘッダーはトップ、ユーザー一覧、ログイン、ユーザー登録、マイページ、新規投稿、ログアウト -->
     <nav class="row p-3">
-        <h3 class="logo col-md-2 col-lg-4 ml-auto vertical-line-middle">
+        <h3 class="logo col-lg-2 ml-auto vertical-line-middle">
           <%= link_to "mementos", top_path %>
         </h3>
-        <div class="col-md-10 col-lg-8">
+        <div class="search col-lg-4">
+        <!-- 検索窓　投稿をtitle,bodyまたは両方で検索 form_withのデフォアクションがPostなのでgetを指定 -->
+          <%= form_with url: search_index_path, method: :get, local: true do |search| %>
+            <div class="form-box">
+              <%= search.text_field :query, placeholder: "キーワードを入力" %>
+              <!-- radio_buttonの値（search_in)に各カラムを渡す。条件式で利用 -->
+              <div class="radio-button"> 
+                <%= search.radio_button :search_in, "title" %>タイトルのみ
+                <%= search.radio_button :search_in, "body" %>エピソードのみ
+                <%= search.radio_button :search_in, "both", checked: true %>両方
+              </div>
+              <%= search.submit "検索" %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-10 col-lg-6 mr-auto">
           <ul class="d-flex list-unstyled justify-content-around mr-auto hina-mincho-regular pt-2">
           <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
             <% if user_signed_in? %>             

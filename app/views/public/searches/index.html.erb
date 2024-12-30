@@ -1,0 +1,18 @@
+投稿の検索結果を表示　投稿日時順に並べ替える　後でいいねの多い順に並べ替える
+<% if @results.any? %>
+  <ul class="row">
+    <% @results.each do |post| %>
+      <li class="col-4">
+        <% if post.image.attached? %>
+          <%= image_tag post.image.variant(resize: "200x200") %>
+        <% else %>
+          <%= image_tag 'no_image.jpg' %>
+        <% end %>
+        <%= link_to post.title, post_path(post.id) %>
+        <%= post.body %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>検索結果がありませんでした。</p>
+<% end %>
