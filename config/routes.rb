@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   #devise_for :usersは標準のdeviseコントローラーを指定してしまうため、
   #カスタマイズしている場合は使用するコントローラーを個別に指定しなければならない
 
+  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+    sessions: 'admin/sessions'
+  }
+  #ログインのコントローラーのみ使用する
+
   scope module: :public do #namespaceの指定をコントローラーのみにする。URLに含めない。
     #ファイル名とアクション名は一致させる必要アリ。アクション名を#mypageにしたらエラーがでてしまった。
     get '' => 'homes#top', as: 'top'
