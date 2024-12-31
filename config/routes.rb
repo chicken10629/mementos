@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'dashboards/index'
+  end
   devise_for :users, controllers: {           #ルートや使用コントローラーをusersに指定
     registrations: 'public/registrations',    #ユーザー登録
     sessions: 'public/sessions',              #ログイン・ログアウト
@@ -11,7 +14,11 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
   #ログインのコントローラーのみ使用する
-
+  scope module: :admin do
+    get 'dashboards/index' => 'dashboards#index', as: 'admin_top'
+    resources :posts, only: [:index, :show, :edit, :destroy, :update]
+    resources :users, only: [:index, :show, :edit, :destroy]
+  end
   scope module: :public do #namespaceの指定をコントローラーのみにする。URLに含めない。
     #ファイル名とアクション名は一致させる必要アリ。アクション名を#mypageにしたらエラーがでてしまった。
     get '' => 'homes#top', as: 'top'

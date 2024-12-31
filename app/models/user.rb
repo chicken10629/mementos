@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :visits
   
   # フォローした、されたユーザーのデータを取得するメソッド
   # 指定したモデルとの関連付けと外部キーを指定。
