@@ -17,11 +17,10 @@
   <body>
   <header style="height: 100px;">
   <!-- ヘッダーはトップ、ユーザー一覧、ログイン、ユーザー登録、マイページ、新規投稿、ログアウト -->
-    <nav class="row p-3">
+    <nav class="navbar navbar-expand-lg p-3">
         <h3 class="logo col-lg-2 ml-auto vertical-line-middle">
           <%= link_to "mementos", top_path %>
         </h3>
-        <div class="search col-lg-4">
         <!-- 検索窓　投稿をtitle,bodyまたは両方で検索 form_withのデフォアクションがPostなのでgetを指定 -->
           <%= form_with url: search_index_path, method: :get, local: true do |search| %>
             <div class="form-box">
@@ -36,15 +35,20 @@
             </div>
           <% end %>
         </div>
-        <div class="col-md-10 col-lg-6 mr-auto">
-          <ul class="d-flex list-unstyled justify-content-around mr-auto hina-mincho-regular pt-2">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <!--縦並びにすると下コンテンツに重なってしまうため、ハンバーガーメニューで誤魔化す-->
+          <ul class="list-unstyled  ml-auto navbar-nav">
           <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
             <% if user_signed_in? %>             
-              <li class="nav-item">
+              <li class="nav-item pr-3">
                 <i class="fa-solid fa-circle-user"></i>
                 <%= link_to "マイページ", my_page_path %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item pr-3">
                 <i class="fa-regular fa-file-pen"></i>
                 <%= link_to "新規投稿", new_post_path %>
               </li>
@@ -74,12 +78,13 @@
               </li>
             <% end %>
           </ul>
-        </div>
     </nav>
   </header>
   <div class="pl-3">
     <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
   </div>
+  <div class="container my-5">
     <%= yield %>
+  </div>
   </body>
 </html>
