@@ -1,0 +1,51 @@
+<!--
+なまえ、がぞう、じこしょうかいの変更のためのぺーじ
+編集ボタン⇒ユーザーページに戻る
+退会ボタン⇒ユーザー登録へ移動
+バリデーションメッセージがなかったので追加
+-->
+<div class="container">
+  <% if @user.errors.any? %>
+    <div class="validation_massage row"> 
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="user_profile row">
+    <div class="col-6">
+      <%= form_with(model: @user, url: admin_user_path(@user.id), method: :patch) do |f| %> 
+        <!-- デフォルト設定でusers/:idに飛ばされるため、urlを指定する必要アリ -->
+    <!-- １．ゆーざーのアイコン -->
+      <p>
+        <label for="inputImage">ユーザーアイコン</label>
+      </p>
+      <p>
+        <%= f.file_field :profile_image, placeholder: "", accept: "image/*" %>
+      </p>
+        
+    <!-- ２．ユーザーの名前 -->
+      <p>
+        <label for="inputName">名前</label> <!-- 入力欄のすぐ近くに表示されるやつ -->
+      </p>
+      <p>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
+      </p>
+        <!--テキストの入力、およびカラムの指定。idとlabel forはautofocusの関連付けのため。placefolderはカーソルをかざしたときの入力ヒント
+    # ３．ユーザーの自己紹介 -->
+      <p>
+        <label for="inputIntroduction">コメント</label>
+      </p>
+      <p>
+        <%= f.text_area :introduction, id:"inputIntroduction", placeholder:"自己紹介" %>
+      </p>
+      <p>
+        <%= f.submit "変更を保存する" %>
+      </p>
+      <% end %>
+    </div>
+  </div>
+    <%= link_to "アカウントを削除する", admin_user_path, method: :delete, confirm: "完全に削除します。よろしいですか？" %>
+</div>

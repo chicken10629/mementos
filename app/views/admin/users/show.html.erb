@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4 col-lg-2">
       <% if @user.profile_image.attached? %>
-        <%= image_tag @user.profile_image.variant(resize: "200x200") %>
+        <%= image_tag @user.profile_image %>
       <% else %>
         <%= image_tag 'no_image.jpg' %>
       <% end %>
@@ -11,22 +11,8 @@
         <%= @user.name %>
       </h5>
     </div>
-      <% if @user.is_public == true %>
-        <div class="user-follow col-md-8 col-lg-10 ">
-          <% if current_user %>
-            <% if current_user.following?(@user) %>
-              <i class="fa-solid fa-user-minus"></i>
-              <%= link_to "フォロー解除する", user_follow_path(user_id: current_user.id, id: @user.id), method: :delete %>
-            <% else %>
-              <i class="fa-solid fa-user-plus"></i>
-              <%= link_to "フォローする", user_follows_path(@user), method: :post %>
-            <% end %>
-          <% end %>
-        </div>
-      <% end %>
   </div>
   <div class="row d-flex flex-column pl-3">
-    <% if @user.is_public == true %>
       <!-- ３．ユーザーの自己紹介 -->
       <div>
         <i class="fa-solid fa-comment"></i>
@@ -35,23 +21,14 @@
         <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
         <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
         <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
-    </div>
+  </div>
     <div class="user_posts row pl-3">
         <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
-          <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
+          <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
             <div class="user_post_card mt-3">
-            <% if post.image.attached? %>
               <%= image_tag post.image.variant(resize: "150x150") %>
-            <% else %>
-              <%= image_tag "no_image.jpg", size: "150x150" %>
               <%= link_to post.title, post_path(post.id) %>
             </div>
           <% end %>
-    <% else %>
-      <p class="mt-3">
-        このユーザーは非公開に設定しています。
-      </p>
-    <% end %>
     </div>
-  </div>
 </div>

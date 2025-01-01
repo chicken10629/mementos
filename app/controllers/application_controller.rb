@@ -1,14 +1,35 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top, :index, :show], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
-  before_action :track_visit
+  #userはtop,index,showは認証が不要、adminは全て認証が必要なのでログイン制限の処理は別々にした。
+  before_action :authenticate_user, except: [:top, :index, :show], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
+  before_action :authenticate_admin, if: :admin_controller?
+  before_action :track_visit, unless: :admin_controller?
+  before_action :redirect_to_user_top
+  #layoutをadmin、それ以外で変更する
+  layout :set_layout
 
   private
 
-  def configure_authentication
+  def redirect_to_user_top
+    if user_signed_in? && current_user.admin?
+      redirect_to admin_top_path
+    end
+  end
+
+  def authenticate_admin
     if admin_controller? #namespaceがadminかどうかチェック。記述は↓
       authenticate_admin!#adminコンだった場合ログイン認証を求める
+    end
+  end
+
+  def authenticate_user
+      authenticate_user! unless admin_controller? || action_is_public? #adminコンでなければトップ画面以外で認証を求める　unless部分いらないが、勉強のために
+  end
+
+  def set_layout
+    if admin_controller?
+      'admin'
     else
-      authenticate_user! unless action_is_public? #adminコンでなければトップ画面以外で認証を求める
+      'application'
     end
   end
 
@@ -17,6 +38,7 @@ class ApplicationController < ActionController::Base
     self.class.module_parent_name == 'Admin' 
   end
 
+  #homes#topかどうかの判定　なくてもよいが、勉強のために
   def action_is_public?
     controller_name == 'homes' && action_name == 'top'
   end
@@ -28,8 +50,6 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path, alert: "あなたのアカウントは既に削除されています。"
     end
   end
-
-  private
 
   def track_visit
     if !user_signed_in? && session[:guest_visited].nil?

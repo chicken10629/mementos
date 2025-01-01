@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'dashboards/index'
-  end
+
+  #user用のログイン回りのコントローラー
   devise_for :users, controllers: {           #ルートや使用コントローラーをusersに指定
     registrations: 'public/registrations',    #ユーザー登録
     sessions: 'public/sessions',              #ログイン・ログアウト
@@ -10,15 +9,17 @@ Rails.application.routes.draw do
   #devise_for :usersは標準のdeviseコントローラーを指定してしまうため、
   #カスタマイズしている場合は使用するコントローラーを個別に指定しなければならない
 
+  #admin用。ログインのコントローラーのみ使用
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'
   }
-  #ログインのコントローラーのみ使用する
-  scope module: :admin do
-    get 'dashboards/index' => 'dashboards#index', as: 'admin_top'
+
+  namespace :admin do
+    get 'dashboards/index' => 'dashboards#index', as: 'top'
     resources :posts, only: [:index, :show, :edit, :destroy, :update]
-    resources :users, only: [:index, :show, :edit, :destroy]
+    resources :users, only: [:index, :show, :edit, :destroy, :update]
   end
+
   scope module: :public do #namespaceの指定をコントローラーのみにする。URLに含めない。
     #ファイル名とアクション名は一致させる必要アリ。アクション名を#mypageにしたらエラーがでてしまった。
     get '' => 'homes#top', as: 'top'
@@ -42,4 +43,7 @@ Rails.application.routes.draw do
     get 'search/index' => 'searches#index', as: 'search_index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   end
+  
+  #パス名を分けておかないとpublicコントローラーを使いだしてしまったので変更。
+
 end

@@ -1,0 +1,64 @@
+<h3>投稿一覧</h3>
+<table>
+  <tr>
+    <th>
+    投稿画像
+    </th>
+    <th>
+    タイトル
+    </th>
+    <th>
+    エピソード
+    </th>
+    <th>
+    登録日
+    </th>
+    <th>
+    更新日
+    </th>
+    <th>
+    投稿者アイコン
+    </th>
+    <th>
+    投稿者
+    </th>
+  </tr>
+  <% @posts.each do |post| %>
+    <tr>
+      <td>
+        <% if post.image.attached? %>
+          <%= image_tag post.image.variant(resize: "100x100") %>
+        <% else %>
+          <%= image_tag "no_image.jpg", size: "100x100" %>
+        <% end %>
+      </td>
+      <td>
+        <%= post.title %>
+      </td>
+      <td>
+      <!-- 念のため文字数制限 -->
+        <%= post.body.truncate(20) %>
+      </td>
+      <td>
+        <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </td>
+      <td>
+        <%= post.updated_at.strftime("%Y/%m/%d %H:%M") %>
+      </td>
+      <td>
+        <% if post.user.profile_image.attached? %>
+          <%= image_tag post.user.profile_image.variant(resize: "100x100") %>
+        <% else %>
+          <%= image_tag "no_image.jpg", size: "100x100" %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to post.user.name, admin_user_path(post.user) %>
+      </td>
+      <td>
+        <%= link_to "edit", edit_admin_post_path(post), class: "btn btn-primary" %>
+        <%= link_to "delete", admin_post_path(post), class: "btn btn-danger", method: :delete, confirm: "完全に削除します。よろしいですか？" %>
+      </td>
+    </tr>
+  <% end %>
+</table>

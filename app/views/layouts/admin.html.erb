@@ -31,7 +31,7 @@
         <!--縦並びにすると下コンテンツに重なってしまうため、ハンバーガーメニューで誤魔化す-->
           <ul class="list-unstyled  ml-auto navbar-nav">
           <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
-            <% if admin_user_signed_in? %>             
+            <% if admin_signed_in? %>             
               <li class="nav-item">
                 <i class="fa-solid fa-book-open"></i>
                 <%= link_to "投稿一覧", admin_posts_path %>
@@ -41,7 +41,8 @@
                 <%= link_to "ユーザー一覧", admin_users_path %>
               </li>
             <% end %>
-            <% if admin_user_signed_in? %>
+            <% if admin_signed_in? %>
+            <!-- deviseコマンドからadminモデルを作成したので、ヘルパーメソッドもcurrent_adminなどに変わる -->
             <!-- deviseのルートを確認する -->
               <li class="nav-item">
                 <i class="fa-solid fa-right-from-bracket"></i>

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <% if @post.image.attached? %>
+      <%= image_tag @post.image.variant(resize: "200x200") %>
+      <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。 -->
+    <% end %>
+    <%= @post.title %><br>
+    <%= @post.body %><br>
+    <%= link_to "編集する", edit_post_path(@post) %>
+      <!-- 日本語より先にパスを書いたらURLが表示されてしまった。 -->
+      <div class="post_user">
+        <% if @post.user.profile_image.attached? %>
+          <p><%= image_tag @post.user.profile_image.variant(resize: "100x100") %></p>
+        <% else %>
+          <p><%= image_tag 'no_image.jpg'.variant(resize: "100x100") %></p>
+        <% end %>
+        <p><%= link_to @post.user.name, user_path(@post.user_id) %></p>
+      </div>
+  </div>
+</div>
