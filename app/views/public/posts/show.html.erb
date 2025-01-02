@@ -10,15 +10,17 @@
     <% if @post.image.attached? %>
       <%= image_tag @post.image.variant(resize: "200x200") %>
       <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。 -->
+    <% else %>
+      <%= image_tag "no_image.jpg", size: "200x200" %>
     <% end %>
     <%= @post.title %><br>
     <%= @post.body %><br>
-    <% if @post.user_id == current_user.id %>
+    <% if current_user && @post.user_id == current_user.id %>
       <%= link_to "編集する", edit_post_path(@post) %>
-      <!-- 日本語より先にパスを書いたらURLが表示されてしまった。 -->
+      <!-- 日本語より先にパスを書いたらURLが表示されてしまった。current_user&&にしないとゲスト時nilエラー -->
     <% end %>
     <!-- 別ユーザーの投稿に限りプロフィール表示 -->
-    <% if @post.user_id != current_user.id %>
+    <% if current_user && @post.user_id != current_user.id %>
       <div class="post_user">
         <% if @post.user.profile_image.attached? %>
           <p><%= image_tag @post.user.profile_image.variant(resize: "100x100") %></p>
