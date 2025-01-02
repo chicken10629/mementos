@@ -49,15 +49,17 @@
   </div>
 </div>
 <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
-<div class="user_posts">
+<div class="user_posts mt-5">
     <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-      <div class="user_post_card row mt-3 pl-5">
+      <div class="user_post_card mb-5 pl-5">
         <% if post.image.attached? %>
           <%= image_tag post.image.variant(resize: "150x150") %>
         <% else %>
           <%= image_tag "no_image.jpg", size: "150x150" %>
         <% end %>
-        <%= link_to post.title, post_path(post.id) %>
+        <p>
+          <%= link_to post.title, post_path(post.id) %>
+        </p>
       </div>
     <% end %>
 </div>

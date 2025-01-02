@@ -26,6 +26,7 @@
       <% end %>
   </div>
   <% if @user.is_public == true %>
+
     <div class="row d-flex flex-column pl-3">   
       <!-- ３．ユーザーの自己紹介 -->
       <div>
@@ -36,6 +37,7 @@
         <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
         <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
     </div>
+
     <div class="user_posts row pl-3">
         <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
           <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
@@ -45,6 +47,7 @@
             <% else %>
               <%= image_tag "no_image.jpg", size: "150x150" %>
               <%= link_to post.title, post_path(post.id) %>
+            <% end %>
             </div>
           <% end %>
   <% else %>

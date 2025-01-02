@@ -1,6 +1,5 @@
 
 <div class="container">
-  <div class="row">
     <p>投稿の編集</p>
     <% if @post.errors.any? %>
       <div class="error_messages">
@@ -13,16 +12,20 @@
     <% end %>
     <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
       
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title, autofocus: true %>
+      <p>
+        <%= f.label :title, "タイトル" %>
+        <%= f.text_field :title, autofocus: true %>
+      </p>
+      <p>
+        <%= f.label :body, "エピソード" %>
+        <%= f.text_area :body %>
+      </p>
 
-      <%= f.label :body, "エピソード" %>
-      <%= f.text_area :body %>
-
-      <%= f.label :image, "画像を選択してください" %>
-      <%= f.file_field :image, accept: "image/*" %>
+      <p>
+        <%= f.label :image, "画像を選択してください" %>
+        <%= f.file_field :image, accept: "image/*" %>
+      </p>
 
       <%= f.submit "変更を保存する" %>
     <% end %>
-  </div>
 </div>

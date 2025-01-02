@@ -4,6 +4,6 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   
   has_one_attached :image
-  validates :title, :body, presence: true
+  validates :title, :body, presence: { message: "を入力してください。" }
   #あとでhas_many_attached :imagesに変更
 end
