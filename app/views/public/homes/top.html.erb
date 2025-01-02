@@ -9,8 +9,8 @@
 <!--        最近の投稿を以下に表示
         投稿日の最新順に並べ替えて5件表示
         必要な情報はpostsモデルの画像、タイトル、ユーザーidに紐づいたユーザーネーム
--->
-      <% @posts.each do |post| %>
+-->  <% if @posts.present? %>
+       <% @posts.each do |post| %>
         <div class="mb-5">
           <% if post.image.attached? %>
             <%= image_tag post.image.variant(resize: "200x200") %>
@@ -27,7 +27,8 @@
             <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
           </p>
         </div>
-      <% end %>
+       <% end %>
+     <% end %>
     </div>
   </div>
   <div class="row mt-3">
