@@ -1,6 +1,34 @@
-投稿詳細
+<!-- 投稿詳細
 タイトル、画像、エピソード
 いいねぼたん
 他のユーザーからのコメント一覧
 コメント投稿機能
 投稿一覧に戻る
+-->
+<div class="container">
+  <div class="row">
+    <% if @post.image.attached? %>
+      <%= image_tag @post.image.variant(resize: "200x200") %>
+      <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。 -->
+    <% else %>
+      <%= image_tag "no_image.jpg", size: "200x200" %>
+    <% end %>
+    <%= @post.title %><br>
+    <%= @post.body %><br>
+    <% if current_user && @post.user_id == current_user.id %>
+      <%= link_to "編集する", edit_post_path(@post) %>
+      <!-- 日本語より先にパスを書いたらURLが表示されてしまった。current_user&&にしないとゲスト時nilエラー -->
+    <% end %>
+    <!-- 別ユーザーの投稿に限りプロフィール表示 -->
+    <% if current_user && @post.user_id != current_user.id %>
+      <div class="post_user">
+        <% if @post.user.profile_image.attached? %>
+          <p><%= image_tag @post.user.profile_image.variant(resize: "100x100") %></p>
+        <% else %>
+          <p><%= image_tag 'no_image.jpg'.variant(resize: "100x100") %></p>
+        <% end %>
+        <p><%= link_to @post.user.name, user_path(@post.user_id) %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

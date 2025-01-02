@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <!-- １．ゆーざーのアイコン -->
+  <div class="row">
+    <div class="col-md-4 col-lg-2">
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image %>
+      <% else %>
+        <%= image_tag 'no_image.jpg' %>
+      <% end %>
+      <h5>
+        <%= @user.name %>
+      </h5>
+    </div>
+  </div>
+  <div class="row d-flex flex-column pl-3">
+      <!-- ３．ユーザーの自己紹介 -->
+      <div>
+        <i class="fa-solid fa-comment"></i>
+        <%= @user.introduction %>
+      </div>
+        <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
+        <%= link_to "いいね一覧を表示", user_favorites_path(@user.id) %>
+        <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
+  </div>
+    <div class="user_posts row pl-3">
+        <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
+          <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
+            <div class="user_post_card mt-3">
+              <%= image_tag post.image.variant(resize: "150x150") %>
+              <%= link_to post.title, post_path(post.id) %>
+            </div>
+          <% end %>
+    </div>
+</div>

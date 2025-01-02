@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mementos</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <!-- FontAwesomeが使えるようにする -->
+    <script src="https://kit.fontawesome.com/a31255e7a3.js" crossorigin="anonymous"></script>
+    <!-- CSSやjavascriptのファイルの管理方法および場所 pack_tagはCSSをWebpackerで管理する際に利用 場所はapp/javascript/packs/stylesheets-->
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  </head>
+
+  <body>
+  <header style="height: 100px;">
+  <!-- ヘッダーはトップ、ユーザー一覧、投稿一覧（最新順・いいね順にソート）、ログイン、ログアウト -->
+  <!-- 共通はトップ、非ログイン時はログイン、ログイン時は各種一覧、ログアウトを表示 -->
+    <nav class="navbar navbar-expand-lg p-3">
+        <h3 class="logo col-lg-2 ml-auto vertical-line-middle">
+          <%= link_to "管理者画面", admin_top_path %>
+        </h3>
+        <!-- 検索窓は個別に作ればよさげ -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <!--縦並びにすると下コンテンツに重なってしまうため、ハンバーガーメニューで誤魔化す-->
+          <ul class="list-unstyled  ml-auto navbar-nav">
+          <!-- ログインしているかチェック 変数は不要で、deviseヘルパーメソッドで済む -->
+            <% if admin_signed_in? %>             
+              <li class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+                <%= link_to "投稿一覧", admin_posts_path %>
+              </li>
+              <li class="nav-item">
+                <i class="fa-solid fa-users"></i>
+                <%= link_to "ユーザー一覧", admin_users_path %>
+              </li>
+            <% end %>
+            <% if admin_signed_in? %>
+            <!-- deviseコマンドからadminモデルを作成したので、ヘルパーメソッドもcurrent_adminなどに変わる -->
+            <!-- deviseのルートを確認する -->
+              <li class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <%= link_to "ログイン", new_admin_session_path %>
+              </li>
+            <% end %>
+          </ul>
+    </nav>
+  </header>
+  <div class="pl-3">
+    <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
+  </div>
+  <div class="container my-5">
+    <%= yield %>
+  </div>
+  </body>
+</html>

@@ -1,5 +1,6 @@
 @use '~bootstrap/scss/bootstrap';
 
+
 a{
   text-decoration: none;
   color:inherit
@@ -8,3 +9,18 @@ a{
 ul{
   list-style: none;
 }
+
+.navbar-collapse{
+  z-index: 1025;
+}
+
+.nav-item{
+  padding-right: 10px;
+  padding-bottom: 15px;
+}
+
+.navbar-collapse.show{
+  padding-left: 15px;
+  background-color: rgba(240,240,240,1);
+}
+

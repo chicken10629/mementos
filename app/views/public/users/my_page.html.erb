@@ -4,7 +4,7 @@
 <!-- １．ゆーざーのアイコン -->
   <div class="row">
   <% if @user.profile_image.attached? %>
-    <%= image_tag @user.profile_image %>
+    <%= image_tag @user.profile_image.variant(resize: "200x200") %>
   <% else %>
     <%= image_tag 'no_image.jpg' %>
   <% end %>
@@ -50,12 +50,16 @@
 </div>
 <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
 <div class="user_posts">
-  <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-    <div class="user_post_card">
-      <%= post.image %>
-      <%= post.title %>
-    </div>
-  <% end %>
+    <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
+      <div class="user_post_card row mt-3 pl-5">
+        <% if post.image.attached? %>
+          <%= image_tag post.image.variant(resize: "150x150") %>
+        <% else %>
+          <%= image_tag "no_image.jpg", size: "150x150" %>
+        <% end %>
+        <%= link_to post.title, post_path(post.id) %>
+      </div>
+    <% end %>
 </div>
 
 

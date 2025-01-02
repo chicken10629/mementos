@@ -13,6 +13,19 @@ class Admin::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def new
+    super
+    @admin = Admin.new
+  end
+
+  def after_sign_in_path_for(resource)
+    admin_top_path #ログイン時にメイン画面へ遷移
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    admin_session_path #ログアウト後にログイン画面へ遷移
+  end
+
   # DELETE /resource/sign_out
   # def destroy
   #   super

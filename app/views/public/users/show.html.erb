@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4 col-lg-2">
       <% if @user.profile_image.attached? %>
-        <%= image_tag @user.profile_image %>
+        <%= image_tag @user.profile_image.variant(resize: "200x200") %>
       <% else %>
         <%= image_tag 'no_image.jpg' %>
       <% end %>
@@ -38,10 +38,13 @@
     </div>
     <div class="user_posts row pl-3">
         <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
-          <% @user.posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-            <div class="user_post_card">
-              <%= post.image %>
-              <%= post.title %>
+          <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
+            <div class="user_post_card mt-3">
+            <% if post.image.attached? %>
+              <%= image_tag post.image.variant(resize: "150x150") %>
+            <% else %>
+              <%= image_tag "no_image.jpg", size: "150x150" %>
+              <%= link_to post.title, post_path(post.id) %>
             </div>
           <% end %>
   <% else %>
