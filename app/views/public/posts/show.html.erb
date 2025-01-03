@@ -52,15 +52,19 @@
       <% end %>
     </div>
     <% if @post_comments.present? %>
-      <div class="post-comment-list">
+      <div class="post-comment-list mt-5 d-flex">
         <% @post_comments.each do |comment| %>
-          <div class="row mt-5">
+          <div class="post-user-profile">
             <% if comment.user.profile_image.attached? %>
-              <%= image_tag comment.user.profile_image.variant(resize: "100x100") %>
+              <%= image_tag comment.user.profile_image.variant(resize: "80x80") %>
             <% else %>
-              <%= image_tag "no_image.jpg", size: "100x100" %>
+              <%= image_tag "no_image.jpg", size: "80x80" %>
             <% end %>
-            <%= comment.user.name %>
+            <p>
+              <%= comment.user.name %>
+            <p>
+          </div>
+          <div class="ml-3">
             <%= comment.comment %>
           </div>
         <% end %>
