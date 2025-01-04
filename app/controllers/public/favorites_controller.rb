@@ -11,7 +11,7 @@ class Public::FavoritesController < ApplicationController
   def create
     #ビュー側でインスタンス変数使わなければローカルでよさげ？
     #拾ってくるidはネストしてる親のid
-    #
+    #pathにpost_idをセットし、コントローラーに送る
     post = Post.find(params[:post_id])
     favorite = current_user.favorites.new(post_id: post.id)
     favorite.save
