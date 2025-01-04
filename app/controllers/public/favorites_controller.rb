@@ -23,7 +23,11 @@ class Public::FavoritesController < ApplicationController
     post = Post.find(params[:post_id])
     favorite = current_user.favorites.find_by(post_id: post.id)
     favorite.destroy
-    redirect_to post_path(post), notice: "いいねを解除しました。"
+    if request.referer.include?("posts")#リクエスト元のURLにpostsが含まれているか？
+      redirect_to post_path(post), notice: "いいねを解除しました。"
+    else
+      redirect_to my_favorites_path, notice: "いいねを解除しました。"
+    end
   end
   
 end

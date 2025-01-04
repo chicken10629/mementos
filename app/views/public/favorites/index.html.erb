@@ -7,21 +7,23 @@ user_idが一致したfavoritesから、post_idを抽出し、postsを呼び出�
 
 <div class="container">
   <h3>いいね一覧</h3>
-  <div class="row my-3">
+  <div class="row my-3 mx-auto">
     <% if @favorites.any? %>
       <% @favorites.each do |favorite| %>
-        <div class="title">
-          <% if favorite.post.image.attached? %>
-            <p><%= image_tag favorite.post.image.variant(resize: "100x100") %> </p>
-          <% else %>
-            <p><%= image_tag "no_image.jpg", size:"100x100" %></p>
-          <% end %>
-          <p><%= link_to favorite.post.title, post_path(favorite.post.id) %></p>
+        <div class="col-6 col-md-4 col-lg-3 mt-3" >
+          <div class="title">
+            <% if favorite.post.image.attached? %>
+              <p><%= image_tag favorite.post.image.variant(resize: "100x100") %> </p>
+            <% else %>
+              <p><%= image_tag "no_image.jpg", size:"100x100" %></p>
+            <% end %>
+            <p><%= link_to favorite.post.title, post_path(favorite.post.id) %></p>
+          </div>
+          <p>
+            <!-- my_pageにしか表示しないしため、解除ボタンすれば消える destroy側ではpost_idを要求しているため、pathにセットする -->
+            <%= link_to "いいねを解除する", post_favorite_path(favorite.post), method: :delete, class: "btn btn-danger" %>
+          </p>
         </div>
-        <p>
-          <!-- my_pageにしか表示しないしため、解除ボタンすれば消える -->
-          <%= link_to "いいねを解除する", post_favorite_path(favorite.id), method: :delete, class: "ml-5 btn btn-danger" %>
-        </p>
       <% end %>
     <% else %>
       <p>まだいいねをしていません。</p>
