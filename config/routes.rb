@@ -28,16 +28,17 @@ Rails.application.routes.draw do
     patch 'users/my_page/edit/:id' => 'users#my_page_update', as: 'my_page_update'
     put 'users/my_page' => 'users#withdraw', as: 'withdraw'
     patch 'users/my_page/public_status' => 'users#public_status', as: 'my_page_public_status'
+    get 'users/my_page/favorites' => 'favorites#index', as: 'my_favorites' #idを表示したくないのであえてネストをしない
     resources :users, only: [:index, :show] do
       resources :follows, only: [:index, :create, :destroy] #usersにネスト
-      resources :favorites, only: [:index]
     end
 
     resources :posts do
       resources :post_comments, only: [:create] do
         patch 'delete', on: :member #on: :memberはカスタムアクション名を定義する際、idが必要なルートを定義するときに使用。indexはon: :collection
       end
-      resources :favorites, only: [:index, :create, :destroy]
+      resource :favorite, only: [:create, :destroy] #favoriteのidはURLには不要。index一覧はuser_idで拾ってくる？
+      resources :favorites, only: [:index] #いいね
     end
 
     get 'search/index' => 'searches#index', as: 'search_index'

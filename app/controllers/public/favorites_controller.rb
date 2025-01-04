@@ -5,7 +5,7 @@ class Public::FavoritesController < ApplicationController
   #joinは二つ以上のテーブルを関連付け、一度にデータを取得
   #
   def index
-    @favorites = current_user.posts.joins(:favorites)
+    @favorites = current_user.favorites.includes(:post)
   end
 
   def create
@@ -15,7 +15,7 @@ class Public::FavoritesController < ApplicationController
     post = Post.find(params[:post_id])
     favorite = current_user.favorites.new(post_id: post.id)
     favorite.save
-    redirect_to post_path(post)
+    redirect_to post_path(post), notice: "いいねしました。"
   end
 
   def destroy
@@ -23,7 +23,7 @@ class Public::FavoritesController < ApplicationController
     post = Post.find(params[:post_id])
     favorite = current_user.favorites.find_by(post_id: post.id)
     favorite.destroy
-    redirect_to post_path(post)
+    redirect_to post_path(post), notice: "いいねを解除しました。"
   end
   
 end

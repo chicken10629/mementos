@@ -9,7 +9,7 @@ class Post < ApplicationRecord
 
   #いいねがついているかのチェック　子ではなく親の方が機能するので、親側にメソッドを作る
   def favorited_by?(user)
-    favorites/exists?(user_id: user.id)
+    favorites.exists?(user_id: user.id)
   end
 
 end

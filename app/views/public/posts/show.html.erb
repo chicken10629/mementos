@@ -35,7 +35,21 @@
         <p><%= link_to @post.user.name, user_path(@post.user_id) %></p>
       </div>
     <% end %>
-
+    <div class="favorite">
+      <% if current_user && @post.favorited_by?(current_user) %>
+        <p>
+          <%= link_to post_favorite_path(@post), method: :delete do %>
+            ♡<%= @post.favorites.count %> いいね
+          <% end %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to post_favorite_path(@post), method: :create do %>
+            ♥<%= @post.favorites.count %> いいね
+          <% end %>
+        </p>
+      <% end %>
+    </div>
     <div class="post-comment">
       <p>みんなのコメント</p>
       <% if current_user %>
