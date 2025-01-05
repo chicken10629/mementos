@@ -30,7 +30,7 @@
         <% if @post.user.profile_image.attached? %>
           <p><%= image_tag @post.user.profile_image.variant(resize: "100x100") %></p>
         <% else %>
-          <p><%= image_tag 'no_image.jpg'.variant(resize: "100x100") %></p>
+          <p><%= image_tag 'no_image.jpg', size: "100x100" %></p>
         <% end %>
         <p><%= link_to @post.user.name, user_path(@post.user_id) %></p>
       </div>

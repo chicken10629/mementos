@@ -24,12 +24,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(current_user.id)
-    if @user.destroy
-      redirect_to admin_users_path, notice: 'アカウントを削除しました。'
-    else
-      redirect_to admin_users_path, alert: 'アカウントの削除に失敗しました。'
+    @user = User.find(params[:id])
+    ActiveRecord::Base.transaction do
+      @user.posts.destroy_all
+      @user.favorites.destroy_all
+      @user.follower.destroy_all
+      @user.followed.destroy_all
+      @user.destroy
     end
+      redirect_to admin_users_path, notice: 'アカウントを削除しました。'
   end
 
   private
