@@ -9,6 +9,5 @@ class Follow < ApplicationRecord
   
   validates :follower_id, uniqueness: {scope: :followed_id}
   #フォローしたユーザーとフォローされたユーザーの組み合わせが唯一であるか？
-
   
 end

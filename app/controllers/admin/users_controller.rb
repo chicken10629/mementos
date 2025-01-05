@@ -28,8 +28,8 @@ class Admin::UsersController < ApplicationController
     ActiveRecord::Base.transaction do
       @user.posts.destroy_all
       @user.favorites.destroy_all
-      @user.follower.destroy_all
-      @user.followed.destroy_all
+      @user.following_users.destroy_all
+      @user.followers.destroy_all
       @user.destroy
     end
       redirect_to admin_users_path, notice: 'アカウントを削除しました。'
