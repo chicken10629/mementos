@@ -1,0 +1,22 @@
+<!-- 部分テンプレートファイル。非同期通信をするために必要らしい
+いいねのボタン部分のみ。パスはfavorites/_favorite.html.erb
+postにセットする@postはそのまま流用できそう
+aria-hiddenは最近流行りの機械読み上げ機能をOFFにするものらしい。
+画像など読み上げ不要なものに使用するといいっぽい。
+do endブロックでlink_to部分をアイコンといいね部分まで広げている。
+アクションごとにjsファイルが必要っぽい。create、destroyは必須。
+-->
+<% if !user_signed_in? %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= post.favorites.count %> いいね
+<% elsif post.favorited_by?(current_user) %>
+  <%= link_to post_favorite_path(post), method: :delete, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= post.favorites.count %> いいね
+  <% end %>
+<% else %>
+  <%= link_to post_favorite_path(post), method: :post, remote: true do %>
+    <i class="fas fa-heart" aria-hidden="true"></i>
+    <%= post.favorites.count %> いいね
+  <% end %>
+<% end %>

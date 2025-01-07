@@ -13,21 +13,17 @@ class Public::FavoritesController < ApplicationController
     #拾ってくるidはネストしてる親のid
     #pathにpost_idをセットし、コントローラーに送る
     post = Post.find(params[:post_id])
-    favorite = current_user.favorites.new(post_id: post.id)
-    favorite.save
-    redirect_to post_path(post), notice: "いいねしました。"
+    @favorite = current_user.favorites.new(post_id: post.id)
+    @favorite.save
+    render 'replace'
   end
 
   def destroy
     #ネストしているものは基本的に親のデータを取得し、各idをセットしてからデータをいじる。
     post = Post.find(params[:post_id])
-    favorite = current_user.favorites.find_by(post_id: post.id)
-    favorite.destroy
-    if request.referer.include?("posts")#リクエスト元のURLにpostsが含まれているか？
-      redirect_to post_path(post), notice: "いいねを解除しました。"
-    else
-      redirect_to my_favorites_path, notice: "いいねを解除しました。"
-    end
+    @favorite = current_user.favorites.find_by(post_id: post.id)
+    @favorite.destroy
+    render 'replace'
   end
   
 end

@@ -19,10 +19,10 @@ user_idが一致したfavoritesから、post_idを抽出し、postsを呼び出�
             <% end %>
             <p><%= link_to favorite.post.title, post_path(favorite.post.id) %></p>
           </div>
-          <p>
-            <!-- my_pageにしか表示しないしため、解除ボタンすれば消える destroy側ではpost_idを要求しているため、pathにセットする -->
-            <%= link_to "いいねを解除する", post_favorite_path(favorite.post), method: :delete, class: "btn btn-danger" %>
-          </p>
+          <p id="favorite_btn_<%= favorite.post.id %>">
+            <%= render "public/favorites/btn", post: favorite.post %>
+          <!-- publicから指定しないとなぜか読み込んでくれない。謎すぎる -->
+        </p>
         </div>
       <% end %>
     <% else %>

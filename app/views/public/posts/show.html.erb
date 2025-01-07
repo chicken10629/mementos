@@ -35,26 +35,22 @@
         <p><%= link_to @post.user.name, user_path(@post.user_id) %></p>
       </div>
     <% end %>
+
+    <!--非同期通信でいいねを実行する
+    流れとしては
+    remote: trueで非同期通信にする
+    変えたいもののid"$()"を選択し、変えたいテキスト"html()"や値"val()"を入力する。それをjsで実行する
+    
+    -->
     <div class="favorite">
-      <% if current_user && @post.favorited_by?(current_user) %>
-        <p>
-          <%= link_to post_favorite_path(@post), method: :delete do %>
-            ♡<%= @post.favorites.count %> いいね
-          <% end %>
-        </p>
-      <% else %>
-        <p>
-          <%= link_to post_favorite_path(@post), method: :create do %>
-            ♥<%= @post.favorites.count %> いいね
-          <% end %>
-        </p>
-      <% end %>
+      <p id="favorite_btn_<%= @post.id %>">
+        <%= render "public/favorites/btn", post: @post %>
+        <!-- publicから指定しないとなぜか読み込んでくれない。謎すぎる -->
+      </p>
     </div>
     <div class="post-comment">
       <p>みんなのコメント</p>
       <% if current_user %>
-        
-
         <%= form_with model: @post_comment, url: post_post_comments_path(@post) do |f| %>
         
           <%= f.label :comment, "コメントしよう" %><br>

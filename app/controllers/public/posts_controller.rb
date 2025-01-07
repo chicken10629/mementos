@@ -4,7 +4,6 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    
     @posts = Post.all
   end
 
@@ -17,7 +16,6 @@ class Public::PostsController < ApplicationController
   rescue ActiveRecord::RecordNotFound #カラムが存在しない場合
     redirect_to posts_path, alert: 'この投稿は存在しないか、既に削除されています。'
   end
-
 
   def create
     @post = Post.new(post_params)
