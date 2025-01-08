@@ -22,7 +22,7 @@ class Admin::UsersController < ApplicationController
       render :edit, alert: 'ユーザー情報の編集に失敗しました。' #こっちはアクション名
     end
   end
-
+ 
   def destroy
     @user = User.find(params[:id])
     ActiveRecord::Base.transaction do
