@@ -11,9 +11,13 @@ class User < ApplicationRecord
   # フォローした、されたユーザーのデータを取得するメソッド
   # 指定したモデルとの関連付けと外部キーを指定。
   # followersはメソッド名らしいため、自由に名を付けられる。
-  has_many :follows, dependent: :destroy
+
   has_many :following_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy #フォローしている人の取得
   has_many :followers, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy #フォローされた人の取得
+  #上記メソッドを利用して、フォロー・フォロワー情報を取得
+  has_many :following_list, through: :following_users, source: :followed
+  has_many :followers_list, through: :followers, source: :follower
+  #following_usersを利用し、following_listとuserモデルを関連付ける。followed_idを参照する。
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -38,7 +42,7 @@ class User < ApplicationRecord
     #following_usersは↑で定義した、followしたユーザーデータを取得するメソッド
     #other_userをフォローするために、followモデルに新しいデータを作成する
     #フォローされたユーザーidに選んだユーザーのidをセットしている。
-    following_users.create!(followed_id: other_user.id)
+    following_users.create(followed_id: other_user.id)
   end
 
   def unfollow(other_user)

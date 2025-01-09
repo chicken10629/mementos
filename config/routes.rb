@@ -30,7 +30,9 @@ Rails.application.routes.draw do
     patch 'users/my_page/public_status' => 'users#public_status', as: 'my_page_public_status'
     get 'users/my_page/favorites' => 'favorites#index', as: 'my_favorites' #idを表示したくないのであえてネストをしない
     resources :users, only: [:index, :show] do
-      resources :follows, only: [:index, :create, :destroy] #usersにネスト
+      resources :follows, only: [:create, :destroy] #usersにネスト
+      get "followings" => "follows#followings", as: 'followings'
+      get "followers" => "follows#followers", as: 'followers'
     end
 
     resources :posts do

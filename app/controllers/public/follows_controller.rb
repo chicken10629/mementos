@@ -1,8 +1,14 @@
 class Public::FollowsController < ApplicationController
-  def index
-    @user = User.find_by(id: params[:user_id])
-    @followed_users = Follow.where(follower_id: @user.id).pluck(:followed_id)#pluckでfollowed_idのみ取得
-    @followed_users = User.where(id: @follwed_users) #userモデルに記述したメソッド。followしたユーザー取得
+  #フォロー一覧取得アクション
+  def followings
+    user = User.find(params[:user_id])
+    @users = user.following_list
+  end
+  
+  #フォロワー一覧取得アクション
+  def followers
+    user = User.find(params[:user_id])
+    @users = user.followers_list
   end
 
   def create   
