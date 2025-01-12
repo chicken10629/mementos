@@ -11,10 +11,11 @@ class User < ApplicationRecord
   # フォローした、されたユーザーのデータを取得するメソッド
   # 指定したモデルとの関連付けと外部キーを指定。
   # followersはメソッド名らしいため、自由に名を付けられる。
-
   has_many :following_users, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy #フォローしている人の取得
   has_many :followers, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy #フォローされた人の取得
+  
   #上記メソッドを利用して、フォロー・フォロワー情報を取得
+  #こちらは中間テーブルを介さずデータを取ってきてくれる。上の方は中間テーブルのfollowの方だけ。
   has_many :following_list, through: :following_users, source: :followed
   has_many :followers_list, through: :followers, source: :follower
   #following_usersを利用し、following_listとuserモデルを関連付ける。followed_idを参照する。
@@ -34,20 +35,21 @@ class User < ApplicationRecord
     followers.exists?(follower_id: current_user.id)#カレントユーザーにフォローされているfollowerがいるか？
   end
 
-  def following?(other_user)
-    following_users.map(&:followed_id).include?(other_user.id)#フォローしているか判定
+  def following?(user)
+    following_users.map(&:followed_id).include?(user.id)#フォローしているか判定
   end
 
-  def follow(other_user)
-    #following_usersは↑で定義した、followしたユーザーデータを取得するメソッド
+  def follow(user)
+    #following_usersは↑で定義した、followしたユーザーデータ(中間テーブルのみ）を取得するメソッド
+    #中間テーブルのfollowedとfollowerにidをセットする？
     #other_userをフォローするために、followモデルに新しいデータを作成する
     #フォローされたユーザーidに選んだユーザーのidをセットしている。
-    following_users.create(followed_id: other_user.id)
+    following_users.create(followed_id: user.id)
   end
 
-  def unfollow(other_user)
-    #other_user、選んだユーザーのidとfollowed_idが一致するデータを削除
-    following_users.find_by(followed_id: other_user.id).destroy
+  def unfollow(user)
+    #userのidとfollowed_idが一致するデータを削除
+    following_users.find_by(followed_id: user.id).destroy
   end
 
 

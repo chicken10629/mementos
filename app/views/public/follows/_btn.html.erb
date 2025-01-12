@@ -1,0 +1,17 @@
+
+
+<% if user_signed_in? && user.id != current_user.id %>
+  <% if user.followed_by?(current_user) %>
+    <%= link_to user_follow_path(user), method: :delete, remote: true do %>
+      <i class="fa-solid fa-user" aria-hidden="true"></i>
+      フォロー解除する
+    <% end %>
+  <% else %>
+    <%= link_to user_follow_path(user), method: :post, remote: true do %>
+      <i class="fa-regular fa-user" aria-hidden="true"></i>
+      フォローする
+    <% end %>
+  <% end %>
+<% end %>
+
+<!-- フォローパスに渡すidは？ -->

@@ -22,7 +22,7 @@ user_idが一致したfavoritesから、post_idを抽出し、postsを呼び出�
           <p id="favorite_btn_<%= favorite.post.id %>">
             <%= render "public/favorites/btn", post: favorite.post %>
           <!-- publicから指定しないとなぜか読み込んでくれない。謎すぎる -->
-        </p>
+          </p>
         </div>
       <% end %>
     <% else %>

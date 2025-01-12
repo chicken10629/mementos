@@ -12,15 +12,16 @@ class Public::FollowsController < ApplicationController
   end
 
   def create   
-    other_user = User.find_by(id: params[:user_id])#ネストされたidであるため、params[:id]⇒params[:user_id]と指定
-    current_user.follow(other_user) #userモデル側にfollow、unfollowを定義する。親となるモデルが、実際の操作を行うためらしい。followモデルはあくまで中間テーブルのモデル。
-    redirect_to user_path(other_user), notice: 'このユーザーをフォローしました。'
+    @user = User.find_by(id: params[:user_id])#ネストされたidであるため、params[:id]⇒params[:user_id]と指定
+    current_user.follow(@user) #userモデル側にfollow、unfollowを定義する。親となるモデルが、実際の操作を行うためらしい。followモデルはあくまで中間テーブルのモデル。
+    render 'replace'
   end
 
   def destroy
-    other_user = User.find_by(id: params[:user_id])#モデル側ではparamsを使えないらしい。
-    current_user.unfollow(other_user)
-    redirect_to user_path(other_user), notice: 'このユーザーのフォローを解除しました。'
+    @user = User.find_by(params[:user_id])
+    #モデル側ではparamsを使えないらしい。また、params[:id]ではダメだったので、デフォルトの指定が間違っていると思われる。指定したほうが確実か？
+    current_user.unfollow(@user)
+    render 'replace'
   end
 
 end

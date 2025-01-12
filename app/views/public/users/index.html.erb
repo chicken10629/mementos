@@ -11,6 +11,9 @@
           <h5>
             <%= link_to user.name, user_path(user.id) %>
           </h5>
+            <p id="follow_btn_<%= user.id %>">
+              <%= render "public/follows/btn", user: user %>
+            </p>
       </div>
       <div class="col-sm-8 col-lg-10 align-top">
           <i class="fa-solid fa-comment"></i>
