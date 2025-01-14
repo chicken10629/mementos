@@ -6,7 +6,7 @@
             <% if user.profile_image.attached? %>
               <%= image_tag user.profile_image, size: "100x100" %>
             <% else %>
-              <%= image_tag 'no_image.jpg' %>
+              <%= image_tag 'no_image.jpg', size: "100x100" %>
             <% end %>
             <p>
               <%= link_to user.name, user_path(user.id) %>
@@ -16,7 +16,7 @@
           <i class="fa-solid fa-comment"></i>
           <%= user.introduction %>
         </div>
-        <p id="follow_btn_<%= user.following_users.follower_id %>">
+        <p id="follow_btn_<%= user.id %>">
           <%= render "public/follows/btn", user: user %>
         </p>
       </div>

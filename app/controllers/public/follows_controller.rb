@@ -14,12 +14,12 @@ class Public::FollowsController < ApplicationController
   def create   
     @user = User.find_by(id: params[:user_id])#ネストされたidであるため、params[:id]⇒params[:user_id]と指定
     current_user.follow(@user) #userモデル側にfollow、unfollowを定義する。親となるモデルが、実際の操作を行うためらしい。followモデルはあくまで中間テーブルのモデル。
-    render 'replace'
+    render 'replace' #部分テンプレートではなく、jsファイルを指定する。
   end
 
   def destroy
-    @user = User.find_by(params[:user_id])
-    #モデル側ではparamsを使えないらしい。また、params[:id]ではダメだったので、デフォルトの指定が間違っていると思われる。指定したほうが確実か？
+    @user = User.find_by(id: params[:user_id])
+    #モデル側ではparamsを使えないらしい。また、params[:id]ではダメだったので、デフォルトの指定が間違っていると思われる。セットするカラムの指定したほうが確実か？
     current_user.unfollow(@user)
     render 'replace'
   end
