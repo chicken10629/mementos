@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :visits
+  has_many :visits, dependent: :nullify # 消すときに外部キーのuser_idがnullになる。
   
   # フォローした、されたユーザーのデータを取得するメソッド
   # 指定したモデルとの関連付けと外部キーを指定。
