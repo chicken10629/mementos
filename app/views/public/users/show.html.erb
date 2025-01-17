@@ -30,16 +30,20 @@
         <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
     </div>
 
-    <div class="user_posts row pl-3">
+    <div class="user_posts row pl-3 mt-5">
         <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
           <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-            <div class="user_post_card mt-3">
-            <% if post.image.attached? %>
-              <%= image_tag post.image.variant(resize: "150x150") %>
-            <% else %>
-              <%= image_tag "no_image.jpg", size: "150x150" %>
-              <%= link_to post.title, post_path(post.id) %>
-            <% end %>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+              <div class="user-post-card">
+                <% if post.image.attached? %>
+                  <%= image_tag post.image.variant(resize: "150x150") %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", size: "150x150" %>
+                <% end %>
+                <p>
+                  <%= link_to post.title, post_path(post.id) %> 
+                </p>
+              </div>
             </div>
           <% end %>
   <% else %>
