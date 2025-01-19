@@ -6,17 +6,19 @@
 投稿一覧に戻る
 -->
 <div class="container">
-  <div class="post-list">
+  <div class="red-border pt-3 bg-white">
     <% if @post.image.attached? %>
-      <%= image_tag @post.image.variant(resize: "200x200") %>
+      <%= image_tag @post.image, class: "d-block mx-auto", width: 300, height: 300, style: "object-fit: cover;" %>
       <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。 -->
     <% else %>
-      <%= image_tag "no_image.jpg", size: "200x200" %>
+      <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block", width: 300, height: 300 %>
     <% end %>
-    <h3>
+    <h3 class="pl-3">
+      <i class="fa-solid fa-quote-left"></i>
       <%= @post.title %>
     </h3>
-    <p>
+    <p class="pl-3">
+      <i class="fa-solid fa-file-lines"></i>
       <%= @post.body %>
     <p>
     <% if current_user && @post.user_id == current_user.id %>
@@ -24,7 +26,7 @@
       <!-- 日本語より先にパスを書いたらURLが表示されてしまった。current_user&&にしないとゲスト時nilエラー -->
     <% end %>
     <!-- 別ユーザーの投稿に限りプロフィール表示 -->
-  </div>
+
     <% if current_user && @post.user_id != current_user.id %>
       <div class="row post_user mt-3">
         <% if @post.user.profile_image.attached? %>
@@ -43,11 +45,12 @@
     
     -->
     <div class="favorite">
-      <p id="favorite_btn_<%= @post.id %>">
+      <p class="pl-3" id="favorite_btn_<%= @post.id %>">
         <%= render "public/favorites/btn", post: @post %>
         <!-- publicから指定しないとなぜか読み込んでくれない。謎すぎる -->
       </p>
     </div>
+  </div>
     <div class="post-comment">
       <p>みんなのコメント</p>
       <% if current_user %>

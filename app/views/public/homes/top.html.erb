@@ -16,16 +16,19 @@
           <% if post.image.attached? %>
             <%= image_tag post.image, class: "d-block mx-auto", width: 200, height: 200, style: "object-fit: cover;" %>
           <% else %>
-            <%= image_tag 'no_image.jpg', class: "d-block mx-auto", width: 200, height: 200, style: "object-fit: cover;" %>
+            <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto", width: 200, height: 200, style: "object-fit: cover;" %>
           <% end %>
-          <div class="pl-3 mt-2">
-            <p>
+          <div class="px-3 mt-2">
+            <p class="border-bottom border-primary">
+              <i class="fa-solid fa-quote-left"></i>
               <%= post.title %>
             </p>
-            <p>
-              <%= post.body %>
+            <p class="border-bottom border-primary">
+              <i class="fa-solid fa-file-lines"></i>
+              <%= post.body.truncate(50) %>
             </p>
-            <p>
+            <p class="border-bottom border-primary">
+              <i class="fa-regular fa-calendar-days"></i>
               <%= post.created_at.strftime('%Y/%m/%d %H:%M') %>
             </p>
           </div>
