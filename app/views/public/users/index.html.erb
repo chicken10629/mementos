@@ -1,7 +1,7 @@
 <!-- ユーザー一覧の表示-->
-<div class="container mt-5">
+<div class="container">
   <% @users.each do |user| %>
-    <div class="row mt-2">
+    <div class="row pt-5">
       <div class="col-sm-4 col-lg-2">
           <% if user.profile_image.attached? %>
             <%= image_tag user.profile_image, size: "100x100", style: "object-fit: cover;" %>

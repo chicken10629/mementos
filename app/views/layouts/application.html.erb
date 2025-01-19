@@ -15,9 +15,9 @@
   </head>
 
   <body>
-  <header style="height: 100px;">
+  <header class="bg-dark mb-0"style="height: 150px;">
   <!-- ヘッダーはトップ、ユーザー一覧、ログイン、ユーザー登録、マイページ、新規投稿、ログアウト -->
-    <nav class="navbar navbar-expand-lg navbar-light p-3">
+    <nav class="navbar navbar-expand-lg text-white navbar-dark p-3">
         <h3 class="logo col-lg-2 ml-auto vertical-line-middle">
           <%= link_to "mementos", top_path %>
         </h3>
@@ -86,14 +86,17 @@
     <div class="pl-3">
       <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
     </div>
-    <div class="container my-5">
+    <div class="container">
       <%= yield %>
     </div>
   </div>
-  <footer style="height: 100px;">
+  <footer class="bg-dark text-white" style="height: 100px;">
     <div class="w-100">
       <p class="ml-auto">
         <%= link_to "管理者画面へ", admin_top_path %>
+      </p>
+      <p class="text-center">
+      ©mementos
       </p>
     </div>
   </footer>

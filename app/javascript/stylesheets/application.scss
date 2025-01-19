@@ -25,9 +25,21 @@ li{
 
 .navbar-collapse.show{
   padding-left: 15px;
-  background-color: rgba(240,240,240,1);
+  background-color: rgb(35, 6, 6);
+  opacity: 0.75;
 }
 
+.red-border{
+  border: 15px solid rgb(152, 0, 0);
+  box-shadow: 2px 2px 4px;
+}
 
+.blue-border{
+  border: 15px solid rgb(0, 102, 190);
+  box-shadow: 2px 2px 4px;
+}
 
-
+.brown-border{
+  border: 15px solid rgb(136, 88, 32);
+  box-shadow: 2px 2px 4px;
+}
