@@ -66,7 +66,7 @@
         <% @post_comments.each do |comment| %>
           <div class="post-user-profile">
             <% if comment.user.profile_image.attached? %>
-              <%= image_tag comment.user.profile_image.variant(resize: "80x80") %>
+              <%= image_tag comment.user.profile_image.variant(resize: "80x80"), style: "object-fit: cover;" %>
             <% else %>
               <%= image_tag "no_image.jpg", size: "80x80" %>
             <% end %>

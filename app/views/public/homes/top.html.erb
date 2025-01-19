@@ -13,7 +13,7 @@
        <% @posts.each do |post| %>
         <div class="mb-5">
           <% if post.image.attached? %>
-            <%= image_tag post.image.variant(resize: "200x200") %>
+            <%= image_tag post.image, size: "200x200", style: "object-fit: cover;" %>
           <% else %>
             <%= image_tag 'no_image.jpg' %>
           <% end %>
@@ -35,8 +35,23 @@
     <div class="col ml-auto">
       <h2>mementosとは？</h2>
       <p>
-        
-      <p>
+        思い出の品について記録し、共有するSNS。
+      </p>
+      <h3>サイトの概要</h3>
+      <ul>
+        <li>
+        あなたの思い出の品とそのエピソードを投稿しよう。
+        </li>
+        <li>
+        みんなの思い出の品についてコメントしてみよう
+        </li>
+        <li>
+        気に入ったものに「いいね」をしてみよう
+        </li>
+        <li>
+        ユーザーフォローをしてみよう
+        </li>
+      </ul>
     </div>
   </div>
 </div>

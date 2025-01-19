@@ -4,7 +4,7 @@
     <div class="row mt-2">
       <div class="col-sm-4 col-lg-2">
           <% if user.profile_image.attached? %>
-            <%= image_tag user.profile_image, size: "100x100" %>
+            <%= image_tag user.profile_image, size: "100x100", style: "object-fit: cover;" %>
           <% else %>
             <%= image_tag 'no_image.jpg', size: "100x100" %>
           <% end %>

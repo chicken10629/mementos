@@ -80,11 +80,15 @@
           </ul>
     </nav>
   </header>
-  <div class="pl-3">
-    <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
-  </div>
-  <div class="container my-5">
-    <%= yield %>
+  <div class="container-fluid", style="background-image: url('<%= asset_path('CorkBoard02.jpg') %>'); background-repeat: repeat;">
+  <!-- cssで指定しても無理だったが、asset_pathで指定したらできるようになった。webpackerを使ってるとパスの指定がうまくいかないことがあるらしい。 -->
+  <!-- assetsフォルダにimagesフォルダを作成し、imageファイルを入れておくとよさげ -->
+    <div class="pl-3">
+      <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
+    </div>
+    <div class="container my-5">
+      <%= yield %>
+    </div>
   </div>
   <footer style="height: 100px;">
     <div class="w-100">

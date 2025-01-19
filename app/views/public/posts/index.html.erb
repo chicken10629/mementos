@@ -1,16 +1,22 @@
-<div class="container mt-5">
+<div class="container">
   <div class="row d-flex mx-auto">
       <% @posts.each do |post| %>
-          <div class="col-6 col-md-4 col-lg-3">
-            <div class="card border-dark mt-4">
+          <div class="col-6 col-md-4 col-lg-3 ">
+            <div class="card border-5 shadow-lg my-4">
               <% if post.image.attached? %>
-                <%= image_tag post.image, class: "card-img-top p-2" %>
+                <%= image_tag post.image, class: "p-2 d-block mx-auto", size: "180x180", style: "object-fit: cover;" %>
               <% else %>
-                <%= image_tag "no_image.jpg", class: "card-img-top p-2" %>
+                <%= image_tag "no_image.jpg", class: "p-2 d-block mx-auto", size: "180x180" %>
               <% end %>
               <div class="card-body">
-                <p><%= link_to post.title, post_path(post.id) %></p>
-                <p><%= post.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+                <p>
+                  <i class="fa-solid fa-quote-left"></i>
+                  <%= link_to post.title, post_path(post.id) %>
+                </p>
+                <p>
+                <i class="fa-regular fa-calendar-days"></i>
+                  <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
+                </p>
               </div>
               <div class="favorite">
                 <p id="favorite_btn_<%= post.id %>" class="pl-3">
