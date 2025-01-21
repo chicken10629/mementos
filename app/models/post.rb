@@ -4,7 +4,8 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   
   has_one_attached :image
-  validates :title, :body, presence: { message: "を入力してください。" }
+  validates :title, presence: { message: "を入力してください。" }, length: { maximum: 50, message: "は50文字以内で入力してください。"}
+  validates :body, presence: { message: "を入力してください。"}, length: { maximum: 500, message: "は500文字以内で入力してください。"}
   #あとでhas_many_attached :imagesに変更
 
   #いいねがついているかのチェック　子ではなく親の方が機能するので、親側にメソッドを作る

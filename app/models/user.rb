@@ -22,7 +22,8 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :name, presence: { message: "を入力してください。" }
+  validates :name, presence: { message: "を入力してください。" }, length: {maximum: 20, message: "は20文字以内で入力してください。"}
+  validates :introduction, length: {maximum: 100, message: "は100文字以内で入力してください。"}
   #自分で追加したカラムはバリデーションを設定しないといけないので、nameを追記
 
   #倫理削除されているとき、ログインできないようにする

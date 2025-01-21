@@ -6,7 +6,7 @@
   <% if @user.profile_image.attached? %>
     <%= image_tag @user.profile_image, size: "150x150", style: "object-fit: cover;" %>
   <% else %>
-    <%= image_tag 'no_image.jpg' %>
+    <%= image_tag 'no_image.jpg', size: "150x150" %>
   <% end %>
     <div class="profile_edit">
       <i class="fa-solid fa-user-pen pl-4"></i>
