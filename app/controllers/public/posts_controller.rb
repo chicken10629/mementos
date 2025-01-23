@@ -4,7 +4,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.joins(:user).where(users: {is_active: true, is_public: true})
   end
 
   def show

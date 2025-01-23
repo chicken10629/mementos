@@ -1,7 +1,7 @@
 <!-- ユーザー一覧を表示　show,edit,destroyを作る
 シンプルにテーブルで作成、アイコンは一応50x50で表示、不適切な物を見つけるために表示する
 -->
-<table>
+<table class="table table-striped table-hover">
   <tr>
     <th>
     アイコン
@@ -26,6 +26,9 @@
     </th>
     <th>
     アクティブ
+    </th>
+    <th>
+    編集
     </th>
   </tr>
   <% @users.each do |user| %>
