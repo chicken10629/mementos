@@ -47,5 +47,5 @@
       <% end %>
     </div>
   </div>
-    <%= link_to "アカウントを削除する", admin_user_path, method: :delete, confirm: "完全に削除します。よろしいですか？" %>
+    <%= link_to "アカウントを削除する", admin_user_path, method: :delete, data: {confirm: "完全に削除します。よろしいですか？"} %>
 </div>

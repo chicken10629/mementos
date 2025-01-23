@@ -6,12 +6,12 @@
 投稿一覧に戻る
 -->
 <div class="container py-5">
-  <div class="red-border pt-3 mb-5 bg-white">
+  <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 600px;">
     <% if @post.image.attached? %>
       <%= image_tag @post.image, class: "d-block mr-auto ml-3", width: 300, height: 300, style: "object-fit: cover;" %>
       <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。 -->
     <% else %>
-      <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mr-auto ml-3", width: 300, height: 300 %>
+      <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto", width: 300, height: 300 %>
     <% end %>
     <h4 class="pl-3 mt-3">
       <i class="fa-solid fa-quote-left"></i>
@@ -28,13 +28,20 @@
     <!-- 別ユーザーの投稿に限りプロフィール表示 -->
 
     <% if current_user && @post.user_id != current_user.id %>
-      <div class="row post_user mt-3">
+      <div class="post_user mt-3 pl-3">
+        <p>
+        <i class="fa-solid fa-note-sticky"></i>
+        投稿者
+        </p>
         <% if @post.user.profile_image.attached? %>
-          <p><%= image_tag @post.user.profile_image.variant(resize: "100x100") %></p>
+          <p><%= image_tag @post.user.profile_image, size: "100x100", style: "object-fit: cover;" %></p>
         <% else %>
           <p><%= image_tag 'no_image.jpg', size: "100x100" %></p>
         <% end %>
-        <p><%= link_to @post.user.name, user_path(@post.user_id) %></p>
+        <p>
+          <i class="fa-solid fa-user"></i>
+          <%= link_to @post.user.name, user_path(@post.user_id) %>
+        </p>
       </div>
     <% end %>
 
@@ -51,7 +58,7 @@
       </p>
     </div>
   </div>
-    <div class="post-comment blue-border bg-white py-3 pl-3">
+    <div class="post-comment blue-border bg-light py-3 pl-3 mx-auto", style= "max-width: 600px;">
       <h4 class="mb-3">
         <i class="fa-regular fa-comments"></i>
         みんなのコメント
@@ -60,20 +67,20 @@
         <%= form_with model: @post_comment, url: post_post_comments_path(@post) do |f| %>
         
           <%= f.label :comment, "コメントしよう" %><br>
-          <%= f.text_area :comment %><br>
+          <%= f.text_area :comment, style: "width: 300px; height: 100px;" %><br>
             <%= f.submit "投稿する" %>
         <% end %>
       <% else %>
           <p>ログインするとコメントができます。</p>
       <% end %>
-    </div>
+    
     <% if @post_comments.present? %>
       <div class="post-comment-list mt-5">
         <% @post_comments.each do |comment| %>
-          <div class="black-border bg-white mt-3 p-3 ", style: "max-width: 500px;">
+          <div class="mt-5", style= "max-width: 300px;">
             <div class="post-user-profile">
               <% if comment.user.profile_image.attached? %>
-                <%= image_tag comment.user.profile_image.variant(resize: "80x80"), style: "object-fit: cover;" %>
+                <%= image_tag comment.user.profile_image, size: "80x80", style: "object-fit: cover;" %>
               <% else %>
                 <%= image_tag "no_image.jpg", size: "80x80" %>
               <% end %>
@@ -90,4 +97,5 @@
         <% end %>
       </div>
     <% end %>
+  </div>
 </div>

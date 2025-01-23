@@ -10,9 +10,9 @@
       <!-- 日本語より先にパスを書いたらURLが表示されてしまった。 -->
       <div class="post_user">
         <% if @post.user.profile_image.attached? %>
-          <p><%= image_tag @post.user.profile_image.variant(resize: "100x100") %></p>
+          <p><%= image_tag @post.user.profile_image, size: "100x100", style: "object-fit: cover;" %></p>
         <% else %>
-          <p><%= image_tag 'no_image.jpg'.variant(resize: "100x100") %></p>
+          <p><%= image_tag 'publicdomainq-0060457lwn.jpg', size: "100x100" %></p>
         <% end %>
         <p><%= link_to @post.user.name, user_path(@post.user_id) %></p>
       </div>

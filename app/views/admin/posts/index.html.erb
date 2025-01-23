@@ -27,9 +27,9 @@
     <tr>
       <td>
         <% if post.image.attached? %>
-          <%= image_tag post.image.variant(resize: "100x100") %>
+          <%= image_tag post.image, size: "80x80", style: "object-fit: cover;" %>
         <% else %>
-          <%= image_tag "no_image.jpg", size: "100x100" %>
+          <%= image_tag 'publicdomainq-0060457lwn.jpg', size: "80x80" %>
         <% end %>
       </td>
       <td>
@@ -37,7 +37,7 @@
       </td>
       <td>
       <!-- 念のため文字数制限 -->
-        <%= post.body.truncate(20) %>
+        <%= post.body.to_s.truncate(20, omission: '...') %>
       </td>
       <td>
         <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
@@ -47,9 +47,9 @@
       </td>
       <td>
         <% if post.user.profile_image.attached? %>
-          <%= image_tag post.user.profile_image.variant(resize: "100x100") %>
+          <%= image_tag post.user.profile_image, size: "80x80", style: "object-fit: cover;"  %>
         <% else %>
-          <%= image_tag "no_image.jpg", size: "100x100" %>
+          <%= image_tag "no_image.jpg", size: "80x80" %>
         <% end %>
       </td>
       <td>
@@ -57,7 +57,7 @@
       </td>
       <td>
         <%= link_to "edit", edit_admin_post_path(post), class: "btn btn-primary" %>
-        <%= link_to "delete", admin_post_path(post), class: "btn btn-danger", method: :delete, confirm: "完全に削除します。よろしいですか？" %>
+        <%= link_to "delete", admin_post_path(post), class: "btn btn-danger", method: :delete, data: { confirm: "完全に削除します。よろしいですか？"} %>
       </td>
     </tr>
   <% end %>
