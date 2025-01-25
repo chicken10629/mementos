@@ -1,4 +1,4 @@
-<div class="pl-5 pt-3">
+<div class="pl-5 py-5 bg-light">
   <h3>ユーザー登録</h3>
   <!-- 後でform_withに変換し、コントローラー側にインスタンス変数を定義 -->
   <%= form_with model:@user , url: user_registration_path do |f| %>
@@ -19,7 +19,7 @@
     <div class="field">
       <%= f.label :password %>
       <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <em>(<%= @minimum_password_length %>文字以上)</em>
       <% end %><br />
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
@@ -34,5 +34,5 @@
     </div>
   <% end %>
 
-  <%= render "public/shared/links" %>
+  
 </div>

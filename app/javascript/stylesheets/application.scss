@@ -31,20 +31,36 @@ li{
 
 .red-border{
   border: 15px solid rgb(152, 0, 0);
-  box-shadow: 2px 2px 4px;
+  box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
 }
 
 .blue-border{
   border: 15px solid rgb(0, 102, 190);
-  box-shadow: 2px 2px 4px;
+  box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
 }
 
 .brown-border{
   border: 15px solid rgb(136, 88, 32);
-  box-shadow: 2px 2px 4px;
+  box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
 }
 
 .black-border{
   border: 1px solid rgb(0, 0, 0);
-  box-shadow: 2px 2px 4px;
+  box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
+}
+
+.picture{
+  border: 1px solid #000;
+  box-shadow: 1px 2px 2px 1px rgba(1, 1, 5, .6);
+  object-fit: cover;
+}
+
+.sample-picture{
+  border: 1px solid #000;
+  box-shadow: 1px 2px 2px 1px rgba(1, 1, 5, .6);
+}
+
+.flash-message{
+  max-width: 300px;
+  margin-left: 15px;
 }

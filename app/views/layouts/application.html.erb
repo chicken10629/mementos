@@ -49,10 +49,15 @@
                 <%= link_to "マイページ", my_page_path %>
               </li>
               <li class="nav-item pr-3">
-                <i class="fa-regular fa-file-pen"></i>
+                <i class="fa-solid fa-file-pen"></i>
                 <%= link_to "新規投稿", new_post_path %>
               </li>
             <% end %>
+              <li class="nav-item">
+                <i class="fa-solid fa-circle-info"></i>
+                <%= link_to "サイト案内", about_path %>
+              </li>
+
               <li class="nav-item">
                 <i class="fa-solid fa-book-open"></i>
                 <%= link_to "投稿一覧", posts_path %>
@@ -83,7 +88,7 @@
   <div class="container-fluid", style="background-image: url('<%= asset_path('CorkBoard02.jpg') %>'); background-repeat: repeat;">
   <!-- cssで指定しても無理だったが、asset_pathで指定したらできるようになった。webpackerを使ってるとパスの指定がうまくいかないことがあるらしい。 -->
   <!-- assetsフォルダにimagesフォルダを作成し、imageファイルを入れておくとよさげ -->
-    <div class="pl-3">
+    <div class="pl-3 bg-light flash-message">
       <%= flash[:notice] %><!-- 各種フラッシュメッセージ データ更新や作成時など -->
     </div>
     <div class="container">

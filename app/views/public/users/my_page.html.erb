@@ -3,11 +3,11 @@
 <div class="user_profile container py-5">
 <!-- １．ゆーざーのアイコン -->
   <div class="row">
-    <div class="brown-border bg-light p-3">
+    <div class="brown-border bg-light p-3 mx-auto">
       <% if @user.profile_image.attached? %>
-        <%= image_tag @user.profile_image, size: "150x150", class: "d-block mx-auto", style: "object-fit: cover;" %>
+        <%= image_tag @user.profile_image, size: "150x150", class: "d-block mx-auto", style: "object-fit: cover; border-radius: 75px;" %>
       <% else %>
-        <%= image_tag 'no_image.jpg', size: "150x150", class: "d-block mx-auto" %>
+        <%= image_tag 'no_image.jpg', size: "150x150", class: "d-block mx-auto", style: "object-fit: cover; border-radius: 75px;" %>
       <% end %>
       <h4 class="my-3">
         <i class="fa-solid fa-user"></i>
@@ -17,7 +17,7 @@
         <i class="fa-solid fa-comment"></i>
         コメント
       </p>
-      <p>
+      <p style="max-width: 260px;">
         <%= @user.introduction %>
       </p>
       <div class="profile_edit pt-3">
@@ -31,7 +31,7 @@
 
       <!-- ３．ユーザーの自己紹介 -->
 
-    <div class="bg-light red-border p-3 mt-4", style="width: 320px;">
+    <div class="bg-light red-border p-3 mt-4 mx-auto", style="width: 320px;">
       <!-- ５．そのユーザーがいいねをした投稿のページへの移動 -->
       <p class="mt-3">
         <i class="fa-solid fa-heart"></i>
@@ -62,17 +62,20 @@
       <div class="col-lg-3 col-md-4 col-6 mb-5 black-border bg-light">
         <div class="user-post-card pt-4">
           <% if post.image.attached? %>
-            <%= image_tag post.image, size: "180x180", style: "object-fit: cover;", class: "d-block mx-auto" %>
+            <%= image_tag post.image, size: "180x180" , class: "picture d-block mx-auto" %>
           <% else %>
-            <%= image_tag "publicdomainq-0060457lwn.jpg", size: "180x180", class: "d-block mx-auto" %>
+            <%= image_tag "publicdomainq-0060457lwn.jpg", size: "180x180", class: "sample-picture d-block mx-auto" %>
           <% end %>
-          <p>
-            
-            <%= link_to post.title, post_path(post.id) %>
-          </p>
-          <p>
-           <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
-          </p>
+          <div class="pl-3">
+            <p class="pt-2 border-bottom border-primary">
+              <i class="fa-solid fa-quote-left"></i>
+              <%= link_to post.title, post_path(post.id) %>
+            </p>
+            <p class="border-bottom border-primary">
+              <i class="fa-regular fa-calendar-days"></i>
+              <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
+            </p>
+          </div>
         </div>
       </div>
     <% end %>

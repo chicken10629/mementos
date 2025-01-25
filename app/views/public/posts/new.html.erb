@@ -1,6 +1,6 @@
 
-<div class="container">
-  <div class="row p-3">
+<div class="container py-5">
+  <div class="row p-3 bg-light">
     <%= flash[:alert] %>
     <%= form_with model: @post, url: posts_path  do |f| %>
 
@@ -20,7 +20,7 @@
         <!-- 後で複数投稿可能にする -->
       </div>
 
-      <%= f.submit "投稿する" %>
+      <%= f.submit "投稿する", class: "btn-primary p-1 mt-1", style: "border: 1px solid #007bff; border-radius: 4px;" %>
     <% end %>
 
   </div>

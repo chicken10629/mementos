@@ -4,9 +4,9 @@
           <div class="col-6 col-md-4 col-lg-3 ">
             <div class="red-border bg-white my-4">
               <% if post.image.attached? %>
-                <%= image_tag post.image, class: "p-2 d-block mx-auto", size: "140x140", style: "object-fit: cover;" %>
+                <%= image_tag post.image, class: "picture p-2 d-block mx-auto", size: "140x140" %>
               <% else %>
-                <%= image_tag "publicdomainq-0060457lwn.jpg", class: "p-2 d-block mx-auto", size: "140x140" %>
+                <%= image_tag "publicdomainq-0060457lwn.jpg", class: "sample-picture p-2 d-block mx-auto", size: "140x140" %>
               <% end %>
               <div class="card-body">
                 <p class="border-bottom border-primary">
@@ -14,7 +14,7 @@
                   <%= link_to post.title.truncate(10), post_path(post.id) %>
                 </p>
                 <p class="border-bottom border-primary">
-                <i class="fa-regular fa-calendar-days"></i>
+                  <i class="fa-regular fa-calendar-days"></i>
                   <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
                 </p>
               </div>

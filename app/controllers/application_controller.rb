@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   #userはtop,index,showは認証が不要、adminは全て認証が必要なのでログイン制限の処理は別々にした。
-  before_action :authenticate_user, except: [:top, :index, :show], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
+  before_action :authenticate_user, except: [:top, :index, :show, :about], unless: :admin_controller? #管理者コンを除き、トップページ以外でユーザー認証を要求する。
   before_action :authenticate_admin, if: :admin_controller?
   before_action :track_visit, unless: :admin_controller?
 

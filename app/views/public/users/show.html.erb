@@ -2,61 +2,75 @@
   <!-- １．ゆーざーのアイコン -->
   
     <div class="row">
-    <div class="brown-border bg-light p-3">
-      <div>
-        <% if @user.profile_image.attached? %>
-          <%= image_tag @user.profile_image, size: "150x150", class: "d-block mx-auto", style: "object-fit: cover;" %>
-        <% else %>
-          <%= image_tag 'no_image.jpg', size: "150x150", class: "d-block mx-auto" %>
-        <% end %>
-        <h5 class="pt-2">
-          <i class="fa-solid fa-user"></i>
-          <%= @user.name %>
-        </h5>
-    <% if @user.is_public == true %>  
-        <!-- ３．ユーザーの自己紹介 -->
-          <div>
-            <i class="fa-solid fa-comment"></i>
-            <%= @user.introduction %>
-          </div>
-          <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
+    <% if @user.is_active == false %>
+      <div style="height: 310px;">
+        <p class="black-border bg-light mt-3">
+          このユーザーはアカウントを削除しています。
+        </p>
       </div>
-          <div>
-            <p id="follow_btn_<%= @user.id %>">
-              <%= render "public/follows/btn", user: @user %>
-            </p>
-          </div>
+    <% else %>
+      <div class="brown-border bg-light p-2 mx-auto">
+        <div>
+          <% if @user.profile_image.attached? %>
+            <%= image_tag @user.profile_image, size: "150x150", class: "d-block mx-auto", style: "object-fit: cover; border-radius: 75px;" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', size: "150x150", class: "d-block mx-auto",style: "border-radius: 75px;" %>
+          <% end %>
+          <h5 class="pt-2">
+            <i class="fa-solid fa-user"></i>
+            <%= @user.name %>
+          </h5>
+      <% if @user.is_public == true %>  
+          <!-- ３．ユーザーの自己紹介 -->
+            <div style="max-width: 260px;">
+              <i class="fa-solid fa-comment"></i>
+              <%= @user.introduction %>
+            </div>
+            <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
+        </div>
+            <div>
+              <p id="follow_btn_<%= @user.id %>">
+                <%= render "public/follows/btn", user: @user %>
+              </p>
+            </div>
+      <% end %>
+      </div>
+    </div>
+    <% if @user.is_public == true %>
+      <div class="user_posts row mt-5 d-flex mx-auto">
+          <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
+          <% if @posts.exists? %>
+            <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
+              <div class="col-lg-3 col-md-4 col-6 mb-5 black-border bg-light">
+                <div class="user-post-card pt-3">
+                  <% if post.image.attached? %>
+                    <%= image_tag post.image, size: "150x150", class: "picture d-block mx-auto" %>
+                  <% else %>
+                    <%= image_tag "publicdomainq-0060457lwn.jpg", size: "150x150" , class: "sample-picture d-block mx-auto" %>
+                  <% end %>
+                  <p class="pt-3">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <%= link_to post.title, post_path(post.id) %> 
+                  </p>
+                  <p>
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+          <p class="black-border bg-light">
+            このユーザーの投稿はありません。
+          </p>
+          <% end %>
+    <% else %>
+        <p class="black-border bg-light mt-3 d-block">
+          このユーザーは非公開に設定しています。
+        </p>
     <% end %>
     </div>
+    <% end %>
   </div>
-  <% if @user.is_public == true %>
-    <div class="user_posts row mt-5 d-flex">
-        <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
-        <% if @posts.exists? %>
-          <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
-            <div class="col-lg-3 col-md-4 col-6 mb-5 black-border bg-light">
-              <div class="user-post-card pt-3">
-                <% if post.image.attached? %>
-                  <%= image_tag post.image, size: "150x150", style: "object-fit: cover;", class: "d-block mx-auto" %>
-                <% else %>
-                  <%= image_tag "publicdomainq-0060457lwn.jpg", size: "150x150", style: "object-fit: cover;", class: "d-block mx-auto" %>
-                <% end %>
-                <p>
-                  <%= link_to post.title, post_path(post.id) %> 
-                </p>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-        <p class="black-border bg-light">
-          このユーザーの投稿はありません。
-        </p>
-        <% end %>
-  <% else %>
-      <p class="black-border bg-light">
-        このユーザーは非公開に設定しています。
-      </p>
-  <% end %>
-  </div>
-  </div>
+  
 </div>

@@ -36,7 +36,7 @@
         <% end %>
       </td>
       <td>
-        <%= post.title %>
+        <%= link_to post.title, admin_post_path(post.id) %>
       </td>
       <td>
       <!-- 念のため文字数制限 -->
@@ -50,9 +50,9 @@
       </td>
       <td>
         <% if post.user.profile_image.attached? %>
-          <%= image_tag post.user.profile_image, size: "80x80", style: "object-fit: cover;"  %>
+          <%= image_tag post.user.profile_image, size: "80x80", style: "object-fit: cover; border-radius:40px;"  %>
         <% else %>
-          <%= image_tag "no_image.jpg", size: "80x80" %>
+          <%= image_tag "no_image.jpg", size: "80x80", style:"border-radius:40px" %>
         <% end %>
       </td>
       <td>

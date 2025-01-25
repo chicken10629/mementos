@@ -9,7 +9,7 @@
     <div class="validation_massage row"> 
       <ul>
         <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+          <li class="bg-light black-border"><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -42,10 +42,10 @@
         <%= f.text_area :introduction, id:"inputIntroduction", placeholder:"自己紹介" %>
       </p>
       <p>
-        <%= f.submit "変更を保存する" %>
+        <%= f.submit "変更を保存する", class: "btn-primary p-2", style: "border: 1px solid #007bff; border-radius: 4px;" %>
       </p>
       <% end %>
+      <%= link_to "アカウントを削除する", withdraw_path, method: :put, data: { confirm: "本当に削除してもよろしいですか？" }, class: "btn btn-danger mb-3"%>
     </div>
-    <%= link_to "アカウントを削除する", withdraw_path, method: :put, data: { confirm: "本当に削除してもよろしいですか？" }%>
   </div>
 </div>

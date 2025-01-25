@@ -16,13 +16,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'dashboards/index' => 'dashboards#index', as: 'top'
-    resources :posts, only: [:index, :show, :edit, :destroy, :update]
+    resources :posts, only: [:index, :show, :edit, :destroy, :update] do
+      resources :post_comments, only: [:update]
+    end
     resources :users, only: [:index, :show, :edit, :destroy, :update]
   end
 
   scope module: :public do #namespaceの指定をコントローラーのみにする。URLに含めない。
     #ファイル名とアクション名は一致させる必要アリ。アクション名を#mypageにしたらエラーがでてしまった。
     get '' => 'homes#top', as: 'top'
+    get 'about' => 'homes#about', as: 'about'
     get 'users/my_page' => 'users#my_page', as: 'my_page'#URL、コントローラー#アクション名、パス名
     get 'users/my_page/edit/:id' => 'users#my_page_edit', as: 'my_page_edit'
     patch 'users/my_page/edit/:id' => 'users#my_page_update', as: 'my_page_update'

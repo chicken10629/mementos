@@ -13,14 +13,14 @@
        <% @posts.each do |post| %>
         <div class="mb-3 ml-3 pt-3 red-border bg-light" style="width: 250px;">
           <% if post.image.attached? %>
-            <%= image_tag post.image, class: "d-block mx-auto", width: 200, height: 200, style: "object-fit: cover;" %>
+            <%= image_tag post.image, class: "picture d-block mx-auto", width: 200, height: 200 %>
           <% else %>
-            <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto", width: 200, height: 200, style: "object-fit: cover;" %>
+            <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "sample-picture d-block mx-auto", width: 200, height: 200 %>
           <% end %>
           <div class="px-3 mt-2">
             <p class="border-bottom border-primary">
               <i class="fa-solid fa-quote-left"></i>
-              <%= post.title %>
+              <%= link_to post.title.truncate(10), post_path(post.id) %>
             </p>
             <p class="border-bottom border-primary">
               <i class="fa-solid fa-file-lines"></i>
@@ -34,29 +34,6 @@
         </div>
        <% end %>
      <% end %>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col ml-auto">
-      <h2>mementosとは？</h2>
-      <p>
-        思い出の品について記録し、共有するSNS。
-      </p>
-      <h3>サイトの概要</h3>
-      <ul>
-        <li>
-        あなたの思い出の品とそのエピソードを投稿しよう。
-        </li>
-        <li>
-        みんなの思い出の品についてコメントしてみよう
-        </li>
-        <li>
-        気に入ったものに「いいね」をしてみよう
-        </li>
-        <li>
-        ユーザーフォローをしてみよう
-        </li>
-      </ul>
     </div>
   </div>
 </div>

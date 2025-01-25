@@ -4,9 +4,9 @@
     <div class="row pt-3 brown-border mb-4 bg-light mx-auto" style="max-width: 500px;">
       <div class="pl-3", style="width: 170px;">
           <% if user.profile_image.attached? %>
-            <%= image_tag user.profile_image, size: "100x100", style: "object-fit: cover;" %>
+            <%= image_tag user.profile_image, size: "100x100", style: "object-fit: cover; border-radius: 50px;" %>
           <% else %>
-            <%= image_tag 'no_image.jpg', size: "100x100" %>
+            <%= image_tag 'no_image.jpg', size: "100x100", style: "object-fit: cover; border-radius: 50px;" %>
           <% end %>
           <p>
             <i class="fa-solid fa-user"></i>

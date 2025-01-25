@@ -35,13 +35,13 @@
     <tr>
       <td>
         <% if user.profile_image.attached? %>
-          <%= image_tag user.profile_image, size: "80x80", style: "object-fit: cover;" %>
+          <%= image_tag user.profile_image, size: "80x80", style: "object-fit: cover; border-radius:40px;" %>
         <% else %>
-          <%= image_tag "no_image.jpg", size: "80x80" %>
+          <%= image_tag "no_image.jpg", size: "80x80", style: "border-radius: 40px;" %>
         <% end %>
       </td>
       <td>
-        <%= user.name %>
+        <%= link_to user.name, admin_user_path(user.id) %>
       </td>
       <td>
       <!-- 念のため文字数制限 -->

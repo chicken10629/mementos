@@ -6,6 +6,7 @@ class Admin::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])#urlからidを取得
+    @post_comments = PostComment.where(post_id: params[:id])
   rescue ActiveRecord::RecordNotFound #カラムが存在しない場合
     redirect_to admin_posts_path, alert: 'この投稿は存在しないか、既に削除されています。'
   end
