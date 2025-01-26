@@ -32,7 +32,7 @@ class Public::SearchesController < ApplicationController
         @results = Post.where( "title LIKE ? OR body LIKE ?", "%#{query}%", "%#{query}%")
       end
     else
-      results = []
+      @results = Post.none #空の配列だとエラーになるのでActiveRecordを使って初期化
     end
     @results = @results.order(created_at: :desc).page(params[:page]).per(10)
   end

@@ -1,9 +1,7 @@
 <div class="container py-5">
   <!-- １．ゆーざーのアイコン -->
-  
     <div class="row">
       <div class="brown-border bg-light p-2 mx-auto">
-        <div>
           <% if @user.profile_image.attached? %>
             <%= image_tag @user.profile_image, size: "150x150", class: "d-block mx-auto", style: "object-fit: cover; border-radius: 75px;" %>
           <% else %>
@@ -14,12 +12,11 @@
             <%= @user.name %>
           </h5>
           <!-- ３．ユーザーの自己紹介 -->
-            <div style="max-width: 260px;">
-              <i class="fa-solid fa-comment"></i>
-              <%= @user.introduction %>
-            </div>
+          <div style="max-width: 260px;">
+            <i class="fa-solid fa-comment"></i>
+            <%= @user.introduction %>
+          </div>
             <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
-        </div>
       </div>
     </div>
       <div class="user_posts row mt-5 d-flex mx-auto">
@@ -44,12 +41,12 @@
                 </div>
               </div>
             <% end %>
+          <!-- このelseは投稿が存在しない場合の分岐 -->
           <% else %>
-          <p class="black-border bg-light">
+          <p class="black-border bg-light d-flex justify-content-center">
             このユーザーの投稿はありません。
           </p>
-          <% end %>
-    </div>
-  </div>
-  
+        <% end %>
+      </div>
+
 </div>

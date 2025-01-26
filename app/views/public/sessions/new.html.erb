@@ -1,34 +1,34 @@
-<div class="pl-5 py-5 bg-light black-border">
-<h3>ログイン画面</h3>
-  <% if flash[:alert] %>
-    <div class="row w-50 alert alert-danger">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
-  <!-- エラーメッセージを表示 -->
-  <%= form_with model:@user , url: user_session_path do |f| %>
+<div class="pl-5 pt-5 bg-light black-border", style="min-height:80vh;">
+  <h3>ログイン画面</h3>
+    <% if flash[:alert] %>
+      <div class="row w-50 alert alert-danger">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <!-- エラーメッセージを表示 -->
+    <%= form_with model:@user , url: user_session_path do |f| %>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
       <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me %>
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "ログイン" %>
       </div>
     <% end %>
 
-    <div class="actions">
-      <%= f.submit "ログイン" %>
-    </div>
-  <% end %>
-
-  <%= render "public/shared/links" %>
+    <%= render "public/shared/links" %>
 </div>
