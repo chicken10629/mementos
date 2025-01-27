@@ -41,6 +41,12 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      redirect_to my_page_path, notice: "投稿を削除しました。"
+    else
+      render 'edit'
+    end
   end
 
   private

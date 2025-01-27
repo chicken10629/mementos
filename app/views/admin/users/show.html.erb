@@ -1,7 +1,7 @@
 <div class="container py-5">
   <!-- １．ゆーざーのアイコン -->
     <div class="row">
-      <div class="brown-border bg-light p-2 mx-auto">
+      <div class="brown-border bg-light p-2 mx-auto mb-5">
           <% if @user.profile_image.attached? %>
             <%= image_tag @user.profile_image, size: "150x150", class: "d-block mx-auto", style: "object-fit: cover; border-radius: 75px;" %>
           <% else %>

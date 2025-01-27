@@ -6,9 +6,9 @@
 投稿一覧に戻る
 -->
 <div class="container py-5">
-  <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 600px;">
+  <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
     <% if @post.image.attached? %>
-      <%= image_tag @post.image, class: "d-block mr-auto ml-3 picture", width: 300, height: 300  %>
+      <%= image_tag @post.image, class: "d-block mx-auto ml-3 picture", width: 300, height: 300  %>
       <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。 -->
     <% else %>
       <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto sample-picture", width: 300, height: 300  %>
@@ -41,7 +41,7 @@
         </p>
       </div>
   </div>
-    <div class="post-comment blue-border bg-light py-3 pl-3 mx-auto", style= "max-width: 600px;">
+    <div class="post-comment blue-border bg-light py-3 pl-3 mx-auto", style= "max-width: 500px;">
       <h4 class="mb-3">
         <i class="fa-regular fa-comments"></i>
         みんなのコメント
