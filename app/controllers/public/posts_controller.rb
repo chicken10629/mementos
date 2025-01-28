@@ -23,7 +23,7 @@ class Public::PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post.id), notice: "投稿しました。" #パス名を指定。showなのでidも欲しい
     else
-      render :new, alert: "投稿に失敗しました。"
+      render 'new'
     end
   end
 
@@ -36,7 +36,7 @@ class Public::PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_path(@post.id), notice: "編集しました。"
     else
-      render :edit
+      render :edit #@postに保持されているエラー情報を向こうで表示する
     end
   end
 

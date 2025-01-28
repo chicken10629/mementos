@@ -21,8 +21,14 @@ class Public::UsersController < ApplicationController
   end
 
   def show
+    
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound #カラムが存在しない場合
+      redirect_to users_path, alert: 'このユーザーは存在しないか、既にアカウントを削除しています。'
+      return #ここで処理終了
+    end
     #current_userである場合my_pageへ飛ばす
-    @user = User.find(params[:id])
     if @user == current_user
       redirect_to my_page_path and return # and returnで@postsが実行されなくなる
     end

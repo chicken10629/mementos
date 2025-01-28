@@ -3,7 +3,7 @@
   <div class="d-flex flex-column">
     <p>投稿の編集</p>
     <% if @post.errors.any? %>
-      <div class="error_messages">
+      <div class="alert alert-danger w-50">
         <ul>
           <% @post.errors.full_messages.each do |message| %>
             <li><%= message %></li>

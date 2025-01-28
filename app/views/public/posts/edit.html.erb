@@ -1,29 +1,27 @@
 
 <div class="container py-5">
+  <% if @post.errors.any? %>
+    <div class="alert alert-danger w-50">
+      <% @post.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
   <div class="row bg-light p-3 d-flex flex-column">
     <h5 class="mb-4 mr-3">投稿の編集</h5>
-    <% if @post.errors.any? %>
-      <div class="error_messages">
-        <ul>
-          <% @post.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
     <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
       
-      <p class="d-flex align-items-start">
-        <%= f.label :title, "タイトル" %>
-        <%= f.text_field :title, autofocus: true, style:"width:200px;" %>
+      <p class="field mt-3">
+        <%= f.label :title, "タイトル" %><br>
+        <%= f.text_field :title, autofocus: true, class:"w-50" %>
       </p>
-      <p class="d-flex align-items-start">
-        <%= f.label :body, "エピソード" %>
-        <%= f.text_area :body, style:"max-width:300px;" %>
+      <p class="field mt-3">
+        <%= f.label :body, "エピソード" %><br>
+        <%= f.text_area :body, class:"w-50" %>
       </p>
 
-      <p class="d-flex flex-column">
-        <%= f.label :image, "画像を選択してください" %>
+      <p class="field mt-3">
+        <%= f.label :image, "画像を選択してください" %><br>
         <%= f.file_field :image, accept: "image/*" %>
       </p>
         <%= f.submit "変更を保存する", class: "btn-primary mt-3", style: "border: 1px solid #007bff; border-radius: 4px;" %>

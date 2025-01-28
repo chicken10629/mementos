@@ -20,58 +20,64 @@
     <p class="pl-3 mt-4">
       <i class="fa-solid fa-file-lines"></i>
       <%= @post.body %>
-    <p>
+    </p>
+    <p class="pl-3 mt-4">
       <%= link_to "編集する", edit_admin_post_path(@post), class: "btn btn-primary ml-3" %>
-      <!-- 日本語より先にパスを書いたらURLが表示されてしまった。current_user&&にしないとゲスト時nilエラー -->
-    <!-- 別ユーザーの投稿に限りプロフィール表示 -->
-
-      <div class="post_user mt-3 pl-3">
-        <p>
+    </p>
+    <p class="pl-3 mt-2">
+      <%= link_to "削除する", admin_post_path(@post), class: "btn btn-danger ml-3", method: :delete, data: {confirm: "削除します。本当によろしいですか？" }%>
+    </p>
+    <div class="post_user mt-3 pl-3">
+      <p>
         <i class="fa-solid fa-note-sticky"></i>
-        投稿者
-        </p>
-        <% if @post.user.profile_image.attached? %>
-          <p><%= image_tag @post.user.profile_image, size: "100x100", style: "object-fit: cover; border-radius: 50px;" %></p>
-        <% else %>
-          <p><%= image_tag 'no_image.jpg', size: "100x100", style: "border-radius: 50px;" %></p>
-        <% end %>
+          投稿者
+      </p>
+      <% if @post.user.profile_image.attached? %>
         <p>
+          <%= image_tag @post.user.profile_image, size: "100x100", style: "object-fit: cover; border-radius: 50px;" %>
+        </p>
+      <% else %>
+        <p><%= image_tag 'no_image.jpg', size: "100x100", style: "border-radius: 50px;" %></p>
+      <% end %>
+      <p>
           <i class="fa-solid fa-user"></i>
           <%= link_to @post.user.name, admin_user_path(@post.user_id) %>
-        </p>
-      </div>
+      </p>
+    </div>
   </div>
     <div class="post-comment blue-border bg-light py-3 pl-3 mx-auto", style= "max-width: 500px;">
       <h4 class="mb-3">
         <i class="fa-regular fa-comments"></i>
         みんなのコメント
       </h4>
-    <% if @post_comments.present? %>
-      <div class="post-comment-list mt-5">
-        <% @post_comments.each do |comment| %>
-          <div class="mt-5", style= "max-width: 300px;">
-            <div class="post-user-profile">
-              <% if comment.user.profile_image.attached? %>
-                <%= image_tag comment.user.profile_image, size: "80x80", style: "object-fit: cover; border-radius: 40px;" %>
-              <% else %>
-                <%= image_tag "no_image.jpg", size: "80x80", style: "border-radius: 40px;" %>
-              <% end %>
-              <p>
-                <i class="fa-solid fa-user"></i>
-                <%= comment.user.name %>
-              <p>
+      <% if @post_comments.present? %>
+        <div class="post-comment-list mt-5">
+          <% @post_comments.each do |comment| %>
+            <div class="mt-5", style= "max-width: 300px;">
+              <div class="post-user-profile">
+                <% if comment.user.profile_image.attached? %>
+                  <%= image_tag comment.user.profile_image, size: "80x80", style: "object-fit: cover; border-radius: 40px;" %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", size: "80x80", style: "border-radius: 40px;" %>
+                <% end %>
+                <p>
+                  <i class="fa-solid fa-user"></i>
+                  <%= comment.user.name %>
+                <p>
+              </div>
+              <div>
+                <i class="fa-solid fa-comment"></i>
+                <%= comment.comment %>
+                <p>
+                  <%= link_to "削除する", admin_post_post_comment_path(post_id: comment.post.id, id: comment.id), method: :patch, class:"btn btn-danger mt-3", data: {confirm: "削除します。よろしいですか？"} %>
+                  <!-- ネストしている場合、idをそれぞれ指定する必要がある -->
+                </p>
+              </div>
             </div>
-            <div>
-              <i class="fa-solid fa-comment"></i>
-              <%= comment.comment %>
-              <p>
-                <%= link_to "削除する", admin_post_post_comment_path(post_id: comment.post.id, id: comment.id), method: :patch, class:"btn btn-danger mt-3", data: {confirm: "削除します。よろしいですか？"} %>
-                <!-- ネストしている場合、idをそれぞれ指定する必要がある -->
-              </p>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+          <% end %>
+          <!-- each文はここまで -->
+        </div>
+      <% end %>
+      <!-- present?はここまで -->
+    </div>
 </div>

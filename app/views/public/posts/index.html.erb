@@ -1,4 +1,9 @@
 <div class="container">
+  <% if flash[:alert] %>
+    <div class="bg-light alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <div class="row d-flex mx-auto">
       <% @posts.each do |post| %>
           <div class="col-6 col-md-4 col-lg-3 ">

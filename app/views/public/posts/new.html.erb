@@ -1,17 +1,24 @@
 
 <div class="container py-5">
-  <div class="row p-3 bg-light">
-    <%= flash[:alert] %>
+  <% if @post.errors.any? %>
+    <div class="alert alert-danger w-50"> 
+      <% @post.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="row p-3 bg-light d-flex flex-column">
+
     <%= form_with model: @post, url: posts_path  do |f| %>
 
       <div class="field mt-3">
         <%= f.label :title, "タイトル" %><br>
-        <%= f.text_field :title, autofocus: true %>
+        <%= f.text_field :title, autofocus: true, class:"w-50" %>
       </div>
 
       <div class="field mt-3">
         <%= f.label :body, "エピソード" %><br>
-        <%= f.text_area :body %>
+        <%= f.text_area :body, class:"w-50" %>
       </div>
 
       <div class="field mt-3">
