@@ -26,6 +26,18 @@ class User < ApplicationRecord
   validates :introduction, length: {maximum: 100, message: "は100文字以内で入力してください。"}
   #自分で追加したカラムはバリデーションを設定しないといけないので、nameを追記
 
+  #image拡張子のバリデーション
+  validate :image_content_type, if: :was_attached?
+
+  def image_content_type
+    extensions = ['image/png', 'image/jpg', 'image/jpeg']
+    errors.add(:profile_image, "の拡張子はpng、jpg、jpegにして下さい。") unless profile_image.content_type.in?(extensions)
+  end
+
+  def was_attached?
+    self.profile_image.attached?
+  end
+
   #倫理削除されているとき、ログインできないようにする
   def active_for_authentication? #deviseにある機能。superで呼び出し、is_activeがtrueでなければログインできなくなる
     super && is_active?
@@ -53,7 +65,7 @@ class User < ApplicationRecord
     following_users.find_by(followed_id: user.id).destroy
   end
 
-
+#エラーがおきるので結局使わなかった。。。
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
