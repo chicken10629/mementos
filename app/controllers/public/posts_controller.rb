@@ -45,7 +45,7 @@ class Public::PostsController < ApplicationController
     if @post.destroy
       redirect_to my_page_path, notice: "投稿を削除しました。"
     else
-      render 'edit'
+      render :edit
     end
   end
 

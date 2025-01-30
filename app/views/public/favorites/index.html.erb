@@ -6,27 +6,38 @@ user_idが一致したfavoritesから、post_idを抽出し、postsを呼び出�
 -->
 
 <div class="container">
-  <h3>いいね一覧</h3>
-  <div class="row my-3 mx-auto">
+  <div class="row d-flex mx-auto">
     <% if @favorites.any? %>
       <% @favorites.each do |favorite| %>
-        <div class="col-6 col-md-4 col-lg-3 mt-3" >
-          <div class="title">
+        <div class="col-6 col-md-4 col-lg-3 mt-3">
+          <div class="red-border bg-light my-4">
             <% if favorite.post.image.attached? %>
-              <p><%= image_tag favorite.post.image.variant(resize: "100x100") %> </p>
+              <p><%= image_tag favorite.post.image, class: "picture p-2 d-block mx-auto", size: "140x140" %> </p>
             <% else %>
-              <p><%= image_tag "no_image.jpg", size:"100x100" %></p>
+              <p><%= image_tag "publicdomainq-0060457lwn.jpg", class: "sample-picture p-2 d-block mx-auto", size: "140x140" %></p>
             <% end %>
-            <p><%= link_to favorite.post.title, post_path(favorite.post.id) %></p>
+            <div class="px-3 pt-2">
+              <p class="border-bottom border-primary">
+                <i class="fa-solid fa-quote-left"></i>
+                <%= link_to favorite.post.title, post_path(favorite.post.id) %>
+              </p>
+              <p class="border-bottom border-primary">
+                <i class="fa-regular fa-calendar-days"></i>
+                <%= favorite.post.created_at.strftime("%Y/%m/%d %H:%M") %>
+              </p>
+              <p id="favorite_btn_<%= favorite.post.id %>", class="pt-3">
+                <%= render "public/favorites/btn", post: favorite.post %>
+              <!-- publicから指定しないとなぜか読み込んでくれない。謎すぎる -->
+              </p>
+            </div>
           </div>
-          <p id="favorite_btn_<%= favorite.post.id %>">
-            <%= render "public/favorites/btn", post: favorite.post %>
-          <!-- publicから指定しないとなぜか読み込んでくれない。謎すぎる -->
-          </p>
-        </div>
       <% end %>
     <% else %>
-      <p>まだいいねをしていません。</p>
+    <div style="min-height:60vh">
+      <h5 class="bg-light black-border w-100 mx-auto">
+        まだいいねをしていません。
+      </h5>
+    </div>
     <% end %>
   </div>
 </div>

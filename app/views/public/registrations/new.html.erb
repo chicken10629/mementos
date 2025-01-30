@@ -1,4 +1,4 @@
-<div class="pl-5 pt-5 bg-light", style="height:540px;">
+<div class="pl-5 pt-5 bg-light", style="max-height:800px;">
   <h3>ユーザー登録</h3>
   <!-- 後でform_withに変換し、コントローラー側にインスタンス変数を定義 -->
   <%= form_with model:@user , url: user_registration_path do |f| %>
@@ -29,10 +29,8 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
 
-    <div class="actions mt-3">
+    <div class="actions py-5">
       <%= f.submit "ユーザー登録", class:"btn btn-primary" %>
     </div>
   <% end %>
-
-  
 </div>

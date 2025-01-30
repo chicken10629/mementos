@@ -9,7 +9,7 @@ class Public::PostCommentsController < ApplicationController
     if @post_comment.save
       redirect_to post_path(@post) , notice: "コメントを投稿しました。"
     else
-      redirect_to post_path(@post) , alert: "コメントに失敗しました。"
+      redirect_to post_path(@post) , alert: "100文字以内で何かコメントしてください。"
     end
   end
 

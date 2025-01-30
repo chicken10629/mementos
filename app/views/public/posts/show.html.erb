@@ -5,11 +5,17 @@
 コメント投稿機能
 投稿一覧に戻る
 -->
+<% if flash[:alert] %>
+  <div class="bg-light alert alert-danger w-75">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 <div class="container py-5">
+  
   <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
     <% if @post.image.attached? %>
       <%= image_tag @post.image, class: "d-block mx-auto ml-3 picture", width: 300, height: 300  %>
-      <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。 -->
+      <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。cssがかからなくなるみたいなので未使用。 -->
     <% else %>
       <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto sample-picture", width: 300, height: 300  %>
     <% end %>
@@ -91,7 +97,7 @@
               <% end %>
               <p>
                 <i class="fa-solid fa-user"></i>
-                <%= comment.user.name %>
+                <%= link_to comment.user.name, user_path(comment.user.id) %>
               <p>
             </div>
             <div>

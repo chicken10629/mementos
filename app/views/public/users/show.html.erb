@@ -27,7 +27,9 @@
               <%= @user.introduction %>
             </div>
             <!-- ６．ユーザーの公開・非公開 表示される文字をis_public? ?で変更する -->
+      <% end %>
         </div>
+      <% if @user.is_public == true %>  
             <div>
               <p id="follow_btn_<%= @user.id %>">
                 <%= render "public/follows/btn", user: @user %>
@@ -36,6 +38,7 @@
       <% end %>
       </div>
     </div>
+
     <% if @user.is_public == true %>
       <% if @posts.exists? %>
         <div class="user_posts row mt-5 d-flex mx-auto">
@@ -68,9 +71,9 @@
             </div>
           <% end %>
     <% else %>
-        <p class="black-border bg-light mt-3 d-block">
+        <div class="black-border bg-light w-50 mx-auto mt-5">
           このユーザーは非公開に設定しています。
-        </p>
+        </div>
     <% end %>
     </div>
     <% end %>
