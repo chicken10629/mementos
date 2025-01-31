@@ -65,6 +65,10 @@ class User < ApplicationRecord
     following_users.find_by(followed_id: user.id).destroy
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["name","introduction"]
+  end
+
 #エラーがおきるので結局使わなかった。。。
   def get_profile_image
     unless profile_image.attached?

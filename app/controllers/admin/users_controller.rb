@@ -1,5 +1,4 @@
 class Admin::UsersController < ApplicationController
-before_action :search, only: [:index]
 
   def edit
     @user = User.find(params[:id])
@@ -8,11 +7,6 @@ before_action :search, only: [:index]
   def index
     @users = User.all
     #倫理削除された物も含める
-  end
-
-  def search
-    @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
   end
 
   def show

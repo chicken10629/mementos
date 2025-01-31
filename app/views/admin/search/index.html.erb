@@ -1,15 +1,15 @@
 <div class="container py-5">
   <!-- ユーザー検索 -->
 
-  <%= search_form_with @user_q, url: admin_search_index_path, method: :get do |f| %>
+  <%= search_form_for @user_q, url: admin_search_index_path, method: :get do |f| %>
     <%= f.search_field :name_cont, placeholder: 'ユーザー名で検索' %>
     <%= f.submit 'ユーザー検索' %>
   <% end %>
 
-  <%= search_form_with @post_q, url: admin_search_index_path, method: :get do |f| %>
+  <%= search_form_for @post_q, url: admin_search_index_path, method: :get do |f| %>
     <%= f.search_field :title_cont, placeholder: '投稿名で検索' %>
     <%= f.search_field :body_cont, placeholder: '投稿文で検索' %>
-    <%= f.submit 'ユーザー検索' %>
+    <%= f.submit '投稿検索' %>
   <% end %>
 
 <!-- 投稿の検索結果を表示
@@ -80,8 +80,7 @@
           </td>
         </tr>
       <% end %>
-    </table>
-        <% end %>
+    </table>       
   <% else %>
     <div style="min-height:50vh;">
       <p class="black-border bg-light w-50">
