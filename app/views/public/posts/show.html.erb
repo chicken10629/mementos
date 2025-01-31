@@ -14,7 +14,7 @@
   
   <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
     <% if @post.image.attached? %>
-      <%= image_tag @post.image, class: "d-block mx-auto ml-3 picture", width: 300, height: 300  %>
+      <%= image_tag @post.image.representation(resize_to_fill: [300, 300]), class: "d-block mx-auto ml-3 picture" %>
       <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。cssがかからなくなるみたいなので未使用。 -->
     <% else %>
       <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto sample-picture", width: 300, height: 300  %>
@@ -45,7 +45,7 @@
         投稿者
         </p>
         <% if @post.user.profile_image.attached? %>
-          <p><%= image_tag @post.user.profile_image, size: "100x100", style: "object-fit: cover; border-radius: 50px;" %></p>
+          <p><%= image_tag @post.user.profile_image.representation(resize_to_fill: [100, 100]), style: "border-radius: 50px;" %></p>
         <% else %>
           <p><%= image_tag 'no_image.jpg', size: "100x100", style: "border-radius: 50px;" %></p>
         <% end %>
@@ -91,7 +91,7 @@
           <div class="mt-5", style= "max-width: 300px;">
             <div class="post-user-profile">
               <% if comment.user.profile_image.attached? %>
-                <%= image_tag comment.user.profile_image, size: "80x80", style: "object-fit: cover; border-radius: 40px;" %>
+                <%= image_tag comment.user.profile_image.representation(resize_to_fill: [80, 80]), style: "border-radius: 40px;" %>
               <% else %>
                 <%= image_tag "no_image.jpg", size: "80x80", style: "border-radius: 40px;" %>
               <% end %>

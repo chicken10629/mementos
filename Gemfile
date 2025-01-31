@@ -71,6 +71,8 @@ gem 'devise-i18n'
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+gem 'ransack'
 #SMTPサーバーを通じてメールを送信
 #POP3を利用してメールサーバーからメールを受信
 #IMAPを利用してメールサーバーとやりとり
+#管理者画面での検索。

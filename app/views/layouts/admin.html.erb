@@ -22,7 +22,6 @@
         <h3 class="logo col-lg-2 vertical-line-middle">
           <%= link_to "管理者画面", admin_top_path %>
         </h3>
-        <!-- 検索窓は個別に作ればよさげ -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -39,6 +38,10 @@
               <li class="nav-item">
                 <i class="fa-solid fa-users"></i>
                 <%= link_to "ユーザー一覧", admin_users_path %>
+              </li>
+              <li class="nav-item">
+                <i class="fa-solid fa-users"></i>
+                <%= link_to "ユーザー一覧", admin_search_index_path %>
               </li>
             <% end %>
             <% if admin_signed_in? %>

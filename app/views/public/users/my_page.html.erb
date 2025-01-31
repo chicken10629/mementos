@@ -5,7 +5,7 @@
   <div class="row">
     <div class="brown-border bg-light p-3 mx-auto">
       <% if @user.profile_image.attached? %>
-        <%= image_tag @user.profile_image, size: "150x150", class: "d-block mx-auto", style: "object-fit: cover; border-radius: 75px;" %>
+        <%= image_tag @user.profile_image.representation(resize_to_fill: [150, 150]), class: "d-block mx-auto", style: "border-radius: 75px;" %>
       <% else %>
         <%= image_tag 'no_image.jpg', size: "150x150", class: "d-block mx-auto", style: "object-fit: cover; border-radius: 75px;" %>
       <% end %>
@@ -62,7 +62,7 @@
       <div class="col-lg-3 col-md-4 col-6 mb-5 black-border bg-light">
         <div class="user-post-card pt-4">
           <% if post.image.attached? %>
-            <%= image_tag post.image, size: "180x180" , class: "picture d-block mx-auto" %>
+            <%= image_tag post.image.representation(resize_to_fill: [180, 180]), class: "picture d-block mx-auto" %>
           <% else %>
             <%= image_tag "publicdomainq-0060457lwn.jpg", size: "180x180", class: "sample-picture d-block mx-auto" %>
           <% end %>

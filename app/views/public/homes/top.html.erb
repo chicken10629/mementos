@@ -13,7 +13,7 @@
        <% @posts.each do |post| %>
         <div class="mb-3 ml-3 pt-3 red-border bg-light" style="width: 250px;">
           <% if post.image.attached? %>
-            <%= image_tag post.image, class: "picture d-block mx-auto", width: 200, height: 200 %>
+            <%= image_tag post.image.representation(resize_to_fill: [200, 200]), class: "picture d-block mx-auto" %>
           <% else %>
             <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "sample-picture d-block mx-auto", width: 200, height: 200 %>
           <% end %>

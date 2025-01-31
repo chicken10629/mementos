@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_admin, if: :admin_controller?
   before_action :track_visit, unless: :admin_controller?
 
+
   #layoutをadmin、それ以外で変更する
   layout :set_layout
 
