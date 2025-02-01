@@ -5,8 +5,16 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
-    #倫理削除された物も含める
+      query = params[:query]
+      @users = User.none
+      #最後の結果表示でnilになってしまったので初期化
+      if query.present?
+        @users = User.where( "name LIKE ?", "%#{params[:query]}%" )
+      else
+        @users = User.all
+      end
+      #結果の表示
+      @users = @users.page(params[:page]).per(10)
   end
 
   def show

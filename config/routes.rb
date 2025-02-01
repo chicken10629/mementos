@@ -20,7 +20,6 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:update]
     end
     resources :users, only: [:index, :show, :edit, :destroy, :update]
-    get 'search/index'
   end
 
   scope module: :public do #namespaceの指定をコントローラーのみにする。URLに含めない。
