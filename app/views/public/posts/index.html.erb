@@ -32,4 +32,9 @@
           </div>
       <% end %>
   </div>
+  <% if @posts.total_pages > 1 %>
+    <div class="pagination black-border bg-light pb-3 ">
+      <%= paginate @posts %>
+    </div>
+  <% end %>
 </div>

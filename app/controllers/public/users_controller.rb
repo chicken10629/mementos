@@ -3,6 +3,7 @@ class Public::UsersController < ApplicationController
   def my_page
     @user = User.find(current_user.id)
     @posts = @user.posts.order(created_at: :desc) #current_userに紐づく投稿データを最新順に表示
+    @posts = @posts.page(params[:page]).per(20)
   end
 
   def public_status
@@ -17,6 +18,7 @@ class Public::UsersController < ApplicationController
 
   def index
     @users = User.where(is_active: true)
+    @users = @users.page(params[:page]).per(10)
     #倫理削除された物を除く
   end
 

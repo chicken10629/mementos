@@ -5,6 +5,7 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts = Post.joins(:user).where(users: {is_active: true, is_public: true})
+    @posts = @posts.order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def show

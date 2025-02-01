@@ -28,4 +28,10 @@
       </div>
     </div>
   <% end %>
+  <!-- pagenationが不要な場合非表示 -->
+  <% if @users.total_pages > 1 %>
+    <div class="pagination black-border bg-light pb-3 ">
+      <%= paginate @users %>
+    </div>
+  <% end %>
 </div>

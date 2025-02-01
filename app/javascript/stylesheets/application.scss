@@ -85,3 +85,37 @@ footer{
   bottom: -100px;
   left: 0;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination .page {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+}
+
+.pagination .page.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination .first,
+.pagination .previous{
+  margin-right: 10px;
+}
+
+.pagination .next,
+.pagination .last{
+  margin-left: 10px;
+}
+
+.pagination ul.empty {
+  display: none;
+}
