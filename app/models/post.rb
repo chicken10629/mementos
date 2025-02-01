@@ -23,11 +23,4 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
-
-  #ransackは検索可能な属性を指定しないとエラーが起きる。
-  def self.ransackable_attributes(auth_object = nil)
-    ["title","body"]
-  end
-
-
 end
