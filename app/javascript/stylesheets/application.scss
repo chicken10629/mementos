@@ -32,21 +32,25 @@ li{
 .red-border{
   border: 15px solid rgb(152, 0, 0);
   box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
+  overflow-wrap: break-word;
 }
 
 .blue-border{
   border: 15px solid rgb(0, 102, 190);
   box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
+  overflow-wrap: break-word;
 }
 
 .brown-border{
   border: 15px solid rgb(136, 88, 32);
   box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
+  overflow-wrap: break-word;
 }
 
 .black-border{
   border: 1px solid rgb(0, 0, 0);
   box-shadow: 2px 2px 4px rgba(1, 1, 5, .8);
+  overflow-wrap: break-word;
 }
 
 .picture{

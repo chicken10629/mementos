@@ -21,7 +21,7 @@
               <%= render "public/follows/btn", user: user %>
             </p>
       </div>
-      <div class="align-top pl-3 col-7", style="width: 300px; overflow-wrap: break-word;">
+      <div class="align-top pl-3 col-7", style="width: 300px;">
           <i class="fa-solid fa-comment"></i>
           <%= user.introduction.to_s.truncate(50, omission: '...') %>
           <!-- 未入力の場合にtruncateをするとエラーが起きるので回避。50文字を超えた場合に...を表示 -->
