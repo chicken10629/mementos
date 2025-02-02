@@ -6,7 +6,7 @@
   <% end %>
   <div class="row d-flex mx-auto">
       <% @posts.each do |post| %>
-          <div class="col-6 col-md-4 col-lg-3 ">
+          <div class="col-6 col-md-4 col-lg-3">
             <div class="red-border bg-white my-4">
               <% if post.image.attached? %>
                 <%= image_tag post.image.representation(resize_to_fill: [140, 140]), class: "picture d-block mx-auto" %>
@@ -30,10 +30,11 @@
               </div>
             </div>
           </div>
+      <!-- postの繰り返し表示終了 -->
       <% end %>
   </div>
   <% if @posts.total_pages > 1 %>
-    <div class="pagination black-border bg-light pb-3 ">
+    <div class="pagination black-border bg-light pb-3">
       <%= paginate @posts %>
     </div>
   <% end %>
