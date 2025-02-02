@@ -4,8 +4,9 @@ class Public::PostsController < ApplicationController
   end
 
   def index
+    #倫理削除したユーザーや非公開ユーザーの投稿を除いて表示
     @posts = Post.joins(:user).where(users: {is_active: true, is_public: true})
-    @posts = @posts.order(created_at: :desc).page(params[:page]).per(20)
+    @posts = @posts.order(created_at: :desc).page(params[:page]).per(12)
   end
 
   def show
@@ -20,6 +21,7 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    #ログインユーザーの投稿id
     @post.user_id = current_user.id
     if @post.save
       redirect_to post_path(@post.id), notice: "投稿しました。" #パス名を指定。showなのでidも欲しい
@@ -53,8 +55,9 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image) #投稿したいカラム、それを扱うモデルを指定し、扱う許可を与える
-    #imagesはpostの配列。params[:post][:images]。
+    #投稿したいカラム、それを扱うモデルを指定し、扱う許可を与える
+    params.require(:post).permit(:title, :body, :image)
+    #複数投稿を実装する場合…imagesはpostの配列。params[:post][:images]。
   end
 
 end

@@ -84,7 +84,7 @@
           </ul>
     </nav>
   </header>
-  <div class="container-fluid", style="background-image: url('<%= asset_path('CorkBoard02.jpg') %>'); background-repeat: repeat; background-size: cover; height: 100vh;">
+  <div class="container-fluid", style="background-image: url('<%= asset_path('CorkBoard02.jpg') %>'); background-repeat: repeat; background-size: cover; min-height: 100vh;">
   <!-- cssで指定しても無理だったが、asset_pathで指定したらできるようになった。webpackerを使ってるとパスの指定がうまくいかないことがあるらしい。 -->
   <!-- assetsフォルダにimagesフォルダを作成し、imageファイルを入れておくとよさげ -->
     <% if flash[:notice] %>

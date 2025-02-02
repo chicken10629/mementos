@@ -20,7 +20,7 @@
       <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto sample-picture", width: 300, height: 300  %>
     <% end %>
     <h4 class="pl-3 mt-3">
-      <i class="fa-solid fa-quote-left"></i>
+      <i class="fa-solid fa-bookmark"></i>
       <%= @post.title %>
     </h4>
     <p class="pl-3 mt-4">
@@ -36,14 +36,10 @@
         <!-- 日本語より先にパスを書いたらURLが表示されてしまった。current_user&&にしないとゲスト時nilエラー -->
       </p>
     <% end %>
-    <!-- 別ユーザーの投稿に限りプロフィール表示 -->
+    <!-- ゲストユーザー、または別ユーザーの投稿に限りプロフィール表示 -->
 
-    <% if current_user && @post.user_id != current_user.id %>
-      <div class="post_user mt-3 pl-3">
-        <p>
-        <i class="fa-solid fa-note-sticky"></i>
-        投稿者
-        </p>
+    <% if current_user.nil? || (current_user && @post.user.id != current_user.id) %>
+      <div class="post_user black-border pl-3 mb-3", style="max-width: 135px">
         <% if @post.user.profile_image.attached? %>
           <p><%= image_tag @post.user.profile_image.representation(resize_to_fill: [100, 100]), style: "border-radius: 50px;" %></p>
         <% else %>

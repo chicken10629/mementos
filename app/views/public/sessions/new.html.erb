@@ -1,4 +1,4 @@
-<div class="pl-5 pt-5 bg-light black-border", style="min-height:80vh;">
+<div class="pl-5 pt-5 bg-light black-border">
   <h3>ログイン画面</h3>
     <% if flash[:alert] %>
       <div class="row w-50 alert alert-danger">
@@ -25,10 +25,8 @@
         </div>
       <% end %>
 
-      <div class="actions">
-        <%= f.submit "ログイン" %>
+      <div class="actions py-5">
+        <%= f.submit "ログイン", class:"btn btn-primary" %>
       </div>
     <% end %>
-
-    <%= render "public/shared/links" %>
 </div>

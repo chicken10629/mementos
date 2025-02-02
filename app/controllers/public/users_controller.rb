@@ -3,7 +3,7 @@ class Public::UsersController < ApplicationController
   def my_page
     @user = User.find(current_user.id)
     @posts = @user.posts.order(created_at: :desc) #current_userに紐づく投稿データを最新順に表示
-    @posts = @posts.page(params[:page]).per(20)
+    @posts = @posts.page(params[:page]).per(12)
   end
 
   def public_status
@@ -34,7 +34,7 @@ class Public::UsersController < ApplicationController
     if @user == current_user
       redirect_to my_page_path and return # and returnで@postsが実行されなくなる
     end
-    @posts = @user.posts.order(created_at: :desc)
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(12)
     #投稿を最新順に表示
   end
 

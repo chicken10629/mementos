@@ -41,7 +41,10 @@
 
     <% if @user.is_public == true %>
       <% if @posts.exists? %>
-        <div class="user_posts row mt-5 d-flex mx-auto">
+      <h4 class="blue-border bg-light p-3 my-5 text-center mx-auto", style="max-width:300px;">
+        <%= @user.name %>の投稿一覧
+      </h4>
+        <div class="user_posts row mt-5 d-flex mx-auto",>
           <!-- ４．ユーザーの投稿一覧⇒各投稿への移動 -->
             <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
               <div class="col-lg-3 col-md-4 col-6 mb-5 black-border bg-light">
@@ -52,7 +55,7 @@
                     <%= image_tag "publicdomainq-0060457lwn.jpg", size: "150x150" , class: "sample-picture d-block mx-auto" %>
                   <% end %>
                   <p class="pt-3">
-                    <i class="fa-solid fa-quote-left"></i>
+                    <i class="fa-solid fa-bookmark"></i>
                     <%= link_to post.title, post_path(post.id) %> 
                   </p>
                   <p>
@@ -63,6 +66,11 @@
               </div>
             <% end %>
             </div>
+            <% if @posts.total_pages > 1 %>
+              <div class="pagination black-border bg-light pb-3 ">
+                <%= paginate @posts %>
+              </div>
+            <% end %>
           <% else %>
             <div class="user_posts mt-5 d-flex justify-content-center mx-auto">
               <p class="black-border bg-light">

@@ -11,8 +11,8 @@ class Admin::DashboardsController < ApplicationController
 
     @total_visits = Visit.count
 
-    @guests_visits = Visit.where(user: nil).count
-    #カウントできていないため、後で修正する
+    # @guests_visits = Visit.where(user: nil).count
+    #カウントできていないため、余裕があれば後で修正する
 
     @active_users = User.where(is_active: true).count
     #倫理削除していないユーザーの累計

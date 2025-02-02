@@ -14,7 +14,7 @@
       <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto sample-picture", size:"300x300" %>
     <% end %>
     <h4 class="pl-3 mt-3">
-      <i class="fa-solid fa-quote-left"></i>
+      <i class="fa-solid fa-bookmark"></i>
       <%= @post.title %>
     </h4>
     <p class="pl-3 mt-4">
@@ -27,11 +27,7 @@
     <p class="pl-3 mt-2">
       <%= link_to "削除する", admin_post_path(@post), class: "btn btn-danger ml-3", method: :delete, data: {confirm: "削除します。本当によろしいですか？" }%>
     </p>
-    <div class="post_user mt-3 pl-3">
-      <p>
-        <i class="fa-solid fa-note-sticky"></i>
-          投稿者
-      </p>
+    <div class="post_user mt-5 pl-3">
       <% if @post.user.profile_image.attached? %>
         <p>
           <%= image_tag @post.user.profile_image, size: "100x100", style: "object-fit: cover; border-radius: 50px;" %>
