@@ -43,7 +43,7 @@
       <tr>
         <td>
           <% if user.profile_image.attached? %>
-            <%= image_tag user.profile_image, size: "80x80", style: "object-fit: cover; border-radius:40px;" %>
+            <%= image_tag user.profile_image.representation(resize_to_fill: [80, 80]), style: "border-radius:40px;" %>
           <% else %>
             <%= image_tag "no_image.jpg", size: "80x80", style: "border-radius: 40px;" %>
           <% end %>
