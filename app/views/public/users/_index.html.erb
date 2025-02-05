@@ -1,0 +1,53 @@
+<!-- ユーザー一覧の表示-->
+<div class="container py-5">
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+  <!-- 部分テンプレートなため、@resultsをusersに代入している ユーザーの入力したキーワードは@query = query -->
+  <h5 class="bg-light black-border">
+  ユーザーの検索結果　キーワード：<%= query %>　検索条件：
+    <% if method == 'perfect'%>
+      完全一致
+    <% elsif method == 'partial' %>
+      部分一致
+    <% end %>
+  </h5>
+  <% if users.any? %>
+    <% users.each do |user| %>
+      <div class="row pt-3 brown-border mb-4 bg-light mr-auto d-flex", style="max-width:500px;">
+        <div class="pl-3 col-5", style="width: 170px;">
+            <% if user.profile_image.attached? %>
+              <%= image_tag user.profile_image.representation(resize_to_fill: [100, 100]), style: "border-radius: 50px;" %>
+            <% else %>
+              <%= image_tag 'no_image.jpg', size: "100x100", style: "object-fit: cover; border-radius: 50px;" %>
+            <% end %>
+            <p>
+              <i class="fa-solid fa-user"></i>
+              <%= link_to user.name, user_path(user.id) %>
+            </p>
+              <p id="follow_btn_<%= user.id %>">
+                <%= render "public/follows/btn", user: user %>
+              </p>
+        </div>
+        <div class="align-top pl-3 col-7", style="width: 300px;">
+            <i class="fa-solid fa-comment"></i>
+            <%= user.introduction.to_s.truncate(50, omission: '...') %>
+            <!-- 未入力の場合にtruncateをするとエラーが起きるので回避。50文字を超えた場合に...を表示 -->
+        </div>
+      </div>
+    <% end %>
+  
+  <!-- pagenationが不要な場合非表示 -->
+    <% if users.total_pages > 1 %>
+      <div class="pagination black-border bg-light pb-3 ">
+        <%= paginate users%>
+      </div>
+    <% end %>
+  <% else %>
+      <p class="black-border bg-light w-50">
+        検索結果はありませんでした。
+      </p>
+  <% end %>
+</div>

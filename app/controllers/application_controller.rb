@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
       authenticate_user! unless admin_controller? || action_is_public? #adminコンでなければトップ画面以外で認証を求める　unless部分いらないが、勉強のために
   end
 
+  #共通テンプレートの切替
   def set_layout
     if admin_controller?
       'admin'

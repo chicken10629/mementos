@@ -1,10 +1,10 @@
 class Public::UsersController < ApplicationController
-  
   def my_page
     @user = User.find(current_user.id)
     @posts = @user.posts.order(created_at: :desc) #current_userに紐づく投稿データを最新順に表示
     @posts = @posts.page(params[:page]).per(12)
   end
+  
 
   def public_status
     @user = current_user #これ設定しないとis_publicがnilになってしまう
@@ -62,6 +62,5 @@ class Public::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image) #更新したいカラム名の使用許可
   end
-
   
 end

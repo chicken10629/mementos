@@ -23,4 +23,21 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
+
+  #検索用。最近のサイトを見るに部分一致だけでよさそうだが、完全一致も追加。
+  #Postモデル内で定義するため、Postを省略可。
+  def self.search_for(query,method)
+    if query.blank?
+      return all
+    end
+
+    case method
+    when "perfect"
+      where(title: query)
+    when "partial"
+      where("title LIKE ?", "%#{query}%")
+    else
+      all
+    end
+  end
 end

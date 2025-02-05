@@ -21,19 +21,8 @@
         <h3 class="logo col-lg-2 ml-auto vertical-line-middle">
           <%= link_to "mementos", top_path %>
         </h3>
-        <!-- 検索窓　投稿をtitle,bodyまたは両方で検索 form_withのデフォアクションがPostなのでgetを指定 -->
-          <%= form_with url: search_index_path, method: :get, local: true do |search| %>
-            <div class="form-box">
-              <%= search.text_field :query, placeholder: "キーワードを入力" %>
-              <!-- radio_buttonの値（search_in)に各カラムを渡す。条件式で利用 -->
-              <div class="radio-button"> 
-                <%= search.radio_button :search_in, "title" %>タイトルのみ
-                <%= search.radio_button :search_in, "body" %>エピソードのみ
-                <%= search.radio_button :search_in, "both", checked: true %>両方
-              </div>
-              <%= search.submit "検索" %>
-            </div>
-          <% end %>
+        <!-- 検索窓 -->
+          <%= render 'layouts/search' %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -56,7 +45,6 @@
                 <i class="fa-solid fa-circle-info"></i>
                 <%= link_to "サイト案内", about_path %>
               </li>
-
               <li class="nav-item">
                 <i class="fa-solid fa-book-open"></i>
                 <%= link_to "投稿一覧", posts_path %>
@@ -65,8 +53,8 @@
                 <i class="fa-solid fa-users"></i>
                 <%= link_to "ユーザー一覧", users_path %>
               </li>
-            <% if user_signed_in? %>
             <!-- deviseのルートを確認する -->
+            <% if user_signed_in? %>
               <li class="nav-item">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

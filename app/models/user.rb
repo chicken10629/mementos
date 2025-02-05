@@ -29,6 +29,7 @@ class User < ApplicationRecord
   #image拡張子のバリデーション
   validate :image_content_type, if: :was_attached?
 
+
   def image_content_type
     extensions = ['image/png', 'image/jpg', 'image/jpeg']
     errors.add(:profile_image, "の拡張子はpng、jpg、jpegにして下さい。") unless profile_image.content_type.in?(extensions)
@@ -64,6 +65,23 @@ class User < ApplicationRecord
     #userのidとfollowed_idが一致するデータを削除
     following_users.find_by(followed_id: user.id).destroy
   end
+
+  def self.search_for(query,method)
+    if query.blank?
+      #Userモデル内で定義しているため、User.allをallにすることが可能。whereも同様
+      return all
+    end
+
+    case method
+    when "perfect"
+      where(name: query)
+    when "partial"
+      where("name LIKE ?", "%#{query}%")
+    else
+      all
+    end
+  end
+
 
 #エラーがおきるので結局使わなかった。。。
   def get_profile_image

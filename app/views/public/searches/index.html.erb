@@ -1,46 +1,7 @@
 <!-- 投稿の検索結果を表示　投稿日時順に並べ替える　後でいいねの多い順に並べ替える
 -->
-<div class="container py-5">
-  <% if @results.any? %>
-    <div class="row d-flex mx-auto">
-      <% @results.each do |post| %>
-            <div class="col-6 col-md-4 col-lg-3">
-              <div class="red-border bg-white my-3">
-                <% if post.image.attached? %>
-                  <%= image_tag post.image.representation(resize_to_fill: [140, 140]), class: "picture d-block mx-auto" %>
-                <% else %>
-                  <%= image_tag "publicdomainq-0060457lwn.jpg", class: "sample-picture d-block mx-auto", size: "140x140" %>
-                <% end %>
-                <div class="card-body">
-                  <p class="border-bottom border-primary">
-                    <i class="fa-solid fa-bookmark"></i>
-                    <%= link_to post.title.truncate(10), post_path(post.id) %>
-                  </p>
-                  <p class="border-bottom border-primary">
-                    <i class="fa-regular fa-calendar-days"></i>
-                    <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
-                  </p>
-                </div>
-                <div class="favorite">
-                  <p id="favorite_btn_<%= post.id %>" class="pl-3">
-                    <%= render "public/favorites/btn", post: post %>
-                  </p>
-                </div>
-              </div>
-            </div>
-      <!-- 検索結果(post)の繰り返し表示終了 -->
-      <% end %>
-    </div>
-  <!-- @results.any?の分岐。条件に合うものがない場合 -->
-  <% else %>
-      <p class="black-border bg-light w-50">
-        検索結果はありませんでした。
-      </p>
-  <% end %>
-  <!-- コントローラー側で、検索結果にpagination用のフィルターをかけてから@resultsに渡す。 -->
-  <% if @results.total_pages > 1 %>
-    <div class="pagination black-border bg-light pb-3">
-      <%= paginate @results %>
-    </div>
-  <% end %>
-</div>
+<% if @model == 'user' %>
+  <%= render 'public/users/index', users: @results, query: @query, method: @method %>
+<% elsif @model == 'post' %>
+  <%= render 'public/posts/index', posts: @results, query: @query, method: @method %>
+<% end %>
