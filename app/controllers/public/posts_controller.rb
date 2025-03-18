@@ -31,7 +31,15 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    begin
+      @post = Post.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to posts_path, alert: "この投稿は存在しないか、既に削除されています。"
+      return
+    end
+    if @post.user.nil? || @post.user.id != current_user.id
+      redirect_to posts_path, alert: "他のユーザーの投稿は編集できません。"
+    end
   end
 
   def update
