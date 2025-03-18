@@ -26,13 +26,13 @@ class Public::UsersController < ApplicationController
     
     begin
       @user = User.find(params[:id])
-    rescue ActiveRecord::RecordNotFound #カラムが存在しない場合
+    rescue ActiveRecord::RecordNotFound #カラムが存在しない場合の処理
       redirect_to users_path, alert: 'このユーザーは存在しないか、既にアカウントを削除しています。'
       return #ここで処理終了
     end
     #current_userである場合my_pageへ飛ばす
     if @user == current_user
-      redirect_to my_page_path and return # and returnで@postsが実行されなくなる
+      redirect_to my_page_path and return # and returnで処理が終了する
     end
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(12)
     #投稿を最新順に表示

@@ -33,7 +33,9 @@
           <%= image_tag @post.user.profile_image, size: "100x100", style: "object-fit: cover; border-radius: 50px;" %>
         </p>
       <% else %>
-        <p><%= image_tag 'no_image.jpg', size: "100x100", style: "border-radius: 50px;" %></p>
+        <p>
+          <%= image_tag 'no_image.jpg', size: "100x100", style: "border-radius: 50px;" %>
+        </p>
       <% end %>
       <p>
           <i class="fa-solid fa-user"></i>

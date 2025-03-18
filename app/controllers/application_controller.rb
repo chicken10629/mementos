@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
       authenticate_user! unless admin_controller? || action_is_public? #adminコンでなければトップ画面以外で認証を求める　unless部分いらないが、勉強のために
   end
 
-  #共通テンプレートの切替
+  #共通テンプレートの切替 views/layoutsディレクトリ内のファイルを呼び出し、共通テンプレートとして使用
   def set_layout
     if admin_controller?
       'admin'
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #管理者コントローラーか確認
+  #名前空間がAdminかチェックすることで、管理者コントローラーかどうか確認
   def admin_controller?
     self.class.module_parent_name == 'Admin' 
   end
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     controller_name == 'homes' && action_name == 'top'
   end
 
-  #サインインしている、なおかつis_activeがfalseである時、強制的にログアウトさせる
+  #サインインしている、なおかつログインユーザーがアカウントを倫理削除していた場合、強制的にログアウトさせる
   def check_active_user
     if user_signed_in? && !curent_user.is_active?
       sign_out current_user
