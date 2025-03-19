@@ -3,7 +3,7 @@ class Admin::PostCommentsController < ApplicationController
   def update
     @post_comment = PostComment.find(params[:id])
     @post = Post.find(params[:post_id])
-    @post_comment.comment = "このコメントは削除されました。"
+    @post_comment.comment = "このコメントは管理者によって削除されました。"
     if @post_comment.save
       redirect_to admin_post_path(@post.id), notice: 'コメントが削除されました。'
     else

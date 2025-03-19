@@ -25,7 +25,10 @@
     </h4>
     <p class="pl-3 mt-4">
       <i class="fa-solid fa-file-lines"></i>
-      <%= @post.body %>
+      <%= simple_format(sanitize(@post.body)).gsub('<p>', '<p class="pl-3">').html_safe %>
+      <!-- 改行や段落の表示を正しくHTMLに変換。また、scriptタグ等不適切なものを安全なものに変換
+      h1やolなどはそのまま通過するため、入れたくないときは指定する必要あり
+      さらにそのままだとpl-3が適用されないので、gsubでつけて、html_safeでpタグを変換-->
     <p>
     <% if current_user && @post.user_id == current_user.id %>
       <p>
@@ -94,11 +97,15 @@
               <p>
                 <i class="fa-solid fa-user"></i>
                 <%= link_to comment.user.name, user_path(comment.user.id) %>
-              <p>
+              </p>
             </div>
             <div>
               <i class="fa-solid fa-comment"></i>
-              <%= comment.comment %>
+              <%= simple_format(sanitize(comment.comment)) %>
+              <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+              <% if current_user == comment.user %>
+                <%= link_to "削除", delete_post_post_comment_path(@post.id, comment.id), class: "btn btn-danger", method: :patch, data: { confirm: "コメントを削除します。よろしいですか？"} %>
+              <% end %>
             </div>
           </div>
         <% end %>
