@@ -27,9 +27,9 @@
               <i class="fa-solid fa-user"></i>
               <%= link_to user.name, user_path(user.id) %>
             </p>
-              <p id="follow_btn_<%= user.id %>">
-                <%= render "public/follows/btn", user: user %>
-              </p>
+            <p id="follow_btn_<%= user.id %>">
+              <%= render "public/follows/btn", user: user %>
+            </p>
         </div>
         <div class="align-top pl-3 col-7", style="width: 300px;">
             <i class="fa-solid fa-comment"></i>

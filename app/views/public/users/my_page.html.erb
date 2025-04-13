@@ -46,6 +46,7 @@
         <i class="fa-solid fa-user-lock"></i>
         プロフィール・投稿の公開設定
       </p>
+      <!--２個目の?は条件演算子　真の場合と偽の場合で表示を切り替える -->
       <%= @user.is_public? ?
         "公開":
         "非公開"
@@ -80,6 +81,7 @@
       </div>
     <% end %>
 </div>
+<!-- ２ページ以上あるときに限りpaginateを表示 -->
 <% if @posts.total_pages > 1 %>
   <div class="pagination black-border bg-light pb-3 ">
     <%= paginate @posts %>

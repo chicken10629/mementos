@@ -13,7 +13,16 @@ class Public::UsersController < ApplicationController
   end
 
   def my_page_edit
-    @user = User.find(params[:id])
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound 
+      redirect_to users_path, alert: '他のユーザーのプロフィールは編集できません。'
+      return #ここで処理終了
+    end
+    if current_user.id.to_s != params[:id]
+      redirect_to users_path, alert: '他のユーザーのプロフィールは編集できません。'
+      return
+    end
   end
 
   def index

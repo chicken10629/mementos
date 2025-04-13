@@ -40,4 +40,15 @@ class Post < ApplicationRecord
       all
     end
   end
+
+  #お試しでポストイメージ
+  def get_post_image(height,width)
+    unless image.attached?
+      file_path = Rails.root.join('app/assets/images/publicdomainq-0060457lwn.jpg')
+      image.attach(io: File.open(file_path), filename: 'publicdomainq-0060457lwn.jpg', content_type: 'image/jpeg')
+    end
+    #imageがない場合、設定したファイルの位置の画像を呼び出し、保存
+    image.variant(resize_to_limit: [height, width]).processed
+    #投稿画像を表示。variantは画像の加工のメソッド。processedはリサイズ処理を適応した状態を結果として返す。
+  end
 end
