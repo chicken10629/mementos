@@ -95,3 +95,4 @@ class User < ApplicationRecord
     #プロフィール画像を表示。variantは画像の加工のメソッド。processedはリサイズ処理を適応した状態を結果として返す。
   end
 
+end
