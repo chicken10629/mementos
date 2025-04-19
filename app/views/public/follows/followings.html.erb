@@ -3,15 +3,11 @@
     <% @users.each do |user| %>
       <div class="row pb-2">
         <div class="col col-sm-10 col-md-8 col-lg-6 py-3 mx-auto mb-3 bg-light brown-border">
-            <% if user.profile_image.attached? %>
-              <%= image_tag user.profile_image, size: "100x100", style: "border-radius: 50px;" %>
-            <% else %>
-              <%= image_tag 'no_image.jpg', size: "100x100", style: "border-radius: 50px;" %>
-            <% end %>
-            <p>
-              <%= link_to user.name, user_path(user.id) %>
-            </p>
-            <div class="align-top mb-2">
+          <%= image_tag user.get_profile_image(100,100), style: "border-radius: 50px;" %>
+          <p>
+            <%= link_to user.name, user_path(user.id) %>
+          </p>
+          <div class="align-top mb-2">
             <i class="fa-solid fa-comment"></i>
             <%= user.introduction %>
           </div>

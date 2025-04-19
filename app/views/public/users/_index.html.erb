@@ -18,11 +18,7 @@
     <% users.each do |user| %>
       <div class="row pt-3 brown-border mb-4 bg-light mr-auto d-flex", style="max-width:500px;">
         <div class="pl-3 col-5", style="width: 170px;">
-            <% if user.profile_image.attached? %>
-              <%= image_tag user.profile_image.representation(resize_to_fill: [100, 100]), style: "border-radius: 50px;" %>
-            <% else %>
-              <%= image_tag 'no_image.jpg', size: "100x100", style: "object-fit: cover; border-radius: 50px;" %>
-            <% end %>
+            <%= image_tag user.get_profile_image(100,100), style: "border-radius: 50px;" %>
             <p>
               <i class="fa-solid fa-user"></i>
               <%= link_to user.name, user_path(user.id) %>

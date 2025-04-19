@@ -48,7 +48,7 @@ class Post < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'publicdomainq-0060457lwn.jpg', content_type: 'image/jpeg')
     end
     #imageがない場合、設定したファイルの位置の画像を呼び出し、保存
-    image.representation(resize_to_fill: [height, width]).processed
+    image.representation(resize_to_fill: [height, width,{gravity: "center"}]).processed
     #投稿画像を表示。variantは画像の加工のメソッド。processedはリサイズ処理を適応した状態を結果として返す。
   end
 end

@@ -18,11 +18,7 @@
         <% posts.each do |post| %>
             <div class="col-6 col-md-4 col-lg-3">
               <div class="red-border bg-white my-4">
-                <% if post.image.attached? %>
-                  <%= image_tag post.image.representation(resize_to_fill: [140, 140]), class: "picture d-block mx-auto" %>
-                <% else %>
-                  <%= image_tag "publicdomainq-0060457lwn.jpg", class: "sample-picture p-2 d-block mx-auto", size: "140x140" %>
-                <% end %>
+                <%= image_tag post.get_post_image(140,140), class:"picture d-block mx-auto" %>
                 <div class="card-body">
                   <p class="border-bottom border-primary">
                     <i class="fa-solid fa-bookmark"></i>

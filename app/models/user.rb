@@ -91,7 +91,7 @@ class User < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
     end
     #profile_imageがない場合、設定したファイルの位置の画像を呼び出し、保存
-    profile_image.variant(resize_to_limit: [height, width]).processed
+    profile_image.variant(resize_to_fill: [height, width, {gravity: "center"}]).processed
     #プロフィール画像を表示。variantは画像の加工のメソッド。processedはリサイズ処理を適応した状態を結果として返す。
   end
 

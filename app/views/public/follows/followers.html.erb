@@ -3,19 +3,15 @@
     <% @users.each do |user| %>
       <div class="row">
         <div class="col-md-4 col-lg-2">
-            <% if user.profile_image.attached? %>
-              <%= image_tag user.profile_image, size: "100x100" %>
-            <% else %>
-              <%= image_tag 'no_image.jpg' %>
-            <% end %>
-            <p>
-              <%= link_to user.name, user_path(user.id) %>
-            </p>
+          <%= image_tag user.get_profile_image(100,100) %>
+          <p>
+            <%= link_to user.name, user_path(user.id) %>
+          </p>
             <!-- userモデルで定義したフォロワー取得のメソッドを使用する フォロワーにフォローを返すためのコマンド -->
             <!-- 相手からのフォローを解除するコマンドは後で考える。-->
-            <p id="follow_btn_<%= user.followers.followed_id %>">
-              <%= render "public/follows/btn", user: user %>
-            </p>
+          <p id="follow_btn_<%= user.followers.followed_id %>">
+            <%= render "public/follows/btn", user: user %>
+          </p>
         </div>
         <div class="col-md-8 col-lg-10 align-top">
           <i class="fa-solid fa-comment"></i>

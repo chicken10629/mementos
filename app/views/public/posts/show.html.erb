@@ -89,11 +89,7 @@
         <% @post_comments.each do |comment| %>
           <div class="mt-5", style= "max-width: 300px;">
             <div class="post-user-profile">
-              <% if comment.user.profile_image.attached? %>
-                <%= image_tag comment.user.profile_image.representation(resize_to_fill: [80, 80]), style: "border-radius: 40px;" %>
-              <% else %>
-                <%= image_tag "no_image.jpg", size: "80x80", style: "border-radius: 40px;" %>
-              <% end %>
+              <%= image_tag comment.user.get_profile_image(80,80), style: "border-radius: 40px;" %>
               <p>
                 <i class="fa-solid fa-user"></i>
                 <%= link_to comment.user.name, user_path(comment.user.id) %>
