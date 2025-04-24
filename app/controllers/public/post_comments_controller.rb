@@ -15,12 +15,10 @@ class Public::PostCommentsController < ApplicationController
 
   def delete
     @post_comment = PostComment.find(params[:id])
-    @post = Post.find(params[:post_id])
-    @post_comment.comment = "このコメントはユーザーによって削除されました。" 
-    if @post_comment.save
-      redirect_to post_path(@post.id), notice: 'コメントを削除しました。'
+    if @post_comment.update(deleted: true)
+      redirect_to post_path(@post_comment.post), notice: 'コメントを削除しました。'
     else
-      redirect_to post_path(@post.id), alert: 'コメントの削除に失敗しました。'
+      redirect_to post_path(@post_comment.post), alert: 'コメントの削除に失敗しました。'
     end
   end
 

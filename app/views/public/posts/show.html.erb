@@ -97,10 +97,15 @@
             </div>
             <div>
               <i class="fa-solid fa-comment"></i>
-              <%= simple_format(sanitize(comment.comment)) %>
-              <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
-              <% if current_user == comment.user %>
-                <%= link_to "削除", delete_post_post_comment_path(@post.id, comment.id), class: "btn btn-danger", method: :patch, data: { confirm: "コメントを削除します。よろしいですか？"} %>
+              <!-- nilかtrueかの分岐なのでunless -->
+              <% unless comment.deleted? %>
+                <%= simple_format(sanitize(comment.comment)) %>
+                <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
+                <% if current_user == comment.user %>
+                  <%= link_to "削除", delete_post_post_comment_path(@post.id, comment.id), class: "btn btn-danger", method: :patch, data: { confirm: "コメントを削除します。よろしいですか？"} %>
+                <% end %>
+              <% else %>
+              このコメントは削除されました。
               <% end %>
             </div>
           </div>
