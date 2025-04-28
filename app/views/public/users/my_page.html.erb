@@ -58,11 +58,7 @@
     <% @posts.each do |post| %> <!-- userのidが紐づいた投稿の表示 -->
       <div class="col-lg-3 col-md-4 col-6 mb-5 black-border bg-light">
         <div class="user-post-card pt-4">
-          <% if post.image.attached? %>
-            <%= image_tag post.image.representation(resize_to_fill: [180, 180]), class: "picture d-block mx-auto" %>
-          <% else %>
-            <%= image_tag "publicdomainq-0060457lwn.jpg", size: "180x180", class: "sample-picture d-block mx-auto" %>
-          <% end %>
+          <%= image_tag post.get_post_image(180,180), class: "picture d-block mx-auto" %>
           <div class="pl-3">
             <p class="pt-2 border-bottom border-primary">
               <i class="fa-solid fa-bookmark"></i>

@@ -13,12 +13,7 @@
 <div class="container py-5">
   
   <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
-    <% if @post.image.attached? %>
-      <%= image_tag @post.image.representation(resize_to_fill: [300, 300]), class: "d-block mx-auto ml-3 picture" %>
-      <!-- 画像のカラム名.variant(resize: "width x height")で表示するサイズを変更。image_processingを利用。cssがかからなくなるみたいなので未使用。 -->
-    <% else %>
-      <%= image_tag 'publicdomainq-0060457lwn.jpg', class: "d-block mx-auto sample-picture", width: 300, height: 300  %>
-    <% end %>
+    <%= image_tag @post.get_post_image(300,300), class: "d-block mx-auto ml-3 picture" %>
     <h4 class="pl-3 mt-3">
       <i class="fa-solid fa-bookmark"></i>
       <%= @post.title %>
@@ -42,12 +37,8 @@
     <!-- ゲストユーザー、または別ユーザーの投稿に限りプロフィール表示 -->
 
     <% if current_user.nil? || (current_user && @post.user.id != current_user.id) %>
-      <div class="post_user black-border pl-3 mb-3", style="max-width: 135px">
-        <% if @post.user.profile_image.attached? %>
-          <p><%= image_tag @post.user.profile_image.representation(resize_to_fill: [100, 100]), style: "border-radius: 50px;" %></p>
-        <% else %>
-          <p><%= image_tag 'no_image.jpg', size: "100x100", style: "border-radius: 50px;" %></p>
-        <% end %>
+      <div class="post_user black-border pt-2 pl-3 mb-3", style="max-width: 135px">
+        <%= image_tag @post.user.get_profile_image(100,100), style: "border-radius: 50px;" %>
         <p>
           <i class="fa-solid fa-user"></i>
           <%= link_to @post.user.name, user_path(@post.user_id) %>

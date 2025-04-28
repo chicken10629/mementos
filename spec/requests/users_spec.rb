@@ -58,7 +58,9 @@ Rspec.describe "マイページ（current_user専用）のテスト", type: :sys
           expect(page).to have_link("公開にする")
         end
 
-      it "" do
+      describe "投稿一覧の表示" do
+        it "" do
+        end
       end
     end
 end
