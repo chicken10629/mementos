@@ -17,7 +17,22 @@
 * 誰かの思い出を閲覧し、共感したり、そこから創作などのアイディアを得たい時
 ​
 ## 設計書
-後ほど作成予定です。
+### 機能一覧
+* ユーザー登録、ログイン機能（devise）
+* 投稿機能
+　* 画像投稿（ActiveStorage,image_processing）
+* いいね機能（Ajax）
+* フォロー機能(Ajax)
+* コメント機能
+* ページネーション機能(kaminari)
+* 検索機能
+
+### インフラ構成
+* 本番サーバー：EC2（Amazon Linux2）
+* データベース：RDS
+* デプロイ：Github
+
+
 ​
 ## 開発環境
 - OS：Linux(CentOS)
@@ -27,5 +42,5 @@
 - IDE：Cloud9
 ​
 ## 使用素材
-- パブリックドメインQ
-- フリーテクスチャ素材館
+- パブリックドメインQ https://publicdomainq.net/
+- フリーテクスチャ素材館 https://free-texture.net/
