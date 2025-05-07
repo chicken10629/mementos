@@ -9,17 +9,18 @@ Rspec.describe "マイページ（current_user専用）のテスト", type: :sys
   
   #Wardenはdeviseと一緒に入っている。systemテストでログインするときに必要
 
-  #インスタンス変数みたいなヘルパーメソッドの定義。
-  #テスト内でuserという名前を使ったときにのみ、FactoryBot.create以降を実行
-  #letは呼び出されるまで評価されない変数定義。つまりuserを呼ぶまでは何も起こらない。
-  let(:user){ FactoryBot.create(:user, name: "スタミナ五郎", introduction: "こんにちわ", is_public: true)}
-  let!(:post){ FactoryBot.create(:post, user: user, title: "ハーモニカ", body: "小３の頃から愛用している相棒です。")}
+
   #beforeはテスト前に必ず実行される。let!と似ているが、こちらは変数として利用可能
     before do
       # テストユーザーとしてログイン
       # visitはcapybaraのヘルパー
-      login_as(user)
+      login_via_ui(user)
       visit my_page_path
+    end
+
+    after do
+      # logoutは(user)不要
+      logout_via_ui
     end
 
     describe "マイページにアクセス" do

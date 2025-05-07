@@ -9,7 +9,7 @@ module AuthUiHelpers
     end
   end
 
-  def login_ui(user)
+  def login_via_ui(user)
     visit root_path
     open_navbar_if_collapsed
     visit login_path
@@ -18,7 +18,14 @@ module AuthUiHelpers
     click_button "ログイン"
   end
 
-  def logout_ui(user)
+  def logout_via_ui
     open_navbar_if_collapsed
     click_link "ログアウト"
   end
+end
+
+# このモジュールをこのタイプのテストで使えるようにして？と明示する。Rspecではこれを指定しないとテストで読み込んでくれない。
+# rails_helperではなく、モジュールを定義したファイルに記述するのが基本らしい。
+RSpec.configure do |config|
+  config.include AuthUIHelpers, type: :system
+end

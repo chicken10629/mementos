@@ -10,7 +10,10 @@ require 'rspec/rails'
 require 'capybara/rspec'
 Capybara.javascript_driver = :selenium_chrome_headless
 # Add additional requires below this line. Rails is not loaded until this point!
-
+# support配下のすべての.rbを読み込む
+Dir[Rails.root.join('spec', 'support' , '**', '*.rb')].sort.each do |file|
+  require file
+end
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
