@@ -12,13 +12,15 @@
 -->  <% if @posts.present? %>
        <% @posts.each do |post| %>
         <div class="mb-3 ml-3 pt-3 red-border bg-light" style="width: 250px;">
-          <%= image_tag post.get_post_image(200,200), class:"picture d-block mx-auto" %>
+        <!-- img-fluidで200未満になった場合サイズ可変に -->
+          <%= image_tag post.get_post_image(200,200), class:"picture d-block mx-auto img-fluid" %>
           <div class="px-3 mt-2">
             <p class="border-bottom border-primary">
               <i class="fa-solid fa-bookmark"></i>
               <%= link_to post.title.truncate(10), post_path(post.id) %>
             </p>
-            <p class="border-bottom border-primary">
+            <!-- 半角英数字を連打すると幅が大きくなったため、文字の折り返しを使用 -->
+            <p class="border-bottom border-primary text-break">
               <i class="fa-solid fa-file-lines"></i>
               <%= post.body.truncate(50) %>
             </p>
