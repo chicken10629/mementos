@@ -6,8 +6,8 @@
     </div>
   <% end %>
   <% @users.each do |user| %>
-    <div class="row pt-3 brown-border mb-4 bg-light mr-auto d-flex", style="max-width:500px;">
-      <div class="pl-3 col-5", style="width: 170px;">
+    <div class="row pt-3 brown-border mb-4 bg-light mr-auto flex-column", style="max-width:500px;">
+      <div class="pl-3", style="max-width: 170px;">
         <%= image_tag user.get_profile_image(100,100), style: "border-radius: 50px" %>
         <p>
           <i class="fa-solid fa-user"></i>
@@ -17,7 +17,7 @@
           <%= render "public/follows/btn", user: user %> 
         </p>
       </div>
-      <div class="align-top pl-3 col-7", style="width: 300px;">
+      <div class="align-top pl-3 text-break", style="max-width: 300px;">
         <i class="fa-solid fa-comment"></i>
         <%= user.introduction.to_s.truncate(50, omission: '...') %>
           <!-- 未入力の場合にtruncateをするとエラーが起きるので回避。50文字を超えた場合に...を表示 -->
