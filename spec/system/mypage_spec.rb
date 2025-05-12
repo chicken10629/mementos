@@ -62,7 +62,15 @@ Rspec.describe "マイページ（current_user専用）のテスト", type: :sys
         end
 
       describe "投稿一覧の表示" do
-        it "" do
+        it "投稿画像、タイトル、エピソードが表示される" do
+          expect(page).to have_selector('img[src$='アイコン.jpg']')
+          expect(page).to have_selector('img[src$='no_image.jpg']')
+
+          expect(page).to have_content('10kgダンベル')
+          expect(page).to have_content('プロテインシェイカー')
+
+          expect(page).to have_content('筋トレのお供')
+          expect(page).to have_content('愛用のボトル')
         end
       end
     end
