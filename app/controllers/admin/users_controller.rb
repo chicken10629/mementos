@@ -32,6 +32,7 @@ class Admin::UsersController < ApplicationController
     end
   end
  
+  # transactionで一連のデータ更新を一つの処理とし、全てのSQL実行が成功した際にDBに更新を反映。整合性を保つ目的。
   def destroy
     @user = User.find(params[:id])
     ActiveRecord::Base.transaction do
