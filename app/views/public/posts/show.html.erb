@@ -11,101 +11,6 @@
   </div>
 <% end %>
 <div class="container py-5">
-<<<<<<< HEAD
-  
-  <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
-    <%= image_tag @post.get_post_image(300,300), class: "d-block mx-auto ml-3 picture" %>
-    <h4 class="pl-3 mt-3">
-      <i class="fa-solid fa-bookmark"></i>
-      <%= @post.title %>
-    </h4>
-    <p class="pl-3 mt-4">
-      <i class="fa-solid fa-file-lines"></i>
-      <%= simple_format(sanitize(@post.body)).gsub('<p>', '<p class="pl-3">').html_safe %>
-      <!-- 改行や段落の表示を正しくHTMLに変換。また、scriptタグ等不適切なものを安全なものに変換
-      h1やolなどはそのまま通過するため、入れたくないときは指定する必要あり
-      さらにそのままだとpl-3が適用されないので、gsubでつけて、html_safeでpタグを変換-->
-    <p>
-    <% if current_user && @post.user_id == current_user.id %>
-      <p>
-        <%= link_to "編集する", edit_post_path(@post), class: "btn btn-primary ml-3" %>
-      </p>
-      <p>
-        <%= link_to "削除する", post_path(@post), class: "btn btn-danger ml-3", method: :delete, data: {confirm: "削除します。本当によろしいですか？" }%>
-        <!-- 日本語より先にパスを書いたらURLが表示されてしまった。current_user&&にしないとゲスト時nilエラー -->
-      </p>
-    <% end %>
-    <!-- ゲストユーザー、または別ユーザーの投稿に限りプロフィール表示 -->
-
-    <% if current_user.nil? || (current_user && @post.user.id != current_user.id) %>
-      <div class="post_user black-border pt-2 pl-3 mb-3", style="max-width: 135px">
-        <%= image_tag @post.user.get_profile_image(100,100), style: "border-radius: 50px;" %>
-        <p>
-          <i class="fa-solid fa-user"></i>
-          <%= link_to @post.user.name, user_path(@post.user_id) %>
-        </p>
-      </div>
-    <% end %>
-
-    <!--非同期通信でいいねを実行する
-    流れとしては
-    remote: trueで非同期通信にする
-    変えたいもののid"$()"を選択し、変えたいテキスト"html()"や値"val()"を入力する。それをjsで実行する
-    
-    -->
-    <div class="favorite">
-      <p class="pl-3" id="favorite_btn_<%= @post.id %>">
-        <%= render "public/favorites/btn", post: @post %>
-        <!-- publicから指定しないとなぜか読み込んでくれない。謎すぎる -->
-      </p>
-    </div>
-  </div>
-    <div class="post-comment blue-border bg-light py-3 pl-3 mx-auto", style= "max-width: 500px;">
-      <h4 class="mb-3">
-        <i class="fa-regular fa-comments"></i>
-        みんなのコメント
-      </h4>
-      <% if current_user %>
-        <%= form_with model: @post_comment, url: post_post_comments_path(@post) do |f| %>
-        
-          <%= f.label :comment, "コメントしよう" %><br>
-          <%= f.text_area :comment, style: "width: 300px; height: 100px;" %><br>
-            <%= f.submit "投稿する" %>
-        <% end %>
-      <% else %>
-          <p>ログインするとコメントができます。</p>
-      <% end %>
-    
-    <% if @post_comments.present? %>
-      <div class="post-comment-list mt-5">
-        <% @post_comments.each do |comment| %>
-          <div class="mt-5", style= "max-width: 300px;">
-            <div class="post-user-profile">
-              <%= image_tag comment.user.get_profile_image(80,80), style: "border-radius: 40px;" %>
-              <p>
-                <i class="fa-solid fa-user"></i>
-                <%= link_to comment.user.name, user_path(comment.user.id) %>
-              </p>
-            </div>
-            <div>
-              <i class="fa-solid fa-comment"></i>
-              <!-- nilかtrueかの分岐なのでunless -->
-              <% unless comment.deleted? %>
-                <%= simple_format(sanitize(comment.comment)) %>
-                <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %>
-                <% if current_user == comment.user %>
-                  <%= link_to "削除", delete_post_post_comment_path(@post.id, comment.id), class: "btn btn-danger", method: :patch, data: { confirm: "コメントを削除します。よろしいですか？"} %>
-                <% end %>
-              <% else %>
-              このコメントは削除されました。
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-=======
 <!-- 公開設定または投稿者自身である場合 -->
   <% if @post.user.is_public? || current_user %>
     <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
@@ -205,5 +110,4 @@
       このユーザーは投稿を非公開設定にしています。
     </div>
   <% end %>
->>>>>>> 15456a0 ([fix]壊れたgitの復旧と非公開ユーザーの投稿の閲覧制限)
 </div>
