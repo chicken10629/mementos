@@ -80,6 +80,14 @@ Rspec.describe "マイページ（current_user専用）のテスト", type: :sys
           click_link "プロテインシェイカー"
           expect(current_path).to eq(post_path(post2.id))
         end
+        it "非公開設定でも自分の投稿は見れる" do
+          click_link "非公開にする"
+          user.reload
+          expect(user.is_public).to be_falsey
+          click_link "10kgダンベル"
+          expect(page).to have_selector('img[src$='アイコン.jpg']')
+          expect(page).to have_content('10kgダンベル')
+          expect(page).to have_content('筋トレのお供')
       end
     end
 end
