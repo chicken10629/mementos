@@ -1,7 +1,7 @@
 #factorybotを使ったデフォルトのダミーデータ。使うファイル側で中身をセットし直す。
 #これを基にpostデータを作るらしい。
 FactoryBot.define do
-  Factory :post do
+  factory :post do
     title {"初期データ"}
     body {"何か入力してください"}
     association :user #ユーザーとの関連
@@ -12,5 +12,6 @@ FactoryBot.define do
         filename: 'sample-user1.jpg',
         content_type: 'image/jpeg'
       )
+    end
   end
 end

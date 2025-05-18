@@ -27,5 +27,5 @@ end
 # このモジュールをこのタイプのテストで使えるようにして？と明示する。Rspecではこれを指定しないとテストで読み込んでくれない。
 # rails_helperではなく、モジュールを定義したファイルに記述するのが基本らしい。
 RSpec.configure do |config|
-  config.include AuthUIHelpers, type: :system
+  config.include AuthUiHelpers, type: :system
 end

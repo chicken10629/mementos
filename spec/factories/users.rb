@@ -12,5 +12,6 @@ FactoryBot.define do
         filename: 'アイコン.jpg',
         content_type: 'image/jpeg'
       )
+    end
   end
 end
