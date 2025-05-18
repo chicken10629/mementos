@@ -6,7 +6,7 @@ require 'rails_helper'
 #例：type: :controllerではdeviseのsign_inが使えるが、type: :systemでは無理
 RSpec.describe "マイページ（current_user専用）のテスト", type: :system do
   include Warden::Test::Helpers
-  
+  include_context 'user_and_posts'
   #Wardenはdeviseと一緒に入っている。systemテストでログインするときに必要
 
 
@@ -65,7 +65,7 @@ RSpec.describe "マイページ（current_user専用）のテスト", type: :sys
       describe "投稿一覧の表示" do
         it "投稿画像、タイトル、エピソードが表示される" do
           #どこで文字列が終わったのかRailsが判断できるようにクォートの種類を別々にする
-          expect(page).to have_selector("img[src$='アイコン.jpg']")
+          expect(page).to have_selector("img[src$='icon.jpg']")
           expect(page).to have_selector("img[src$='no_image.jpg']")
 
           expect(page).to have_content('10kgダンベル')
@@ -87,7 +87,7 @@ RSpec.describe "マイページ（current_user専用）のテスト", type: :sys
           user.reload
           expect(user.is_public).to be_falsey
           click_link "10kgダンベル"
-          expect(page).to have_selector("img[src$='アイコン.jpg']")
+          expect(page).to have_selector("img[src$='icon.jpg']")
           expect(page).to have_content('10kgダンベル')
           expect(page).to have_content('筋トレのお供')
       end
