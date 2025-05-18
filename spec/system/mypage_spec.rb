@@ -72,6 +72,14 @@ Rspec.describe "マイページ（current_user専用）のテスト", type: :sys
           expect(page).to have_content('筋トレのお供')
           expect(page).to have_content('愛用のボトル')
         end
+        it "タイトル1をクリックして投稿詳細にアクセスできる" do
+          click_link "10kgダンベル"
+          expect(current_path).to eq(post_path(post1.id))
+        end
+        it "タイトル2をクリックして投稿詳細にアクセスできる" do
+          click_link "プロテインシェイカー"
+          expect(current_path).to eq(post_path(post2.id))
+        end
       end
     end
 end
