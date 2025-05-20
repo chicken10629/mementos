@@ -12,7 +12,7 @@ module AuthUiHelpers
   def login_via_ui(user)
     visit root_path
     open_navbar_if_collapsed
-    visit login_path
+    click_link "ログイン"
     fill_in "メールアドレス", with: user.email
     fill_in "パスワード", with: user.password
     click_link "ログイン"

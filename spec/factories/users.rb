@@ -7,9 +7,9 @@ FactoryBot.define do
     is_public{"true"}
 
     after(:build) do |user|
-      user.porfile_image.attach(
-        io: File.open(rails.root.join('spec/fixtures/files/アイコン.jpg')),
-        filename: 'アイコン.jpg',
+      user.profile_image.attach(
+        io: File.open(Rails.root.join('spec/fixtures/files/icon.jpg')),
+        filename: 'icon.jpg',
         content_type: 'image/jpeg'
       )
     end
