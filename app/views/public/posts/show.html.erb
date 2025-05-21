@@ -12,6 +12,7 @@
 <% end %>
 <div class="container py-5">
 <!-- 公開設定または投稿者自身である場合 -->
+# gitコンフリクトのチェック
   <% if @post.user.is_public? || current_user %>
     <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
       <%= image_tag @post.get_post_image(300,300), class: "d-block mx-auto ml-3 picture" %>
