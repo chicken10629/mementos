@@ -40,15 +40,15 @@ RSpec.describe "マイページ（current_user専用）のテスト", type: :sys
 
       it "いいね一覧リンクが表示・リンク先に遷移できる" do
         click_link "いいね一覧を表示"
-        expect.(current_path).to eq(my_favorites_path)
+        expect(current_path).to eq(my_favorites_path)
       end
 
       it "フォロー一覧リンクが表示・リンク先に遷移できる" do
         click_link "フォローユーザー一覧を表示"
-        expect.(current_path).to eq(user_followings_path(user.id))
+        expect(current_path).to eq(user_followings_path(user.id))
       end
 
-      describe "公開・非公開設定について"
+      describe "公開・非公開設定について" do
         it "公開状態の時、非公開設定に切り替えられる" do
           expect(page).to have_content("公開")
           click_link "非公開にする"
