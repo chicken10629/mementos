@@ -12,8 +12,8 @@
 <% end %>
 <div class="container py-5">
 <!-- 公開設定または投稿者自身である場合 -->
-# gitコンフリクトのチェック
-  <% if @post.user.is_public? || current_user %>
+
+  <% if @post.user.is_public? || @post.user == current_user %>
     <div class="red-border pt-3 mb-5 bg-light mx-auto", style= "max-width: 500px;">
       <%= image_tag @post.get_post_image(300,300), class: "d-block mx-auto ml-3 picture" %>
       <h4 class="pl-3 mt-3">
@@ -107,7 +107,7 @@
       <% end %>
     </div>
   <% else %>
-    <div class="bg-light w-50 ">
+    <div class="bg-light alert alert-danger w-50 mx-auto">
       このユーザーは投稿を非公開設定にしています。
     </div>
   <% end %>
