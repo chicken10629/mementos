@@ -11,10 +11,6 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])#urlからidを取得
-<<<<<<< HEAD
-=======
-  
->>>>>>> 15456a0 ([fix]壊れたgitの復旧と非公開ユーザーの投稿の閲覧制限)
     #コメント投稿フォーム
     @post_comment = PostComment.new
     #コメントの取得
